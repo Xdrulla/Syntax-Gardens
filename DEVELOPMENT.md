@@ -1,0 +1,1399 @@
+# Syntax Gardens - Documentação de Desenvolvimento
+
+## Visão Geral
+
+Syntax Gardens é um jogo educacional de simulação de jardim onde conceitos de programação são representados como plantas que crescem através da prática de código real. O jogador planta sementes, rega as plantas resolvendo desafios de código, e colhe recompensas ao completar o ciclo de crescimento.
+
+---
+
+## Status Atual: MVP Funcional
+
+### Data: Janeiro 2026
+### Versão: 0.1.0 (Alpha)
+
+---
+
+## Arquitetura Implementada
+
+### Stack Técnica
+
+| Camada | Tecnologia | Versão |
+|--------|------------|--------|
+| Frontend | React | 18.x |
+| Linguagem | TypeScript | 5.x |
+| Bundler | Vite | 7.x |
+| Estilização | Tailwind CSS | 4.x |
+| Estado Global | Zustand | 5.x |
+| Animações | Framer Motion | 12.x |
+| Ícones | Lucide React | 0.56x |
+| Validação | Zod | 4.x |
+| Monorepo | pnpm + Turborepo | - |
+
+### Estrutura de Pastas
+
+```
+syntax-gardens/
+├── apps/
+│   └── web/                          # Aplicação Frontend
+│       ├── public/                   # Assets estáticos
+│       └── src/
+│           ├── components/
+│           │   ├── game/             # Componentes do jogo
+│           │   │   ├── Garden.tsx    # Grid principal do jardim
+│           │   │   └── Plot.tsx      # Canteiro individual
+│           │   ├── challenges/       # Sistema de desafios
+│           │   │   ├── ChallengeModal.tsx
+│           │   │   ├── CodeEditor.tsx
+│           │   │   ├── TestResults.tsx
+│           │   │   └── HintSystem.tsx
+│           │   ├── ui/               # Componentes reutilizáveis
+│           │   │   ├── Button.tsx
+│           │   │   ├── Modal.tsx
+│           │   │   └── ProgressBar.tsx
+│           │   └── layout/           # Layout da aplicação
+│           │       └── HUD.tsx
+│           ├── features/
+│           │   ├── inventory/        # Sistema de inventário
+│           │   │   └── SeedBag.tsx
+│           │   └── shop/             # Sistema de loja
+│           │       ├── ShopModal.tsx
+│           │       ├── ShopItem.tsx
+│           │       └── index.ts
+│           ├── stores/               # Estado global (Zustand)
+│           │   ├── playerStore.ts    # Dados do jogador
+│           │   ├── gardenStore.ts    # Estado do jardim
+│           │   ├── inventoryStore.ts # Inventário
+│           │   └── shopStore.ts      # Estado da loja
+│           ├── data/                 # Dados estáticos do jogo
+│           │   ├── plants/           # Definições de plantas
+│           │   │   └── basic.ts
+│           │   └── challenges/       # Desafios de código
+│           │       ├── variables.ts
+│           │       ├── functions.ts
+│           │       ├── loops.ts
+│           │       ├── objects.ts
+│           │       ├── arrays.ts
+│           │       ├── conditionals.ts  # Desafios de condicionais
+│           │       ├── strings.ts       # Desafios de strings
+│           │       ├── math.ts          # Desafios de matemática
+│           │       └── index.ts
+│           ├── lib/
+│           │   └── validators/       # Validação de código
+│           │       └── codeValidator.ts
+│           ├── types/                # Tipos TypeScript
+│           │   ├── plant.ts
+│           │   ├── challenge.ts
+│           │   ├── player.ts
+│           │   └── game.ts
+│           ├── App.tsx
+│           └── main.tsx
+├── packages/
+│   └── shared/                       # Código compartilhado (futuro)
+├── turbo.json                        # Configuração Turborepo
+├── pnpm-workspace.yaml               # Configuração monorepo
+└── package.json
+```
+
+---
+
+## Funcionalidades Implementadas
+
+### 1. Sistema de Jardim
+
+**Arquivo:** `src/components/game/Garden.tsx`
+
+- Grid 3x3 de canteiros interativos
+- Suporte para expansão futura do jardim
+- Gerenciamento de seleção de canteiros
+- Integração com sistema de plantio e colheita
+
+**Arquivo:** `src/components/game/Plot.tsx`
+
+- Representação visual de cada canteiro
+- Estados visuais: vazio, semente, broto, crescendo, maduro
+- Barra de progresso de crescimento
+- Indicador de planta pronta para colheita
+- Animações de interação (hover, click)
+
+### 2. Sistema de Plantio
+
+**Arquivo:** `src/stores/gardenStore.ts`
+
+- Plantar sementes em canteiros vazios
+- Consumir sementes do inventário ao plantar
+- Rastrear estado de crescimento de cada planta
+- Calcular estágio de crescimento baseado em regas
+
+**Fluxo:**
+1. Jogador seleciona uma semente no inventário
+2. Clica em um canteiro vazio
+3. Semente é consumida e planta aparece no canteiro
+
+### 3. Sistema de Rega via Desafios
+
+**Arquivo:** `src/components/challenges/ChallengeModal.tsx`
+
+- Modal fullscreen para resolução de desafios
+- Exibe instruções e descrição do desafio
+- Integrado com editor de código
+- Botões de testar e completar
+
+**Arquivo:** `src/components/challenges/CodeEditor.tsx`
+
+- Editor de código com numeração de linhas
+- Suporte a indentação com Tab
+- Syntax highlighting básico (fundo escuro)
+- Responsivo e acessível
+
+**Arquivo:** `src/components/challenges/TestResults.tsx`
+
+- Exibe resultados dos testes
+- Feedback visual de sucesso/falha
+- Lista erros detalhados quando falha
+- Animações de transição
+
+**Arquivo:** `src/components/challenges/HintSystem.tsx`
+
+- Sistema de dicas progressivas
+- Revela uma dica por vez
+- Interface expansível/colapsável
+- Incentiva tentativa antes de ver dicas
+
+### 4. Validador de Código
+
+**Arquivo:** `src/lib/validators/codeValidator.ts`
+
+- Sanitização de código (remove keywords perigosos)
+- Execução em contexto isolado
+- Timeout de 3 segundos para prevenir loops infinitos
+- Comparação de outputs esperados vs recebidos
+- Lista de keywords bloqueados:
+  - eval, Function, import, require
+  - process, global, window, document
+  - localStorage, sessionStorage
+  - fetch, XMLHttpRequest, Worker, WebSocket
+
+### 5. Sistema de Progressão do Jogador
+
+**Arquivo:** `src/stores/playerStore.ts`
+
+- Nível e experiência (100 XP por nível)
+- Sistema de moedas
+- Contagem de dias e estações
+- Estatísticas:
+  - Total de plantas colhidas
+  - Total de desafios completados
+  - Tempo de jogo
+  - Streak atual e melhor streak
+
+### 6. Sistema de Inventário
+
+**Arquivo:** `src/stores/inventoryStore.ts`
+
+- Gerenciamento de itens (sementes, ferramentas, decorações)
+- Adicionar e remover itens
+- Verificar quantidade disponível
+- Seleção de semente para plantio
+
+**Arquivo:** `src/features/inventory/SeedBag.tsx`
+
+- Interface visual do inventário de sementes
+- Seleção de semente com feedback visual
+- Exibe quantidade de cada tipo
+- Instruções contextuais
+
+### 7. HUD (Heads-Up Display)
+
+**Arquivo:** `src/components/layout/HUD.tsx`
+
+- Barra superior com informações do jogador
+- Exibe: nível, XP, moedas, estação, dia
+- Estatísticas rápidas (plantas colhidas, desafios)
+- Botão de acesso à loja
+- Design responsivo
+- Animações em mudanças de valor
+
+### 8. Sistema de Loja
+
+**Arquivo:** `src/features/shop/ShopModal.tsx`
+
+- Modal com grid de sementes disponíveis
+- Exibe saldo atual do jogador
+- Compra de sementes com moedas
+- Sistema de desbloqueio por nível
+- Feedback visual animado de compra
+- Mostra quantidade de sementes já possuídas
+
+**Arquivo:** `src/features/shop/ShopItem.tsx`
+
+- Card individual para cada tipo de semente
+- Indicador visual de tier (cores por nível)
+- Informações: nome, descrição, preço, valor, XP
+- Estado bloqueado com motivo do bloqueio
+- Botão de compra com verificação de saldo
+
+**Arquivo:** `src/stores/shopStore.ts`
+
+- Controle de abertura/fechamento do modal
+- Estado simples sem persistência
+
+### 9. Persistência de Dados
+
+- Todos os stores usam `zustand/middleware/persist`
+- Dados salvos automaticamente no LocalStorage
+- Chaves de storage:
+  - `syntax-gardens-player`
+  - `syntax-gardens-garden`
+  - `syntax-gardens-inventory`
+
+---
+
+## Dados do Jogo
+
+### Plantas Implementadas
+
+| ID | Nome | Tipo | Tier | Regas | Valor | XP |
+|----|------|------|------|-------|-------|-----|
+| var-seedling | Muda de Variável | variable | 1 | 3 | 10 | 5 |
+| func-flower | Flor de Função | function | 2 | 5 | 25 | 15 |
+| loop-vine | Trepadeira de Loop | loop | 2 | 5 | 30 | 20 |
+| object-tree | Árvore de Objeto | object | 3 | 7 | 50 | 35 |
+| array-patch | Canteiro de Array | array | 3 | 7 | 55 | 40 |
+| cond-cactus | Cacto Condicional | conditional | 1 | 4 | 15 | 8 |
+| string-vine | Cipó de String | string | 1 | 4 | 15 | 8 |
+| math-crystal | Cristal Numérico | math | 2 | 5 | 25 | 15 |
+
+### Desafios Implementados
+
+**Variáveis (var-1, var-2, var-3):**
+
+1. **Primeira Variável** - Declarar variável `water = 10`
+2. **Calculando Crescimento** - Operações matemáticas
+3. **Tipos de Dados** - String, boolean, number
+
+**Funções (func-1 a func-5):**
+
+1. **Primeira Função** - Criar função simples que retorna string
+2. **Função com Parâmetro** - Função que recebe e usa parâmetro
+3. **Calculando Água** - Função com múltiplos parâmetros
+4. **Arrow Functions** - Sintaxe moderna de funções
+5. **Função de Crescimento** - Função com valor padrão de parâmetro
+
+**Loops (loop-1 a loop-5):**
+
+1. **Primeiro Loop** - Loop for básico para somar números
+2. **Loop While** - Loop while para drenar água
+3. **Contando Plantas** - Loop para contar elementos em array
+4. **For...of Loop** - Iteração moderna de arrays
+5. **Loop Aninhado** - Loops dentro de loops
+
+**Objetos (obj-1 a obj-5):**
+
+1. **Primeiro Objeto** - Criar objeto com propriedades
+2. **Acessando Propriedades** - Ler dados de objetos
+3. **Modificando Objetos** - Alterar e adicionar propriedades
+4. **Objetos Aninhados** - Objetos dentro de objetos
+5. **Métodos de Objeto** - Funções como propriedades
+
+**Arrays (arr-1 a arr-5):**
+
+1. **Primeiro Array** - Criar array simples
+2. **Acessando Elementos** - Acessar primeiro e último elemento
+3. **Modificando Arrays** - push, shift e manipulação
+4. **Método Map** - Transformar elementos do array
+5. **Método Filter** - Filtrar elementos do array
+
+**Conditionals (cond-1 a cond-15):**
+
+1. **If Simples** - Verificar se água > 0
+2. **If/Else** - Escolher entre regar ou não
+3. **If/Else If/Else** - Classificar nível de água
+4. **Operadores de Comparação** - ==, ===, !=, !==, <, >, <=, >=
+5. **Operador AND (&&)** - Verificar múltiplas condições
+6. **Operador OR (||)** - Verificar alternativas
+7. **Operador NOT (!)** - Inverter condições
+8. **Condições Aninhadas** - If dentro de if
+9. **Operador Ternário** - Forma curta de if/else
+10. **Ternário Aninhado** - Múltiplas condições em linha
+11. **Switch/Case Básico** - Escolher estação
+12. **Switch com Default** - Classificar tipo de planta
+13. **Truthy/Falsy** - Valores que viram true/false
+14. **Comparação com Null/Undefined** - Verificar valores nulos
+15. **Sistema de Irrigação** - Desafio combinado
+
+**Strings (str-1 a str-18):**
+
+1. **Concatenação com +** - Juntar mensagens
+2. **Template Literals Básico** - Interpolação de variáveis
+3. **Template Literals Multi-linha** - Strings com quebras de linha
+4. **Propriedade Length** - Contar caracteres
+5. **toUpperCase/toLowerCase** - Converter case
+6. **charAt e Acesso por Índice** - Acessar caracteres
+7. **Método slice()** - Extrair substring
+8. **substring e substr** - Outras formas de extrair
+9. **Método split()** - Dividir string em array
+10. **Método join()** - Juntar array em string
+11. **Método includes()** - Verificar se contém
+12. **indexOf/lastIndexOf** - Encontrar posição
+13. **startsWith/endsWith** - Verificar início/fim
+14. **Método replace()** - Substituir texto
+15. **trim/trimStart/trimEnd** - Remover espaços
+16. **Método repeat()** - Repetir string
+17. **padStart/padEnd** - Adicionar padding
+18. **Formatador de Nomes** - Desafio combinado
+
+**Math e Numbers (math-1 a math-16):**
+
+1. **Math.round()** - Arredondar para inteiro mais próximo
+2. **Math.floor()** - Arredondar para baixo
+3. **Math.ceil()** - Arredondar para cima
+4. **Math.random()** - Gerar número aleatório 0-1
+5. **Random Range** - Número aleatório em intervalo
+6. **Math.max/min** - Maior e menor valor
+7. **Math.abs()** - Valor absoluto
+8. **Math.pow e **\*\*** - Potenciação
+9. **Math.sqrt()** - Raiz quadrada
+10. **parseInt()** - Converter string para int
+11. **parseFloat()** - Converter string para float
+12. **Number()** - Converter para número
+13. **toFixed()** - Limitar casas decimais
+14. **isNaN/isFinite** - Validar números
+15. **Math.PI e Math.E** - Constantes matemáticas
+16. **Calculadora de Crescimento** - Desafio combinado
+
+---
+
+## Componentes UI Reutilizáveis
+
+### Button
+- Variantes: primary, secondary, success, danger
+- Tamanhos: sm, md, lg
+- Estado de loading
+- Animações com Framer Motion
+
+### Modal
+- Tamanhos: sm, md, lg, xl
+- Overlay com blur
+- Animação de entrada/saída
+- Botão de fechar
+
+### ProgressBar
+- Cores: green, blue, yellow, red
+- Tamanhos: sm, md, lg
+- Label opcional
+- Animação de preenchimento
+
+---
+
+## Como Executar
+
+```bash
+# Instalar dependências
+cd syntax-gardens
+pnpm install
+
+# Rodar em desenvolvimento
+pnpm dev
+
+# Build para produção
+pnpm build
+
+# Type-check
+pnpm exec tsc --noEmit
+```
+
+**URL de desenvolvimento:** http://localhost:5173
+
+---
+
+## Próximos Passos de Desenvolvimento
+
+### Fase 2: Expansão de Conteúdo Core (Prioridade CRÍTICA)
+
+**Objetivo**: Cobrir todos os conceitos fundamentais de JavaScript de forma progressiva e completa.
+
+> **⚠️ IMPORTANTE**: Esta é a fase mais crítica do projeto. Sem conteúdo educacional robusto, o jogo não cumpre sua função principal. Todas as outras fases dependem de ter um catálogo completo de conceitos e desafios.
+
+#### 2.1 Conceitos Básicos - Tier 1-5 (Nível 1-5)
+
+**Conditionals (if/else) - Cacto Condicional** ✅ IMPLEMENTADO
+- [x] Criar planta "Cacto Condicional" (tier 1, 4 regas)
+- [x] Desafio 1: if simples - verificar se água > 0
+- [x] Desafio 2: if/else - escolher entre regar ou não
+- [x] Desafio 3: if/else if/else - classificar nível de água (baixo/médio/alto)
+- [x] Desafio 4: Operadores de comparação (==, ===, !=, !==, <, >, <=, >=)
+- [x] Desafio 5: Operadores lógicos AND (&&) - verificar múltiplas condições
+- [x] Desafio 6: Operadores lógicos OR (||) - verificar alternativas
+- [x] Desafio 7: Operador NOT (!) - inverter condições
+- [x] Desafio 8: Condições aninhadas - if dentro de if
+- [x] Desafio 9: Ternário simples - condição ? verdadeiro : falso
+- [x] Desafio 10: Ternário aninhado - múltiplas condições
+- [x] Desafio 11: Switch/case básico - escolher estação
+- [x] Desafio 12: Switch com default - classificar tipo de planta
+- [x] Desafio 13: Truthy/Falsy - valores que viram true/false
+- [x] Desafio 14: Comparação com null e undefined
+- [x] Desafio 15: Desafio combinado - sistema de irrigação inteligente
+
+**Strings - Cipó de String** ✅ IMPLEMENTADO
+- [x] Criar planta "Cipó de String" (tier 1, 4 regas)
+- [x] Desafio 1: Concatenação com + - juntar mensagens
+- [x] Desafio 2: Template literals básico - `Olá ${nome}`
+- [x] Desafio 3: Template literals multi-linha
+- [x] Desafio 4: length - contar caracteres
+- [x] Desafio 5: toUpperCase() e toLowerCase() - converter case
+- [x] Desafio 6: charAt() e charCodeAt() - acessar caractere
+- [x] Desafio 7: slice() - extrair substring
+- [x] Desafio 8: substring() e substr() - outras formas de extrair
+- [x] Desafio 9: split() - dividir string em array
+- [x] Desafio 10: join() - juntar array em string
+- [x] Desafio 11: includes() - verificar se contém substring
+- [x] Desafio 12: indexOf() e lastIndexOf() - encontrar posição
+- [x] Desafio 13: startsWith() e endsWith() - verificar início/fim
+- [x] Desafio 14: replace() - substituir texto
+- [x] Desafio 15: trim(), trimStart(), trimEnd() - remover espaços
+- [x] Desafio 16: repeat() - repetir string
+- [x] Desafio 17: padStart() e padEnd() - adicionar padding
+- [x] Desafio 18: Desafio combinado - formatador de nomes de plantas
+
+**Math e Numbers - Cristal Numérico** ✅ IMPLEMENTADO
+- [x] Criar planta "Cristal Numérico" (tier 2, 5 regas)
+- [x] Desafio 1: Math.round() - arredondar para inteiro mais próximo
+- [x] Desafio 2: Math.floor() - arredondar para baixo
+- [x] Desafio 3: Math.ceil() - arredondar para cima
+- [x] Desafio 4: Math.random() - gerar número aleatório 0-1
+- [x] Desafio 5: Random range - número aleatório em intervalo
+- [x] Desafio 6: Math.max() e Math.min() - maior e menor
+- [x] Desafio 7: Math.abs() - valor absoluto
+- [x] Desafio 8: Math.pow() e ** - potenciação
+- [x] Desafio 9: Math.sqrt() - raiz quadrada
+- [x] Desafio 10: parseInt() - converter string para int
+- [x] Desafio 11: parseFloat() - converter string para float
+- [x] Desafio 12: Number() - converter para número
+- [x] Desafio 13: toFixed() - limitar casas decimais
+- [x] Desafio 14: isNaN() e isFinite() - validar números
+- [x] Desafio 15: Math.PI e Math.E - constantes matemáticas
+- [x] Desafio 16: Desafio combinado - calculadora de crescimento de plantas
+
+#### 2.2 Conceitos Intermediários - Tier 6-12 (Nível 6-12)
+
+**Array Methods Avançados - Jardim de Dados**
+- [ ] Criar planta "Jardim de Dados" (tier 3, 6 regas)
+- [ ] Desafio 1: reduce() básico - somar valores
+- [ ] Desafio 2: reduce() com objeto - agrupar dados
+- [ ] Desafio 3: reduce() para flatten - achatar array
+- [ ] Desafio 4: find() - encontrar primeiro elemento
+- [ ] Desafio 5: findIndex() - encontrar índice do primeiro elemento
+- [ ] Desafio 6: findLast() e findLastIndex() - buscar do fim
+- [ ] Desafio 7: some() - verificar se algum satisfaz condição
+- [ ] Desafio 8: every() - verificar se todos satisfazem condição
+- [ ] Desafio 9: sort() com números - ordenar crescente/decrescente
+- [ ] Desafio 10: sort() com strings - ordenar alfabeticamente
+- [ ] Desafio 11: sort() com comparador customizado - ordenar objetos
+- [ ] Desafio 12: reverse() - inverter array
+- [ ] Desafio 13: flat() - achatar array aninhado
+- [ ] Desafio 14: flatMap() - map + flat em um passo
+- [ ] Desafio 15: includes() - verificar se contém elemento
+- [ ] Desafio 16: indexOf() e lastIndexOf() - encontrar índice
+- [ ] Desafio 17: slice() vs splice() - extrair vs modificar
+- [ ] Desafio 18: concat() - juntar arrays
+- [ ] Desafio 19: Array.from() - criar array de iterável
+- [ ] Desafio 20: Array.isArray() - verificar se é array
+- [ ] Desafio 21: Encadeamento: filter + map + reduce
+- [ ] Desafio 22: Encadeamento: sort + slice - top N elementos
+- [ ] Desafio 23: Desafio combinado - análise de jardim completo
+
+**Destructuring - Flor Fragmentada**
+- [ ] Criar planta "Flor Fragmentada" (tier 2, 5 regas)
+- [ ] Desafio 1: Destructuring básico de array - [a, b] = arr
+- [ ] Desafio 2: Pular elementos em array - [a, , c] = arr
+- [ ] Desafio 3: Rest em array - [first, ...rest] = arr
+- [ ] Desafio 4: Default values em array - [a = 1, b = 2] = arr
+- [ ] Desafio 5: Swap de variáveis - [a, b] = [b, a]
+- [ ] Desafio 6: Destructuring básico de objeto - {name, age} = obj
+- [ ] Desafio 7: Renomear propriedades - {name: plantName} = obj
+- [ ] Desafio 8: Default values em objeto - {name = 'Unknown'} = obj
+- [ ] Desafio 9: Destructuring aninhado - objeto dentro de objeto
+- [ ] Desafio 10: Destructuring em parâmetros de função
+- [ ] Desafio 11: Destructuring com rest - {a, b, ...rest} = obj
+- [ ] Desafio 12: Destructuring em loops - for (const {name} of plants)
+- [ ] Desafio 13: Destructuring de arrays retornados
+- [ ] Desafio 14: Destructuring de objetos retornados
+- [ ] Desafio 15: Desafio combinado - processar dados de plantas
+
+**Spread/Rest - Semente Expansiva**
+- [ ] Criar planta "Semente Expansiva" (tier 2, 5 regas)
+- [ ] Desafio 1: Spread em arrays - [...arr1, ...arr2]
+- [ ] Desafio 2: Copiar array - [...original]
+- [ ] Desafio 3: Adicionar elementos - [...arr, newItem]
+- [ ] Desafio 4: Spread em objetos - {...obj1, ...obj2}
+- [ ] Desafio 5: Copiar objeto - {...original}
+- [ ] Desafio 6: Merge de objetos com override
+- [ ] Desafio 7: Adicionar propriedades - {...obj, newProp: value}
+- [ ] Desafio 8: Rest parameters em função - (...args)
+- [ ] Desafio 9: Rest com outros parâmetros - (first, ...rest)
+- [ ] Desafio 10: Spread em chamada de função - fn(...args)
+- [ ] Desafio 11: Spread com Math.max/min
+- [ ] Desafio 12: Clonar array aninhado (shallow vs deep)
+- [ ] Desafio 13: Clonar objeto aninhado (shallow vs deep)
+- [ ] Desafio 14: Spread para remover propriedade - const {remove, ...keep} = obj
+- [ ] Desafio 15: Desafio combinado - sistema de merge de plantas
+
+**Arrow Functions Avançadas - Rosa Aérea**
+- [ ] Criar planta "Rosa Aérea" (tier 2, 5 regas)
+- [ ] Desafio 1: Implicit return simples - x => x * 2
+- [ ] Desafio 2: Implicit return de objeto - x => ({value: x})
+- [ ] Desafio 3: Arrow function sem parâmetros - () => value
+- [ ] Desafio 4: Arrow function com um parâmetro - x => x + 1
+- [ ] Desafio 5: Arrow function com múltiplos parâmetros - (a, b) => a + b
+- [ ] Desafio 6: Arrow function em map - arr.map(x => x * 2)
+- [ ] Desafio 7: Arrow function em filter - arr.filter(x => x > 0)
+- [ ] Desafio 8: Arrow function em reduce
+- [ ] Desafio 9: Arrow function em sort
+- [ ] Desafio 10: Arrow function como callback - setTimeout(() => {})
+- [ ] Desafio 11: This binding - comparar arrow vs function
+- [ ] Desafio 12: Arrow em métodos de objeto - quando NÃO usar
+- [ ] Desafio 13: Currying com arrows - x => y => x + y
+- [ ] Desafio 14: Higher-order function retornando arrow
+- [ ] Desafio 15: Desafio combinado - pipeline de transformações
+
+#### 2.3 Conceitos Avançados - Tier 13-20 (Nível 13-20)
+
+**Classes e OOP - Árvore Ancestral**
+- [ ] Criar planta "Árvore Ancestral" (tier 4, 8 regas)
+- [ ] Desafio 1: Declaração básica de classe
+- [ ] Desafio 2: Constructor com parâmetros
+- [ ] Desafio 3: Propriedades da instância
+- [ ] Desafio 4: Métodos da classe
+- [ ] Desafio 5: Getter methods
+- [ ] Desafio 6: Setter methods
+- [ ] Desafio 7: Static methods
+- [ ] Desafio 8: Static properties
+- [ ] Desafio 9: Herança com extends
+- [ ] Desafio 10: Super() no constructor
+- [ ] Desafio 11: Override de métodos
+- [ ] Desafio 12: Super.method() - chamar método da classe pai
+- [ ] Desafio 13: Private fields (#field)
+- [ ] Desafio 14: Protected pattern (_field)
+- [ ] Desafio 15: Desafio combinado - sistema de hierarquia de plantas
+
+**Async/Await - Orquídea Temporal**
+- [ ] Criar planta "Orquídea Temporal" (tier 4, 8 regas)
+- [ ] Desafio 1: Criar Promise básica
+- [ ] Desafio 2: Promise.resolve e Promise.reject
+- [ ] Desafio 3: .then() e .catch()
+- [ ] Desafio 4: Encadear .then()
+- [ ] Desafio 5: Async function básica
+- [ ] Desafio 6: Await básico
+- [ ] Desafio 7: Try/catch com async/await
+- [ ] Desafio 8: Finally block
+- [ ] Desafio 9: Promise.all - esperar múltiplas promises
+- [ ] Desafio 10: Promise.race - primeira a resolver
+- [ ] Desafio 11: Promise.allSettled - esperar todas independente do resultado
+- [ ] Desafio 12: Promise.any - primeira a resolver com sucesso
+- [ ] Desafio 13: Async em loops - for await of
+- [ ] Desafio 14: Parallel vs Sequential async
+- [ ] Desafio 15: Desafio combinado - sistema de rega assíncrono
+
+**Closures e Scope - Videira Envolvente**
+- [ ] Criar planta "Videira Envolvente" (tier 3, 7 regas)
+- [ ] Desafio 1: Entender escopo de bloco (let/const)
+- [ ] Desafio 2: Entender escopo de função (var)
+- [ ] Desafio 3: Lexical scope básico
+- [ ] Desafio 4: Closure simples - função retorna função
+- [ ] Desafio 5: Closure com variável privada
+- [ ] Desafio 6: Counter com closure
+- [ ] Desafio 7: Factory function com closure
+- [ ] Desafio 8: Module pattern
+- [ ] Desafio 9: IIFE (Immediately Invoked Function Expression)
+- [ ] Desafio 10: Closure em loops (problema clássico)
+- [ ] Desafio 11: Closure em event handlers
+- [ ] Desafio 12: Closure para memoization
+- [ ] Desafio 13: Closure para debounce/throttle
+- [ ] Desafio 14: Closure vs Arrow functions
+- [ ] Desafio 15: Desafio combinado - sistema de cache de crescimento
+
+**Error Handling - Cacto Defensivo**
+- [ ] Criar planta "Cacto Defensivo" (tier 3, 6 regas)
+- [ ] Desafio 1: Try/catch básico
+- [ ] Desafio 2: Finally block
+- [ ] Desafio 3: Throw new Error()
+- [ ] Desafio 4: Custom error messages
+- [ ] Desafio 5: Error.name e Error.message
+- [ ] Desafio 6: Multiple catch blocks (tipo de erro)
+- [ ] Desafio 7: Re-throwing errors
+- [ ] Desafio 8: Error em async functions
+- [ ] Desafio 9: Custom Error classes
+- [ ] Desafio 10: TypeError, ReferenceError, SyntaxError
+- [ ] Desafio 11: Validação de inputs com throw
+- [ ] Desafio 12: Error boundaries pattern
+- [ ] Desafio 13: Global error handling
+- [ ] Desafio 14: Logging de erros
+- [ ] Desafio 15: Desafio combinado - sistema robusto de rega
+
+#### 2.4 Conceitos Expert - Tier 21+ (Nível 21+)
+
+**Prototypes - Raiz Primordial**
+- [ ] Criar planta "Raiz Primordial" (tier 5, 10 regas)
+- [ ] Desafio 1: Entender __proto__
+- [ ] Desafio 2: Prototype chain básica
+- [ ] Desafio 3: Object.getPrototypeOf()
+- [ ] Desafio 4: Object.setPrototypeOf()
+- [ ] Desafio 5: Constructor.prototype
+- [ ] Desafio 6: Adicionar métodos ao prototype
+- [ ] Desafio 7: Object.create() básico
+- [ ] Desafio 8: Object.create() com propriedades
+- [ ] Desafio 9: Herança prototípica manual
+- [ ] Desafio 10: hasOwnProperty vs in
+- [ ] Desafio 11: Object.keys vs for...in
+- [ ] Desafio 12: Prototype pollution (entender o problema)
+- [ ] Desafio 13: Desafio combinado - sistema de herança de plantas
+
+**Generators e Iterators - Flor Infinita**
+- [ ] Criar planta "Flor Infinita" (tier 5, 10 regas)
+- [ ] Desafio 1: function* syntax básica
+- [ ] Desafio 2: yield simples
+- [ ] Desafio 3: next() e value
+- [ ] Desafio 4: Generator que retorna valores finitos
+- [ ] Desafio 5: Generator infinito
+- [ ] Desafio 6: yield* para delegar
+- [ ] Desafio 7: Passar valores para next()
+- [ ] Desafio 8: return() em generator
+- [ ] Desafio 9: throw() em generator
+- [ ] Desafio 10: Iterator protocol - Symbol.iterator
+- [ ] Desafio 11: Criar iterador customizado
+- [ ] Desafio 12: Generator para Fibonacci
+- [ ] Desafio 13: Desafio combinado - sequência de crescimento
+
+**Proxies e Reflect - Espelho Mágico**
+- [ ] Criar planta "Espelho Mágico" (tier 5, 10 regas)
+- [ ] Desafio 1: new Proxy() básico
+- [ ] Desafio 2: get trap - interceptar leitura
+- [ ] Desafio 3: set trap - interceptar escrita
+- [ ] Desafio 4: has trap - interceptar 'in' operator
+- [ ] Desafio 5: deleteProperty trap
+- [ ] Desafio 6: apply trap - interceptar chamadas de função
+- [ ] Desafio 7: construct trap - interceptar 'new'
+- [ ] Desafio 8: Reflect API básico
+- [ ] Desafio 9: Reflect.get/set
+- [ ] Desafio 10: Reflect.has e Reflect.deleteProperty
+- [ ] Desafio 11: Reflect.apply
+- [ ] Desafio 12: Proxy para validação
+- [ ] Desafio 13: Proxy para logging
+- [ ] Desafio 14: Desafio combinado - sistema observável de plantas
+
+**WeakMap/WeakSet - Memória Efêmera**
+- [ ] Criar planta "Memória Efêmera" (tier 4, 8 regas)
+- [ ] Desafio 1: Map vs WeakMap - diferenças básicas
+- [ ] Desafio 2: Criar WeakMap
+- [ ] Desafio 3: set/get/has/delete no WeakMap
+- [ ] Desafio 4: Entender garbage collection com WeakMap
+- [ ] Desafio 5: WeakMap para dados privados
+- [ ] Desafio 6: WeakMap para cache
+- [ ] Desafio 7: Set vs WeakSet
+- [ ] Desafio 8: Criar WeakSet
+- [ ] Desafio 9: add/has/delete no WeakSet
+- [ ] Desafio 10: WeakSet para rastrear objetos
+- [ ] Desafio 11: Desafio combinado - sistema de referências fracas
+
+#### 2.5 Sistema de Progressão Educacional
+
+- [ ] **Níveis de dificuldade por conceito**
+  - Cada conceito terá 3 níveis: Iniciante (30%), Praticante (50%), Mestre (20%)
+  - Desafios escalam em complexidade dentro do mesmo conceito
+  - Visual badges: Bronze/Prata/Ouro para cada conceito
+
+- [ ] **Sistema de pré-requisitos inteligente**
+  - Criar grafo de dependências entre conceitos
+  - Ex: Async/Await requer Functions + Promises + Error Handling
+  - Mostrar path de aprendizado sugerido
+  - Bloquear conceitos avançados até completar básicos
+
+- [ ] **Desafios combinados (Cross-Concept)**
+  - Criar 20+ desafios que misturam múltiplos conceitos
+  - Recompensas 2x maiores (XP e moedas)
+  - Desbloqueiam após dominar conceitos individuais
+  - Ex: "Sistema de Jardim Assíncrono" = Async + Classes + Arrays
+
+- [ ] **Modo Revisão**
+  - Gerar desafio aleatório de conceitos já aprendidos
+  - Recompensa menor mas mantém conhecimento fresco
+  - Sistema de spaced repetition
+  - Notificação se não praticar por 3+ dias
+
+- [ ] **Curva de aprendizado inteligente**
+  - Rastrear tempo médio por desafio
+  - Se jogador travar 3+ tentativas, oferecer dica automática
+  - Se completar muito rápido, sugerir nível acima
+  - Adaptive difficulty baseado em performance
+
+---
+
+### Fase 3: Sistema de Progressão e Retenção (Prioridade Alta)
+
+**Objetivo**: Manter jogadores engajados através de sistemas de recompensa, feedback e objetivos claros.
+
+#### 3.1 Sistema de Loja Expandido
+
+- [x] Compra de sementes básicas
+- [ ] **Upgrades de ferramentas**
+  - Regador automático (rega 2 plantas por desafio)
+  - Fertilizante (reduz regas necessárias em 1)
+  - Pá dourada (chance de dobrar colheita)
+  - Lupa (revela 1 dica grátis por desafio)
+- [ ] **Power-ups consumíveis**
+  - Boost de XP (2x XP por 1 hora)
+  - Boost de moedas (2x moedas por 1 hora)
+  - Skip de rega (avança 1 rega instantaneamente)
+- [ ] **Decorações de jardim**
+  - Cercas, pedras, fontes (puramente estético)
+  - Backgrounds temáticos por estação
+  - Efeitos de partículas (folhas caindo, borboletas)
+- [ ] **Expansão de terreno**
+  - Desbloquear grid 4x4 (nível 10)
+  - Desbloquear grid 5x5 (nível 20)
+  - Desbloquear grid 6x6 (nível 30)
+
+#### 3.2 Colheita e Feedback Aprimorado
+
+- [x] Animação de colheita básica
+- [x] Sistema de qualidade (poor/normal/perfect)
+- [ ] **Combo System**
+  - Colher múltiplas plantas seguidas aumenta multiplicador
+  - Combo 3x = 1.5x moedas
+  - Combo 5x = 2x moedas
+  - Combo 10x = 3x moedas + XP bonus
+  - Combo quebra se esperar 5+ segundos entre colheitas
+- [ ] **Recompensas especiais aleatórias**
+  - 5% chance de dobrar moedas na colheita
+  - 3% chance de encontrar semente rara
+  - 1% chance de encontrar semente lendária
+  - Animação especial com brilho e som diferente
+- [ ] **Estatísticas de colheita**
+  - Rastrear maior combo conseguido
+  - Total de colheitas perfect
+  - Planta mais colhida
+  - Estação mais produtiva
+
+#### 3.3 Sistema de Conquistas
+
+- [ ] **Conquistas de progressão (10)**
+  - Primeira planta colhida
+  - 10, 50, 100, 500 plantas colhidas
+  - Alcançar nível 5, 10, 20, 50
+  - Completar todos desafios de um conceito
+  - Dominar todos conceitos de um tier
+- [ ] **Conquistas de maestria (15)**
+  - Completar desafio sem ver dicas
+  - Completar 10 desafios seguidos sem erro
+  - Conseguir 100% em todos testes de um desafio
+  - Colher 5 plantas perfect seguidas
+  - Alcançar combo 10x
+- [ ] **Conquistas de colecionador (10)**
+  - Colher todos tipos de planta
+  - Ter 1000 moedas
+  - Comprar todos upgrades de ferramentas
+  - Plantar 100 sementes
+  - Desbloquear todas plantas do tier 1, 2, 3, 4, 5
+- [ ] **Conquistas secretas/easter eggs (5)**
+  - Plantar 3 do mesmo tipo em linha
+  - Colher tudo no jardim de uma vez
+  - Completar desafio em menos de 30 segundos
+  - Alcançar streak de 30 dias
+  - Descobrir código secreto no editor
+- [ ] **Sistema de badges**
+  - Badge visual único para cada conquista
+  - Exibir no perfil do jogador
+  - Recompensas: moedas, XP, sementes raras
+  - Notificação animada ao desbloquear
+
+#### 3.4 Desafios Diários e Eventos
+
+- [ ] **Desafio diário**
+  - 1 desafio especial por dia, conceito aleatório
+  - Dificuldade baseada no nível do jogador
+  - Recompensa: 3x XP + 2x moedas + semente rara
+  - Expira em 24h
+  - Visual destacado no HUD
+- [ ] **Sistema de streak**
+  - Rastrear dias consecutivos completando desafio diário
+  - Streak 7 dias = recompensa especial
+  - Streak 30 dias = conquista + título
+  - Notificação se streak em risco
+- [ ] **Eventos semanais**
+  - "Semana das Funções" - desafios só de functions, recompensas 2x
+  - "Maratona de Loops" - completar 20 desafios de loop
+  - "Fim de semana double XP" - todo XP duplicado
+  - Rotação semanal, nunca repete 2 semanas seguidas
+- [ ] **Calendário de eventos**
+  - Interface mostrando eventos ativos
+  - Cronômetro de tempo restante
+  - Progresso atual no evento
+  - Recompensas já conquistadas vs pendentes
+
+---
+
+### Fase 4: Features de Engajamento (Prioridade Média)
+
+**Objetivo**: Adicionar profundidade e variedade à experiência, aumentando tempo de jogo e replayability.
+
+#### 4.1 Sistema de Estações Completo
+
+- [x] Ciclo de 7 dias por estação (Primavera, Verão, Outono, Inverno)
+- [ ] **Plantas sazonais especiais**
+  - Primavera: Flores de cerejeira (bonus XP)
+  - Verão: Girassol gigante (bonus moedas)
+  - Outono: Abóbora de código (bonus itens raros)
+  - Inverno: Pinheiro eterno (não murcha)
+- [ ] **Eventos sazonais automáticos**
+  - Primavera: "Festival das Flores" - flores crescem 2x mais rápido
+  - Verão: "Onda de calor" - plantas precisam de água extra
+  - Outono: "Colheita abundante" - dobro de moedas
+  - Inverno: "Neve mágica" - chance de sementes bonus
+- [ ] **Clima dinâmico**
+  - Sol, nuvens, chuva, neve (visual only no MVP)
+  - Futuro: chuva rega automaticamente (reduz 1 desafio)
+  - Tempestade murcha plantas não maduras (cria urgência)
+- [ ] **Transições visuais**
+  - Paleta de cores muda com estação
+  - Partículas sazonais (pétalas, folhas, neve)
+  - Animação suave de 2 segundos na transição
+
+#### 4.2 Tutorial e Onboarding
+
+- [ ] **Tutorial interativo (5-10 minutos)**
+  - Welcome screen explicando o conceito do jogo
+  - Passo 1: Plantar primeira semente (guiado)
+  - Passo 2: Completar primeiro desafio var-1 (assistido)
+  - Passo 3: Colher primeira planta (celebração)
+  - Passo 4: Comprar semente na loja (introduzir economia)
+  - Passo 5: Tour rápido do HUD e features
+- [ ] **Tooltips contextuais**
+  - Aparecem na primeira vez que jogador vê cada elemento
+  - Seta apontando + texto curto
+  - Pode ser fechado e não aparece novamente
+  - Exemplos: primeira vez vendo Shop, Seed Bag, Plot vazio
+- [ ] **Sistema de missões iniciais**
+  - "Bem-vindo ao Jardim" - complete tutorial (recompensa: 50 moedas)
+  - "Primeiro Broto" - colha 3 plantas (recompensa: 5 sementes variadas)
+  - "Estudante Dedicado" - complete 5 desafios (recompensa: 100 XP)
+  - "Mestre da Loja" - compre 10 sementes (recompensa: upgrade grátis)
+  - Missões marcadas como completas, visíveis em aba separada
+
+#### 4.3 UX e Polish
+
+- [ ] **Animações avançadas com Framer Motion**
+  - Page transitions (fade in/out)
+  - Stagger animations em grids
+  - Spring animations em botões
+  - Parallax scrolling no background
+  - Shake animation em erro de teste
+- [ ] **Sistema de partículas com tsParticles**
+  - Partículas de colheita (moedas voando, sparkles)
+  - Partículas de level up (explosão de confetti)
+  - Partículas ambientes por estação
+  - Partículas de erro (fumaça vermelha)
+- [ ] **Feedback sonoro**
+  - Som de plantio (seed drop)
+  - Som de rega/desafio completo (water splash)
+  - Som de colheita (coin collect)
+  - Som de level up (fanfare)
+  - Som de erro (buzzer suave)
+  - Som de UI (click, hover)
+  - Volume ajustável, mute toggle
+- [ ] **Micro-interações**
+  - Hover effects em todos botões
+  - Active states (press down)
+  - Loading states animados
+  - Skeleton screens durante carregamento
+  - Toast notifications elegantes
+
+#### 4.4 Sistema de Perfil do Jogador
+
+- [ ] **Tela de perfil**
+  - Avatar/foto (escolher entre preset de ícones)
+  - Username editável
+  - Estatísticas principais destacadas
+  - Gráfico de progresso por conceito
+  - Lista de conquistas com progresso
+- [ ] **Estatísticas detalhadas**
+  - Total de desafios por conceito
+  - Accuracy rate (% de acertos)
+  - Tempo médio por desafio
+  - Conceito favorito (mais praticado)
+  - Dias ativos vs total
+- [ ] **Histórico de atividade**
+  - Últimas 10 plantas colhidas
+  - Últimos 5 desafios completados
+  - Gráfico de XP ganho por dia (últimos 7 dias)
+
+---
+
+### Fase 5: Backend e Persistência (Prioridade Média)
+
+**Objetivo**: Migrar de LocalStorage para backend real, permitindo sincronização entre dispositivos e features multiplayer futuras.
+
+#### 5.1 Setup do Backend
+
+- [ ] **Criar apps/api com Fastify**
+  - Setup inicial do projeto
+  - Configurar TypeScript
+  - CORS configurado
+  - Environment variables (.env)
+  - Estrutura de pastas: routes, controllers, services, models
+- [ ] **Configurar Prisma com PostgreSQL**
+  - Instalar Prisma CLI
+  - Conectar com PostgreSQL (local ou Railway)
+  - Definir schema.prisma
+  - Migrations setup
+- [ ] **Schema do banco**
+  - User: id, email, username, password_hash, created_at, updated_at
+  - Player: id, user_id, level, xp, coins, season, day, stats (JSON)
+  - Garden: id, user_id, plots (JSON array), updated_at
+  - Inventory: id, user_id, items (JSON)
+  - ChallengeProgress: id, user_id, challenge_id, completed, attempts, best_time
+  - Achievement: id, user_id, achievement_id, unlocked_at
+  - DailyChallenge: id, user_id, date, challenge_id, completed
+
+#### 5.2 Autenticação
+
+- [ ] **Registro de usuário**
+  - POST /auth/register - email, username, password
+  - Hash de senha com bcrypt
+  - Validação de email único
+  - Validação de senha forte (min 8 chars)
+  - Retorna JWT token + user data
+- [ ] **Login**
+  - POST /auth/login - email, password
+  - Verificar hash de senha
+  - Retornar JWT token
+  - Refresh token opcional
+- [ ] **JWT Middleware**
+  - Verificar token em rotas protegidas
+  - Extrair user_id do token
+  - Anexar ao request como req.userId
+- [ ] **Logout** (client-side)
+  - Remover token do localStorage
+  - Limpar Zustand stores
+
+#### 5.3 API Endpoints
+
+**Players**
+- [ ] GET /players/me - Buscar dados do jogador atual
+- [ ] PATCH /players/me - Atualizar dados (level, xp, coins, stats)
+- [ ] POST /players/level-up - Calcular level up
+
+**Garden**
+- [ ] GET /gardens/me - Buscar estado do jardim
+- [ ] POST /gardens/plant - Plantar semente em plot
+- [ ] POST /gardens/water - Regar planta (completar desafio)
+- [ ] POST /gardens/harvest - Colher planta
+
+**Inventory**
+- [ ] GET /inventory/me - Buscar inventário
+- [ ] POST /inventory/add - Adicionar item
+- [ ] POST /inventory/remove - Remover item
+
+**Shop**
+- [ ] GET /shop/seeds - Listar sementes disponíveis
+- [ ] POST /shop/buy - Comprar semente
+
+**Challenges**
+- [ ] GET /challenges - Listar todos desafios
+- [ ] GET /challenges/:id - Buscar desafio específico
+- [ ] POST /challenges/:id/complete - Marcar desafio como completo
+- [ ] GET /challenges/progress - Progresso do jogador em todos desafios
+
+**Achievements**
+- [ ] GET /achievements - Listar todas conquistas
+- [ ] GET /achievements/me - Conquistas do jogador
+- [ ] POST /achievements/unlock - Desbloquear conquista
+
+**Leaderboard**
+- [ ] GET /leaderboard/global - Top 100 jogadores por XP
+- [ ] GET /leaderboard/weekly - Top 100 da semana
+- [ ] GET /leaderboard/concept/:concept - Ranking por conceito
+
+**Daily Challenge**
+- [ ] GET /daily - Buscar desafio diário atual
+- [ ] POST /daily/complete - Completar desafio diário
+
+#### 5.4 Sincronização e Migração
+
+- [ ] **Migração de LocalStorage para API**
+  - Criar endpoint POST /players/import-local - recebe dados do localStorage
+  - Validar e sanitizar dados antes de salvar
+  - Mesclar com dados existentes se usuário já registrado
+- [ ] **Sync offline/online**
+  - Detectar quando ficar offline
+  - Continuar salvando em localStorage
+  - Quando voltar online, sincronizar mudanças
+  - Resolver conflitos (last-write-wins ou merge inteligente)
+- [ ] **Indicador de sync status**
+  - Ícone no HUD: verde (synced), amarelo (syncing), vermelho (offline)
+  - Toast notification quando sync completa
+  - Retry automático se falhar
+
+---
+
+### Fase 6: Otimização e Qualidade (Prioridade Baixa)
+
+**Objetivo**: Melhorar performance, acessibilidade e experiência mobile.
+
+#### 6.1 Responsividade e Mobile
+
+- [ ] **Layout responsivo**
+  - Breakpoints: mobile (<640px), tablet (640-1024px), desktop (>1024px)
+  - Grid ajustável: 2x3 mobile, 3x3 tablet, 3x3+ desktop
+  - HUD adaptativo: vertical mobile, horizontal desktop
+- [ ] **Touch gestures**
+  - Tap para selecionar/plantar/colher
+  - Swipe para navegar entre modals
+  - Long press para ver detalhes de planta
+  - Pinch to zoom no jardim (futuro)
+- [ ] **PWA (Progressive Web App)**
+  - Manifest.json configurado
+  - Service Worker para cache
+  - Ícones para todas plataformas
+  - Splash screens
+  - "Add to Home Screen" prompt
+- [ ] **Offline support**
+  - Cache de assets estáticos
+  - Cache de dados críticos
+  - Queue de ações para sync posterior
+  - Mensagem clara de modo offline
+
+#### 6.2 Performance
+
+- [ ] **Code splitting**
+  - Lazy load de modais (Shop, Challenge)
+  - Lazy load de features não-críticas
+  - React.lazy e Suspense
+- [ ] **Lazy loading de componentes**
+  - Carregar desafios sob demanda
+  - Carregar plantas conforme necessário
+- [ ] **Bundle optimization**
+  - Tree shaking configurado
+  - Minificação em produção
+  - Compression (gzip/brotli)
+  - Análise de bundle size com Vite Bundle Analyzer
+- [ ] **Otimização de imagens**
+  - Usar WebP quando possível
+  - Lazy load de imagens
+  - Sprites para ícones pequenos
+
+#### 6.3 Acessibilidade
+
+- [ ] **Keyboard navigation**
+  - Tab order lógico
+  - Enter/Space para ações
+  - Esc para fechar modais
+  - Atalhos de teclado (?, H para help)
+- [ ] **Screen reader support**
+  - ARIA labels em todos elementos interativos
+  - ARIA live regions para notificações
+  - Role attributes corretos
+  - Alt text em imagens
+- [ ] **Contraste e cores**
+  - WCAG AA compliance mínimo
+  - Modo de alto contraste opcional
+  - Não depender só de cor para informação
+- [ ] **Modo escuro** (opcional)
+  - Toggle de dark/light mode
+  - Persistir preferência
+  - Respeitar preferência do sistema
+
+#### 6.4 Testes
+
+- [ ] **Testes unitários (Vitest)**
+  - Testar validador de código
+  - Testar Zustand stores
+  - Testar utility functions
+  - Coverage mínimo de 70%
+- [ ] **Testes de componente**
+  - Testar componentes UI isolados
+  - Testar interações de usuário
+  - React Testing Library
+- [ ] **Testes E2E (Playwright)**
+  - Fluxo completo: plantar → regar → colher
+  - Fluxo de compra na loja
+  - Fluxo de desafio completo
+  - Testes de regressão críticos
+
+---
+
+### Fase 7: Deploy e Infraestrutura (Prioridade Baixa)
+
+**Objetivo**: Colocar o jogo em produção de forma automatizada e monitorada.
+
+#### 7.1 CI/CD
+
+- [ ] **GitHub Actions para CI**
+  - Workflow de teste em cada PR
+  - Lint e type-check
+  - Build de teste
+  - Rodar testes unitários
+- [ ] **Deploy automático**
+  - Deploy frontend em merge para main
+  - Deploy backend em merge para main
+  - Preview deployments para PRs
+- [ ] **Versionamento**
+  - Semantic versioning (major.minor.patch)
+  - Changelog automático
+  - Git tags para releases
+
+#### 7.2 Hospedagem
+
+- [ ] **Frontend no Vercel**
+  - Conectar repositório GitHub
+  - Configurar environment variables
+  - Custom domain (syntaxgardens.com)
+  - SSL automático via Vercel
+- [ ] **Backend no Railway**
+  - Conectar repositório GitHub
+  - PostgreSQL database provisionado
+  - Environment variables configuradas
+  - Auto-scaling se necessário
+- [ ] **CDN para assets**
+  - Cloudflare ou Vercel Edge
+  - Cache agressivo de imagens/fonts
+  - Servir de múltiplas regiões
+
+#### 7.3 Monitoramento
+
+- [ ] **Error tracking com Sentry**
+  - Capturar erros de JavaScript
+  - Capturar erros de API
+  - Source maps para debug
+  - Alertas por email/Slack
+- [ ] **Analytics com Plausible**
+  - Rastrear pageviews
+  - Eventos customizados (plantar, colher, completar desafio)
+  - Funil de conversão (registro → primeiro desafio → primeira colheita)
+  - Respeitar privacidade (GDPR compliant)
+- [ ] **Logs estruturados**
+  - Pino.js no backend
+  - Logs em JSON
+  - Níveis: error, warn, info, debug
+  - Integração com serviço de logs (Logtail, Papertrail)
+- [ ] **Uptime monitoring**
+  - Ping a cada 5 minutos
+  - Alertas se down por >2 minutos
+  - Status page público
+
+#### 7.4 Documentação
+
+- [ ] **README atualizado**
+  - Descrição do projeto
+  - Screenshots
+  - Como rodar localmente
+  - Como contribuir
+- [ ] **Documentação da API**
+  - Swagger/OpenAPI spec
+  - Exemplos de requests/responses
+  - Códigos de erro
+- [ ] **Contributing guide**
+  - Como reportar bugs
+  - Como sugerir features
+  - Code style guide
+  - PR template
+
+---
+
+## Decisões Técnicas
+
+### Por que Zustand ao invés de Redux?
+- API mais simples e menos boilerplate
+- Melhor integração com TypeScript
+- Persist middleware incluso
+- Performance excelente para este tamanho de projeto
+- Curva de aprendizado menor para novos contribuidores
+
+### Por que Tailwind CSS?
+- Desenvolvimento rápido com classes utilitárias
+- Consistência visual garantida
+- Bundle otimizado (purge CSS remove classes não usadas)
+- Excelente para prototipação rápida
+- Design system embutido (cores, espaçamentos)
+
+### Por que validação client-side de código?
+- Resposta instantânea para o jogador
+- Sem necessidade de backend para MVP
+- Suficiente para desafios educacionais simples
+- Fácil de migrar para backend depois se necessário
+- Reduz custos de infraestrutura inicialmente
+
+### Por que LocalStorage para persistência inicial?
+- Zero configuração de backend
+- Funciona offline por padrão
+- Suficiente para single-player MVP
+- Migrar para API é transparente com Zustand persist
+- Permite validar o produto antes de investir em infra
+
+### Por que monorepo com Turborepo?
+- Compartilhar código entre frontend/backend facilmente
+- Build e cache inteligente
+- Preparado para escalar (mobile app, admin panel no futuro)
+- TypeScript types compartilhados
+
+### Por que PostgreSQL?
+- Relacional é mais adequado para dados estruturados do jogo
+- JSON support para flexibilidade (stats, inventory)
+- Excelente integração com Prisma
+- Escalável e confiável
+- Gratuito no Railway para começar
+
+---
+
+## Métricas de Sucesso
+
+| Categoria | Métrica | Meta Mês 1 | Meta Mês 3 | Meta Mês 6 |
+|-----------|---------|------------|------------|------------|
+| **Aquisição** | Usuários registrados | 100 | 500 | 2000 |
+| **Ativação** | Completam tutorial | 70% | 80% | 85% |
+| | Completam 5 desafios | 40% | 50% | 60% |
+| **Retenção** | D1 (retornam no dia seguinte) | 30% | 40% | 50% |
+| | D7 (retornam após 7 dias) | 15% | 20% | 30% |
+| | D30 (retornam após 30 dias) | 5% | 10% | 15% |
+| **Engajamento** | Tempo médio de sessão | 10 min | 15 min | 20 min |
+| | Desafios por usuário/dia | 3 | 5 | 8 |
+| | Plantas colhidas/usuário/semana | 5 | 10 | 20 |
+| **Progressão** | % que chega nível 5 | 30% | 40% | 50% |
+| | % que chega nível 10 | 10% | 20% | 30% |
+| | Conceitos dominados (média) | 2 | 5 | 10 |
+| **Monetização** | Conversão para premium (futuro) | - | 2% | 5% |
+| **Satisfação** | NPS | 40 | 50 | 60 |
+| | Reviews 4+ estrelas | 70% | 80% | 85% |
+
+### Dashboards de Analytics
+
+**Dashboard Principal:**
+- MAU (Monthly Active Users)
+- DAU (Daily Active Users)
+- DAU/MAU ratio (stickiness)
+- New signups por dia
+- Churn rate
+
+**Dashboard de Engajamento:**
+- Desafios completados por hora do dia
+- Conceitos mais populares
+- Taxa de abandono por conceito
+- Tempo médio por desafio
+- Taxa de uso de hints
+
+**Dashboard de Progressão:**
+- Distribuição de níveis dos jogadores
+- Funil de progressão (nível 1 → 5 → 10 → 20)
+- Conceitos por tier (quantos % dos jogadores dominam cada tier)
+- Plantas mais colhidas
+- Conquistas mais raras
+
+---
+
+## Contribuindo
+
+### Como Contribuir
+
+1. **Fork o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/syntax-gardens.git
+   ```
+
+2. **Crie uma branch**
+   ```bash
+   git checkout -b feature/nome-da-feature
+   ```
+
+3. **Faça suas mudanças**
+   - Siga o style guide (Prettier + ESLint)
+   - Adicione testes se aplicável
+   - Atualize documentação se necessário
+
+4. **Commit suas mudanças**
+   ```bash
+   git commit -m 'feat: adiciona nova feature X'
+   ```
+   Use conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+
+5. **Push para a branch**
+   ```bash
+   git push origin feature/nome-da-feature
+   ```
+
+6. **Abra um Pull Request**
+   - Descreva o que foi feito
+   - Adicione screenshots se mudança visual
+   - Referencie issues relacionadas
+
+### Áreas que Precisam de Ajuda
+
+- **Conteúdo Educacional**: Criar novos desafios de código
+- **Arte/Design**: Sprites de plantas, ícones, backgrounds
+- **UX Writing**: Melhorar textos, dicas, tutoriais
+- **Tradução**: i18n para Português, Espanhol, etc
+- **Testing**: Escrever testes unitários e E2E
+- **Acessibilidade**: Melhorar suporte a screen readers
+
+---
+
+## Roadmap de Longo Prazo (Além de 6 meses)
+
+### Expansões de Conteúdo
+- [ ] **Modo Multiplayer**
+  - Jardins compartilhados (co-op)
+  - Competições semanais
+  - Trocar plantas com amigos
+  - Chat in-game
+- [ ] **Novos Conceitos Avançados**
+  - TypeScript types
+  - Regex patterns
+  - Web APIs (Fetch, LocalStorage, etc)
+  - Node.js específicos (fs, path, etc)
+- [ ] **Sistema de Pets**
+  - Mascotes que ajudam (regam automaticamente, etc)
+  - Evoluem com o tempo
+  - Customizáveis
+- [ ] **Modo História**
+  - Narrativa linear com NPCs
+  - Desafios em sequência
+  - Boss fights (desafios muito difíceis)
+
+### Monetização (se necessário)
+- [ ] **Modelo Freemium**
+  - Versão grátis: conceitos básicos (tier 1-3)
+  - Premium ($5/mês): todos conceitos + features extras
+  - Lifetime ($30): acesso permanente
+- [ ] **Cosmetics opcionais**
+  - Skins de plantas
+  - Temas de jardim
+  - Emotes e animações
+  - Puramente estético, sem pay-to-win
+
+### Plataformas
+- [ ] **Mobile App (React Native)**
+  - iOS e Android
+  - Sync com web
+  - Notificações push (desafio diário pronto)
+- [ ] **Desktop App (Electron)**
+  - Windows, Mac, Linux
+  - Offline-first
+
+---
+
+## Licença
+
+MIT License - veja LICENSE para detalhes.
+
+---
+
+## Contato e Suporte
+
+- **Website**: https://syntaxgardens.com (futuro)
+- **Email**: suporte@syntaxgardens.com (futuro)
+- **GitHub Issues**: Para bugs e feature requests
+- **Discord**: Comunidade de jogadores e devs (futuro)
+
+---
+
+**Última atualização**: Janeiro 2026  
+**Versão do documento**: 2.0  
+**Próxima revisão planejada**: Fevereiro 2026

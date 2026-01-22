@@ -1,0 +1,215 @@
+import type { PlantDefinition } from '../../types';
+
+export const basicPlants: PlantDefinition[] = [
+  {
+    id: 'var-seedling',
+    type: 'variable',
+    tier: 1,
+    name: 'Variable Seedling',
+    displayName: 'Muda de Variavel',
+    description: 'A planta mais basica do jardim. Cresce rapido e ensina os fundamentos de variaveis.',
+    sprite: '/sprites/plants/variable-seedling.png',
+    growthStages: {
+      seed: '/sprites/stages/var-seed.png',
+      sprout: '/sprites/stages/var-sprout.png',
+      growing: '/sprites/stages/var-growing.png',
+      mature: '/sprites/stages/var-mature.png',
+    },
+    growthTime: 3,
+    value: 10,
+    experienceGain: 5,
+    shopPrice: 5,
+    challenges: ['var-1', 'var-2', 'var-3'],
+  },
+  {
+    id: 'func-flower',
+    type: 'function',
+    tier: 2,
+    name: 'Function Flower',
+    displayName: 'Flor de Funcao',
+    description: 'Uma flor elegante que floresce quando voce domina funcoes.',
+    sprite: '/sprites/plants/function-flower.png',
+    growthStages: {
+      seed: '/sprites/stages/func-seed.png',
+      sprout: '/sprites/stages/func-sprout.png',
+      growing: '/sprites/stages/func-growing.png',
+      mature: '/sprites/stages/func-mature.png',
+    },
+    growthTime: 5,
+    value: 25,
+    experienceGain: 15,
+    shopPrice: 15,
+    unlockRequirement: {
+      level: 2,
+    },
+    challenges: ['func-1', 'func-2', 'func-3', 'func-4', 'func-5'],
+  },
+  {
+    id: 'loop-vine',
+    type: 'loop',
+    tier: 2,
+    name: 'Loop Vine',
+    displayName: 'Trepadeira de Loop',
+    description: 'Cresce em padroes repetitivos. Perfeita para aprender iteracao.',
+    sprite: '/sprites/plants/loop-vine.png',
+    growthStages: {
+      seed: '/sprites/stages/loop-seed.png',
+      sprout: '/sprites/stages/loop-sprout.png',
+      growing: '/sprites/stages/loop-growing.png',
+      mature: '/sprites/stages/loop-mature.png',
+    },
+    growthTime: 5,
+    value: 30,
+    experienceGain: 20,
+    shopPrice: 20,
+    unlockRequirement: {
+      level: 3,
+      prerequisitePlants: ['var-seedling'],
+    },
+    challenges: ['loop-1', 'loop-2', 'loop-3', 'loop-4', 'loop-5'],
+  },
+  {
+    id: 'object-tree',
+    type: 'object',
+    tier: 3,
+    name: 'Object Tree',
+    displayName: 'Arvore de Objeto',
+    description: 'Uma arvore robusta que representa a estrutura de objetos JavaScript.',
+    sprite: '/sprites/plants/object-tree.png',
+    growthStages: {
+      seed: '/sprites/stages/obj-seed.png',
+      sprout: '/sprites/stages/obj-sprout.png',
+      growing: '/sprites/stages/obj-growing.png',
+      mature: '/sprites/stages/obj-mature.png',
+    },
+    growthTime: 7,
+    value: 50,
+    experienceGain: 35,
+    shopPrice: 35,
+    unlockRequirement: {
+      level: 5,
+      prerequisitePlants: ['func-flower'],
+    },
+    challenges: ['obj-1', 'obj-2', 'obj-3', 'obj-4', 'obj-5'],
+  },
+  {
+    id: 'array-patch',
+    type: 'array',
+    tier: 3,
+    name: 'Array Patch',
+    displayName: 'Canteiro de Array',
+    description: 'Um canteiro organizado que ensina sobre arrays e seus metodos.',
+    sprite: '/sprites/plants/array-patch.png',
+    growthStages: {
+      seed: '/sprites/stages/arr-seed.png',
+      sprout: '/sprites/stages/arr-sprout.png',
+      growing: '/sprites/stages/arr-growing.png',
+      mature: '/sprites/stages/arr-mature.png',
+    },
+    growthTime: 7,
+    value: 55,
+    experienceGain: 40,
+    shopPrice: 40,
+    unlockRequirement: {
+      level: 6,
+      prerequisitePlants: ['loop-vine'],
+    },
+    challenges: ['arr-1', 'arr-2', 'arr-3', 'arr-4', 'arr-5'],
+  },
+  {
+    id: 'cond-cactus',
+    type: 'conditional',
+    tier: 1,
+    name: 'Conditional Cactus',
+    displayName: 'Cacto Condicional',
+    description: 'Um cacto resistente que ensina a tomar decisoes no codigo com if/else.',
+    sprite: '/sprites/plants/conditional-cactus.png',
+    growthStages: {
+      seed: '/sprites/stages/cond-seed.png',
+      sprout: '/sprites/stages/cond-sprout.png',
+      growing: '/sprites/stages/cond-growing.png',
+      mature: '/sprites/stages/cond-mature.png',
+    },
+    growthTime: 4,
+    value: 15,
+    experienceGain: 8,
+    shopPrice: 8,
+    unlockRequirement: {
+      level: 2,
+      prerequisitePlants: ['var-seedling'],
+    },
+    challenges: [
+      'cond-1', 'cond-2', 'cond-3', 'cond-4', 'cond-5',
+      'cond-6', 'cond-7', 'cond-8', 'cond-9', 'cond-10',
+      'cond-11', 'cond-12', 'cond-13', 'cond-14', 'cond-15',
+    ],
+  },
+  {
+    id: 'string-vine',
+    type: 'string',
+    tier: 1,
+    name: 'String Vine',
+    displayName: 'Cipo de String',
+    description: 'Uma trepadeira flexivel que ensina manipulacao de textos.',
+    sprite: '/sprites/plants/string-vine.png',
+    growthStages: {
+      seed: '/sprites/stages/str-seed.png',
+      sprout: '/sprites/stages/str-sprout.png',
+      growing: '/sprites/stages/str-growing.png',
+      mature: '/sprites/stages/str-mature.png',
+    },
+    growthTime: 4,
+    value: 15,
+    experienceGain: 8,
+    shopPrice: 8,
+    unlockRequirement: {
+      level: 2,
+      prerequisitePlants: ['var-seedling'],
+    },
+    challenges: [
+      'str-1', 'str-2', 'str-3', 'str-4', 'str-5', 'str-6',
+      'str-7', 'str-8', 'str-9', 'str-10', 'str-11', 'str-12',
+      'str-13', 'str-14', 'str-15', 'str-16', 'str-17', 'str-18',
+    ],
+  },
+  {
+    id: 'math-crystal',
+    type: 'math',
+    tier: 2,
+    name: 'Math Crystal',
+    displayName: 'Cristal Numerico',
+    description: 'Um cristal brilhante que revela os segredos dos numeros e calculos.',
+    sprite: '/sprites/plants/math-crystal.png',
+    growthStages: {
+      seed: '/sprites/stages/math-seed.png',
+      sprout: '/sprites/stages/math-sprout.png',
+      growing: '/sprites/stages/math-growing.png',
+      mature: '/sprites/stages/math-mature.png',
+    },
+    growthTime: 5,
+    value: 25,
+    experienceGain: 15,
+    shopPrice: 15,
+    unlockRequirement: {
+      level: 3,
+      prerequisitePlants: ['var-seedling'],
+    },
+    challenges: [
+      'math-1', 'math-2', 'math-3', 'math-4', 'math-5', 'math-6',
+      'math-7', 'math-8', 'math-9', 'math-10', 'math-11', 'math-12',
+      'math-13', 'math-14', 'math-15', 'math-16',
+    ],
+  },
+];
+
+export const getPlantById = (id: string): PlantDefinition | undefined => {
+  return basicPlants.find((plant) => plant.id === id);
+};
+
+export const getPlantsByType = (type: PlantDefinition['type']): PlantDefinition[] => {
+  return basicPlants.filter((plant) => plant.type === type);
+};
+
+export const getPlantsByTier = (tier: PlantDefinition['tier']): PlantDefinition[] => {
+  return basicPlants.filter((plant) => plant.tier === tier);
+};

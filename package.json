@@ -1,0 +1,26 @@
+{
+  "name": "syntax-gardens",
+  "version": "1.0.0",
+  "description": "Jogo educacional de simulacao de jardim onde conceitos de programacao sao plantas",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "keywords": [
+    "game",
+    "education",
+    "programming",
+    "garden"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.0",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "turbo": "^2.7.5",
+    "typescript": "^5.9.3"
+  }
+}
