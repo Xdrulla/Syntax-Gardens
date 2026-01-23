@@ -270,6 +270,10 @@ syntax-gardens/
 | fragment-flower | Flor Fragmentada | destructuring | 2 | 5 | 30 | 20 |
 | spread-seed | Semente Expansiva | spread-rest | 2 | 5 | 30 | 20 |
 | arrow-rose | Rosa Aérea | arrow-functions | 2 | 5 | 30 | 20 |
+| ancestor-tree | Árvore Ancestral | class | 4 | 8 | 70 | 50 |
+| temporal-orchid | Orquídea Temporal | async | 4 | 8 | 75 | 55 |
+| wrapping-vine | Videira Envolvente | closure | 3 | 7 | 60 | 45 |
+| defensive-cactus | Cacto Defensivo | error-handling | 3 | 6 | 55 | 40 |
 
 ### Desafios Implementados
 
@@ -448,6 +452,78 @@ syntax-gardens/
 13. **Currying** - x => y => x + y
 14. **Higher-Order Function**
 15. **Pipeline de Transformações** - Desafio combinado
+
+**Classes e OOP (class-1 a class-15):**
+
+1. **Primeira Classe** - Declaração básica de classe
+2. **Constructor** - Constructor com parâmetros
+3. **Propriedades da Instância** - Definir propriedades padrão
+4. **Métodos de Classe** - Funções dentro da classe
+5. **Getter Methods** - Propriedades calculadas
+6. **Setter Methods** - Validação ao atribuir
+7. **Métodos Estáticos** - Métodos da classe
+8. **Propriedades Estáticas** - Compartilhadas por instâncias
+9. **Herança com Extends** - Classes baseadas em outras
+10. **Super no Constructor** - Chamar constructor pai
+11. **Override de Métodos** - Sobrescrever métodos
+12. **Chamar Método do Pai** - super.method()
+13. **Campos Privados** - #field
+14. **Padrão Protected** - _field
+15. **Hierarquia de Plantas** - Desafio combinado
+
+**Async/Await (async-1 a async-15):**
+
+1. **Primeira Promise** - new Promise básica
+2. **Promise.resolve/reject** - Criar promises resolvidas
+3. **Then e Catch** - Handlers de promise
+4. **Encadear Then** - Múltiplos .then()
+5. **Async Function** - Funções assíncronas
+6. **Await Básico** - Esperar promises
+7. **Try/Catch Async** - Tratamento de erros
+8. **Finally Async** - Cleanup sempre executado
+9. **Promise.all** - Esperar múltiplas
+10. **Promise.race** - Primeira a completar
+11. **Promise.allSettled** - Todas independente de erro
+12. **Promise.any** - Primeira com sucesso
+13. **Async em Loop** - for...of com await
+14. **Paralelo vs Sequencial** - Diferentes padrões
+15. **Sistema de Rega Async** - Desafio combinado
+
+**Closures e Scope (closure-1 a closure-15):**
+
+1. **Escopo de Bloco** - let/const
+2. **Escopo de Função** - var
+3. **Escopo Léxico** - Acesso a variáveis externas
+4. **Closure Simples** - Função retorna função
+5. **Variável Privada** - Encapsulamento
+6. **Counter com Closure** - Estado interno
+7. **Factory Function** - Criar objetos com closure
+8. **Module Pattern** - IIFE + closure
+9. **IIFE** - Função auto-executável
+10. **Closure em Loops** - Problema clássico
+11. **Closure em Callbacks** - Capturar dados
+12. **Memoization** - Cache com closure
+13. **Contador com Delay** - Estado assíncrono
+14. **Closure vs This** - Diferenças de captura
+15. **Sistema de Cache** - Desafio combinado
+
+**Error Handling (error-1 a error-15):**
+
+1. **Try/Catch Básico** - Capturar erros
+2. **Finally Block** - Sempre executa
+3. **Throw Error** - Lançar erros
+4. **Mensagens de Erro** - e.message
+5. **Propriedades do Error** - name e message
+6. **Verificar Tipo de Erro** - instanceof
+7. **Re-lançar Erros** - Processar e repassar
+8. **Função Segura** - Validação com throw
+9. **Classe de Erro Customizada** - extends Error
+10. **Tipos de Erro Padrão** - TypeError, RangeError, etc.
+11. **Validação de Input** - Múltiplas validações
+12. **Função Wrapper Segura** - Higher-order safe
+13. **Handler de Erros** - Centralizar tratamento
+14. **Log de Erros** - Formatação
+15. **Sistema Robusto de Rega** - Desafio combinado
 
 ---
 
@@ -644,79 +720,79 @@ pnpm exec tsc --noEmit
 - [x] Desafio 14: Higher-order function retornando arrow
 - [x] Desafio 15: Desafio combinado - pipeline de transformações
 
-#### 2.3 Conceitos Avançados - Tier 13-20 (Nível 13-20)
+#### 2.3 Conceitos Avançados - Tier 13-20 (Nível 13-20) ✅ IMPLEMENTADO
 
-**Classes e OOP - Árvore Ancestral**
-- [ ] Criar planta "Árvore Ancestral" (tier 4, 8 regas)
-- [ ] Desafio 1: Declaração básica de classe
-- [ ] Desafio 2: Constructor com parâmetros
-- [ ] Desafio 3: Propriedades da instância
-- [ ] Desafio 4: Métodos da classe
-- [ ] Desafio 5: Getter methods
-- [ ] Desafio 6: Setter methods
-- [ ] Desafio 7: Static methods
-- [ ] Desafio 8: Static properties
-- [ ] Desafio 9: Herança com extends
-- [ ] Desafio 10: Super() no constructor
-- [ ] Desafio 11: Override de métodos
-- [ ] Desafio 12: Super.method() - chamar método da classe pai
-- [ ] Desafio 13: Private fields (#field)
-- [ ] Desafio 14: Protected pattern (_field)
-- [ ] Desafio 15: Desafio combinado - sistema de hierarquia de plantas
+**Classes e OOP - Árvore Ancestral** ✅ IMPLEMENTADO
+- [x] Criar planta "Árvore Ancestral" (tier 4, 8 regas)
+- [x] Desafio 1: Declaração básica de classe
+- [x] Desafio 2: Constructor com parâmetros
+- [x] Desafio 3: Propriedades da instância
+- [x] Desafio 4: Métodos da classe
+- [x] Desafio 5: Getter methods
+- [x] Desafio 6: Setter methods
+- [x] Desafio 7: Static methods
+- [x] Desafio 8: Static properties
+- [x] Desafio 9: Herança com extends
+- [x] Desafio 10: Super() no constructor
+- [x] Desafio 11: Override de métodos
+- [x] Desafio 12: Super.method() - chamar método da classe pai
+- [x] Desafio 13: Private fields (#field)
+- [x] Desafio 14: Protected pattern (_field)
+- [x] Desafio 15: Desafio combinado - sistema de hierarquia de plantas
 
-**Async/Await - Orquídea Temporal**
-- [ ] Criar planta "Orquídea Temporal" (tier 4, 8 regas)
-- [ ] Desafio 1: Criar Promise básica
-- [ ] Desafio 2: Promise.resolve e Promise.reject
-- [ ] Desafio 3: .then() e .catch()
-- [ ] Desafio 4: Encadear .then()
-- [ ] Desafio 5: Async function básica
-- [ ] Desafio 6: Await básico
-- [ ] Desafio 7: Try/catch com async/await
-- [ ] Desafio 8: Finally block
-- [ ] Desafio 9: Promise.all - esperar múltiplas promises
-- [ ] Desafio 10: Promise.race - primeira a resolver
-- [ ] Desafio 11: Promise.allSettled - esperar todas independente do resultado
-- [ ] Desafio 12: Promise.any - primeira a resolver com sucesso
-- [ ] Desafio 13: Async em loops - for await of
-- [ ] Desafio 14: Parallel vs Sequential async
-- [ ] Desafio 15: Desafio combinado - sistema de rega assíncrono
+**Async/Await - Orquídea Temporal** ✅ IMPLEMENTADO
+- [x] Criar planta "Orquídea Temporal" (tier 4, 8 regas)
+- [x] Desafio 1: Criar Promise básica
+- [x] Desafio 2: Promise.resolve e Promise.reject
+- [x] Desafio 3: .then() e .catch()
+- [x] Desafio 4: Encadear .then()
+- [x] Desafio 5: Async function básica
+- [x] Desafio 6: Await básico
+- [x] Desafio 7: Try/catch com async/await
+- [x] Desafio 8: Finally block
+- [x] Desafio 9: Promise.all - esperar múltiplas promises
+- [x] Desafio 10: Promise.race - primeira a resolver
+- [x] Desafio 11: Promise.allSettled - esperar todas independente do resultado
+- [x] Desafio 12: Promise.any - primeira a resolver com sucesso
+- [x] Desafio 13: Async em loops - for await of
+- [x] Desafio 14: Parallel vs Sequential async
+- [x] Desafio 15: Desafio combinado - sistema de rega assíncrono
 
-**Closures e Scope - Videira Envolvente**
-- [ ] Criar planta "Videira Envolvente" (tier 3, 7 regas)
-- [ ] Desafio 1: Entender escopo de bloco (let/const)
-- [ ] Desafio 2: Entender escopo de função (var)
-- [ ] Desafio 3: Lexical scope básico
-- [ ] Desafio 4: Closure simples - função retorna função
-- [ ] Desafio 5: Closure com variável privada
-- [ ] Desafio 6: Counter com closure
-- [ ] Desafio 7: Factory function com closure
-- [ ] Desafio 8: Module pattern
-- [ ] Desafio 9: IIFE (Immediately Invoked Function Expression)
-- [ ] Desafio 10: Closure em loops (problema clássico)
-- [ ] Desafio 11: Closure em event handlers
-- [ ] Desafio 12: Closure para memoization
-- [ ] Desafio 13: Closure para debounce/throttle
-- [ ] Desafio 14: Closure vs Arrow functions
-- [ ] Desafio 15: Desafio combinado - sistema de cache de crescimento
+**Closures e Scope - Videira Envolvente** ✅ IMPLEMENTADO
+- [x] Criar planta "Videira Envolvente" (tier 3, 7 regas)
+- [x] Desafio 1: Entender escopo de bloco (let/const)
+- [x] Desafio 2: Entender escopo de função (var)
+- [x] Desafio 3: Lexical scope básico
+- [x] Desafio 4: Closure simples - função retorna função
+- [x] Desafio 5: Closure com variável privada
+- [x] Desafio 6: Counter com closure
+- [x] Desafio 7: Factory function com closure
+- [x] Desafio 8: Module pattern
+- [x] Desafio 9: IIFE (Immediately Invoked Function Expression)
+- [x] Desafio 10: Closure em loops (problema clássico)
+- [x] Desafio 11: Closure em event handlers
+- [x] Desafio 12: Closure para memoization
+- [x] Desafio 13: Closure para debounce/throttle
+- [x] Desafio 14: Closure vs Arrow functions
+- [x] Desafio 15: Desafio combinado - sistema de cache de crescimento
 
-**Error Handling - Cacto Defensivo**
-- [ ] Criar planta "Cacto Defensivo" (tier 3, 6 regas)
-- [ ] Desafio 1: Try/catch básico
-- [ ] Desafio 2: Finally block
-- [ ] Desafio 3: Throw new Error()
-- [ ] Desafio 4: Custom error messages
-- [ ] Desafio 5: Error.name e Error.message
-- [ ] Desafio 6: Multiple catch blocks (tipo de erro)
-- [ ] Desafio 7: Re-throwing errors
-- [ ] Desafio 8: Error em async functions
-- [ ] Desafio 9: Custom Error classes
-- [ ] Desafio 10: TypeError, ReferenceError, SyntaxError
-- [ ] Desafio 11: Validação de inputs com throw
-- [ ] Desafio 12: Error boundaries pattern
-- [ ] Desafio 13: Global error handling
-- [ ] Desafio 14: Logging de erros
-- [ ] Desafio 15: Desafio combinado - sistema robusto de rega
+**Error Handling - Cacto Defensivo** ✅ IMPLEMENTADO
+- [x] Criar planta "Cacto Defensivo" (tier 3, 6 regas)
+- [x] Desafio 1: Try/catch básico
+- [x] Desafio 2: Finally block
+- [x] Desafio 3: Throw new Error()
+- [x] Desafio 4: Custom error messages
+- [x] Desafio 5: Error.name e Error.message
+- [x] Desafio 6: Multiple catch blocks (tipo de erro)
+- [x] Desafio 7: Re-throwing errors
+- [x] Desafio 8: Error em async functions
+- [x] Desafio 9: Custom Error classes
+- [x] Desafio 10: TypeError, ReferenceError, SyntaxError
+- [x] Desafio 11: Validação de inputs com throw
+- [x] Desafio 12: Error boundaries pattern
+- [x] Desafio 13: Global error handling
+- [x] Desafio 14: Logging de erros
+- [x] Desafio 15: Desafio combinado - sistema robusto de rega
 
 #### 2.4 Conceitos Expert - Tier 21+ (Nível 21+)
 

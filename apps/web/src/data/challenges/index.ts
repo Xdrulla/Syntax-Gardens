@@ -10,6 +10,11 @@ import { arrayMethodsChallenges } from './arrayMethods';
 import { destructuringChallenges } from './destructuring';
 import { spreadRestChallenges } from './spreadRest';
 import { arrowFunctionsChallenges } from './arrowFunctions';
+// Fase 2.3 - Conceitos Avancados
+import { classesChallenges } from './classes';
+import { asyncAwaitChallenges } from './asyncAwait';
+import { closuresChallenges } from './closures';
+import { errorHandlingChallenges } from './errorHandling';
 import type { ChallengeDefinition } from '../../types';
 
 export const allChallenges: ChallengeDefinition[] = [
@@ -25,6 +30,11 @@ export const allChallenges: ChallengeDefinition[] = [
   ...destructuringChallenges,
   ...spreadRestChallenges,
   ...arrowFunctionsChallenges,
+  // Fase 2.3 - Conceitos Avancados
+  ...classesChallenges,
+  ...asyncAwaitChallenges,
+  ...closuresChallenges,
+  ...errorHandlingChallenges,
 ];
 
 export const getChallengeById = (id: string): ChallengeDefinition | undefined => {
@@ -48,5 +58,10 @@ export {
   destructuringChallenges,
   spreadRestChallenges,
   arrowFunctionsChallenges,
+  // Fase 2.3 - Conceitos Avancados
+  classesChallenges,
+  asyncAwaitChallenges,
+  closuresChallenges,
+  errorHandlingChallenges,
   getVarChallenge,
 };

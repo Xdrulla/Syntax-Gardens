@@ -277,6 +277,60 @@ const EXTRACTABLE_VARIABLES = [
   'filtered',
   'pipeline',
   'rose',
+  // Classes/OOP
+  'plantNeeds',
+  'cactusNeeds',
+  'status1',
+  'status2',
+  'water1',
+  'water2',
+  'healthy',
+  'unhealthy',
+  // Closures
+  'funcs',
+  'afterAdd',
+  'afterRemove',
+  'afterBigRemove',
+  'afterFirst',
+  'afterThird',
+  'info',
+  'error',
+  'first',
+  'second',
+  'third',
+  'cached',
+  'cacheSize',
+  // Error Handling
+  'done',
+  'valid',
+  'errorMsg',
+  'typeError',
+  'nanError',
+  'nullError',
+  'nameError',
+  'waterError',
+  'successCase',
+  'errorCase',
+  'errorCount',
+  'hasTime',
+  'hasMessage',
+  'validCase',
+  'badAmount',
+  'noName',
+  'nullPlant',
+  // Async/Await
+  'promise',
+  'resolved',
+  'rejected',
+  'resolvedValue',
+  'rejectedReason',
+  'success',
+  'value',
+  'cleanup',
+  'plantsWatered',
+  'totalWater',
+  'sequential',
+  'parallel',
 ];
 
 // Lista de funcoes que o sistema pode tentar chamar
@@ -287,6 +341,45 @@ const CALLABLE_FUNCTIONS = [
   'double',
   'growthRate',
   'getInfo',
+  // Closures
+  'createGreeter',
+  'createCounter',
+  'createWaterTank',
+  'createPlant',
+  'createLogger',
+  'createMemoizedDouble',
+  'createDelayedCounter',
+  'createPlantWithClosure',
+  'createGrowthCache',
+  'createFunctions',
+  'inner',
+  'getWater',
+  // Error Handling
+  'validateWater',
+  'checkError',
+  'process',
+  'safeParseInt',
+  'throwByCode',
+  'validatePlant',
+  'safeFn',
+  'createErrorHandler',
+  'formatError',
+  'waterPlantSafely',
+  // Async/Await
+  'handlePromise',
+  'processWater',
+  'getPlantName',
+  'safeFetch',
+  'withCleanup',
+  'getAllWater',
+  'race',
+  'checkAll',
+  'firstSuccess',
+  'sumWaters',
+  'sequential',
+  'parallel',
+  'waterGarden',
+  'fetchWater',
 ];
 
 function buildExecutionCode(sanitizedCode: string): string {
@@ -541,6 +634,104 @@ function extractResult(results: Record<string, unknown>): unknown {
   }
   if ('pipeline' in results && typeof results.pipeline === 'string') {
     return results.pipeline;
+  }
+
+  // ========== CLASSES/OOP ==========
+  if ('status1' in results && 'status2' in results) {
+    return { status1: results.status1, status2: results.status2 };
+  }
+  if ('water1' in results && 'water2' in results) {
+    return { water1: results.water1, water2: results.water2 };
+  }
+  if ('healthy' in results && 'unhealthy' in results) {
+    return { healthy: results.healthy, unhealthy: results.unhealthy };
+  }
+  if ('plantNeeds' in results && 'cactusNeeds' in results) {
+    return { plantNeeds: results.plantNeeds, cactusNeeds: results.cactusNeeds };
+  }
+
+  // ========== CLOSURES ==========
+  if ('afterAdd' in results && 'afterRemove' in results && 'afterBigRemove' in results) {
+    return { afterAdd: results.afterAdd, afterRemove: results.afterRemove, afterBigRemove: results.afterBigRemove };
+  }
+  if ('first' in results && 'second' in results && 'third' in results && typeof results.first === 'number') {
+    return { first: results.first, second: results.second, third: results.third };
+  }
+  if ('afterFirst' in results && 'afterThird' in results) {
+    return { afterFirst: results.afterFirst, afterThird: results.afterThird };
+  }
+  if ('info' in results && 'error' in results && typeof results.info === 'string' && typeof results.error === 'string') {
+    return { info: results.info, error: results.error };
+  }
+  if ('first' in results && 'second' in results && 'cached' in results) {
+    return { first: results.first, second: results.second, cached: results.cached };
+  }
+  if ('result1' in results && 'cacheSize' in results) {
+    return { result1: results.result1, result2: results.result2, cacheSize: results.cacheSize, cached: results.cached };
+  }
+  if ('plants' in results && 'count' in results && typeof results.count === 'number') {
+    return { plants: results.plants, count: results.count };
+  }
+  if ('funcs' in results && Array.isArray(results.funcs)) {
+    return results.funcs;
+  }
+
+  // ========== ERROR HANDLING ==========
+  if ('error' in results && 'done' in results) {
+    return { error: results.error, done: results.done };
+  }
+  if ('valid' in results && 'errorMsg' in results) {
+    return { valid: results.valid, errorMsg: results.errorMsg };
+  }
+  if ('valid' in results && 'typeError' in results && 'nanError' in results) {
+    return { valid: results.valid, typeError: results.typeError, nanError: results.nanError };
+  }
+  if ('type' in results && 'ref' in results && 'other' in results) {
+    return { type: results.type, ref: results.ref, other: results.other };
+  }
+  if ('valid' in results && 'errorContains' in results) {
+    return { valid: results.valid, errorContains: results.errorContains };
+  }
+  if ('name' in results && 'amount' in results && 'hasMessage' in results) {
+    return { name: results.name, amount: results.amount, hasMessage: results.hasMessage };
+  }
+  if ('typeError' in results && 'stringError' in results) {
+    return { typeError: results.typeError, stringError: results.stringError };
+  }
+  if ('valid' in results && 'nullError' in results && 'nameError' in results && 'waterError' in results) {
+    return { valid: results.valid, nullError: results.nullError, nameError: results.nameError, waterError: results.waterError };
+  }
+  if ('successCase' in results && 'errorCase' in results) {
+    return { successCase: results.successCase, errorCase: results.errorCase };
+  }
+  if ('errorCount' in results && 'hasTime' in results && 'hasMessage' in results) {
+    return { errorCount: results.errorCount, hasTime: results.hasTime, hasMessage: results.hasMessage };
+  }
+  if ('validCase' in results && 'nullPlant' in results) {
+    return { validCase: results.validCase, nullPlant: results.nullPlant, noName: results.noName, badAmount: results.badAmount };
+  }
+
+  // ========== ASYNC/AWAIT ==========
+  if ('resolvedValue' in results && 'rejectedReason' in results) {
+    return { resolvedValue: results.resolvedValue, rejectedReason: results.rejectedReason };
+  }
+  if ('resolved' in results && 'rejected' in results && typeof results.resolved === 'number') {
+    return { resolved: results.resolved, rejected: results.rejected };
+  }
+  if ('success' in results && 'error' in results && typeof results.success === 'string') {
+    return { success: results.success, error: results.error };
+  }
+  if ('result' in results && 'cleanup' in results) {
+    return { result: results.result, cleanup: results.cleanup };
+  }
+  if ('totalWater' in results && 'plantsWatered' in results) {
+    return { totalWater: results.totalWater, plantsWatered: results.plantsWatered };
+  }
+  if ('sequential' in results && 'parallel' in results) {
+    return { sequential: results.sequential, parallel: results.parallel };
+  }
+  if ('promise' in results) {
+    return results.promise;
   }
 
   // Strings - objetos compostos
