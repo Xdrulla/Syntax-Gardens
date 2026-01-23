@@ -15,6 +15,11 @@ import { classesChallenges } from './classes';
 import { asyncAwaitChallenges } from './asyncAwait';
 import { closuresChallenges } from './closures';
 import { errorHandlingChallenges } from './errorHandling';
+// Fase 2.4 - Conceitos Expert
+import { prototypeChallenges } from './prototypes';
+import { generatorChallenges } from './generators';
+import { proxyChallenges } from './proxies';
+import { weakCollectionChallenges } from './weakCollections';
 import type { ChallengeDefinition } from '../../types';
 
 export const allChallenges: ChallengeDefinition[] = [
@@ -35,6 +40,11 @@ export const allChallenges: ChallengeDefinition[] = [
   ...asyncAwaitChallenges,
   ...closuresChallenges,
   ...errorHandlingChallenges,
+  // Fase 2.4 - Conceitos Expert
+  ...prototypeChallenges,
+  ...generatorChallenges,
+  ...proxyChallenges,
+  ...weakCollectionChallenges,
 ];
 
 export const getChallengeById = (id: string): ChallengeDefinition | undefined => {
@@ -63,5 +73,10 @@ export {
   asyncAwaitChallenges,
   closuresChallenges,
   errorHandlingChallenges,
+  // Fase 2.4 - Conceitos Expert
+  prototypeChallenges,
+  generatorChallenges,
+  proxyChallenges,
+  weakCollectionChallenges,
   getVarChallenge,
 };

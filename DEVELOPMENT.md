@@ -274,6 +274,10 @@ syntax-gardens/
 | temporal-orchid | Orquídea Temporal | async | 4 | 8 | 75 | 55 |
 | wrapping-vine | Videira Envolvente | closure | 3 | 7 | 60 | 45 |
 | defensive-cactus | Cacto Defensivo | error-handling | 3 | 6 | 55 | 40 |
+| primordial-root | Raiz Primordial | prototype | 5 | 10 | 100 | 75 |
+| infinite-flower | Flor Infinita | generator | 5 | 10 | 100 | 75 |
+| magic-mirror | Espelho Mágico | proxy | 5 | 10 | 100 | 75 |
+| ephemeral-memory | Memória Efêmera | weak-collection | 4 | 8 | 80 | 60 |
 
 ### Desafios Implementados
 
@@ -524,6 +528,69 @@ syntax-gardens/
 13. **Handler de Erros** - Centralizar tratamento
 14. **Log de Erros** - Formatação
 15. **Sistema Robusto de Rega** - Desafio combinado
+
+**Prototypes (proto-1 a proto-13):**
+
+1. **Entendendo __proto__** - Descobrir o prototype de um objeto
+2. **Cadeia de Prototypes** - Herança via prototype chain
+3. **Object.getPrototypeOf()** - Inspecionar prototypes
+4. **Object.setPrototypeOf()** - Alterar prototype existente
+5. **Constructor.prototype** - Propriedade prototype de construtores
+6. **Métodos no Prototype** - Adicionar métodos compartilhados
+7. **Object.create() Básico** - Criar objetos com prototype específico
+8. **Object.create() com Propriedades** - Property descriptors
+9. **Herança Prototípica Manual** - Herança entre construtores
+10. **hasOwnProperty vs in** - Propriedades próprias vs herdadas
+11. **Object.keys vs for...in** - Iteração de propriedades
+12. **Prototype Pollution** - Entender o problema de segurança
+13. **Sistema de Herança de Plantas** - Desafio combinado
+
+**Generators e Iterators (gen-1 a gen-13):**
+
+1. **Primeira Generator Function** - function* syntax
+2. **Usando yield** - Pausar execução
+3. **Método next()** - Consumir valores
+4. **Generator Finito** - Produzir quantidade limitada
+5. **Generator Infinito** - Lazy evaluation infinita
+6. **yield* Delegação** - Delegar para outro generator
+7. **Comunicação Bidirecional** - Passar valores via next()
+8. **Método return()** - Finalizar prematuramente
+9. **Método throw()** - Lançar exceções
+10. **Iterator Protocol** - Symbol.iterator
+11. **Iterador Customizado** - Classe com iterador
+12. **Generator Fibonacci** - Sequência infinita
+13. **Sequência de Crescimento** - Desafio combinado
+
+**Proxies e Reflect (proxy-1 a proxy-14):**
+
+1. **Primeiro Proxy** - new Proxy() básico
+2. **Get Trap** - Interceptar leituras
+3. **Set Trap** - Interceptar escritas
+4. **Has Trap** - Interceptar operador 'in'
+5. **DeleteProperty Trap** - Interceptar delete
+6. **Apply Trap** - Interceptar chamadas de função
+7. **Construct Trap** - Interceptar new
+8. **Reflect API Básico** - Operações com Reflect
+9. **Reflect.get e Reflect.set** - Usar Reflect em traps
+10. **Reflect.has e deleteProperty** - Verificação e deleção
+11. **Reflect.apply** - Chamar funções com contexto
+12. **Proxy para Validação** - Sistema de validação
+13. **Proxy para Logging** - Logging automático
+14. **Sistema Observável de Plantas** - Desafio combinado
+
+**WeakMap/WeakSet (weak-1 a weak-11):**
+
+1. **Map vs WeakMap** - Diferenças básicas
+2. **Criando WeakMap** - Inicialização
+3. **Métodos do WeakMap** - set/get/has/delete
+4. **Garbage Collection** - Referências fracas
+5. **Dados Privados com WeakMap** - Encapsulamento
+6. **Cache com WeakMap** - Cache sem memory leaks
+7. **Set vs WeakSet** - Diferenças básicas
+8. **Criando WeakSet** - Inicialização
+9. **Métodos do WeakSet** - add/has/delete
+10. **Rastreamento com WeakSet** - Marcar objetos processados
+11. **Sistema de Referências Fracas** - Desafio combinado
 
 ---
 
@@ -794,70 +861,70 @@ pnpm exec tsc --noEmit
 - [x] Desafio 14: Logging de erros
 - [x] Desafio 15: Desafio combinado - sistema robusto de rega
 
-#### 2.4 Conceitos Expert - Tier 21+ (Nível 21+)
+#### 2.4 Conceitos Expert - Tier 21+ (Nível 21+) ✅ IMPLEMENTADO
 
-**Prototypes - Raiz Primordial**
-- [ ] Criar planta "Raiz Primordial" (tier 5, 10 regas)
-- [ ] Desafio 1: Entender __proto__
-- [ ] Desafio 2: Prototype chain básica
-- [ ] Desafio 3: Object.getPrototypeOf()
-- [ ] Desafio 4: Object.setPrototypeOf()
-- [ ] Desafio 5: Constructor.prototype
-- [ ] Desafio 6: Adicionar métodos ao prototype
-- [ ] Desafio 7: Object.create() básico
-- [ ] Desafio 8: Object.create() com propriedades
-- [ ] Desafio 9: Herança prototípica manual
-- [ ] Desafio 10: hasOwnProperty vs in
-- [ ] Desafio 11: Object.keys vs for...in
-- [ ] Desafio 12: Prototype pollution (entender o problema)
-- [ ] Desafio 13: Desafio combinado - sistema de herança de plantas
+**Prototypes - Raiz Primordial** ✅ IMPLEMENTADO
+- [x] Criar planta "Raiz Primordial" (tier 5, 10 regas)
+- [x] Desafio 1: Entender __proto__
+- [x] Desafio 2: Prototype chain básica
+- [x] Desafio 3: Object.getPrototypeOf()
+- [x] Desafio 4: Object.setPrototypeOf()
+- [x] Desafio 5: Constructor.prototype
+- [x] Desafio 6: Adicionar métodos ao prototype
+- [x] Desafio 7: Object.create() básico
+- [x] Desafio 8: Object.create() com propriedades
+- [x] Desafio 9: Herança prototípica manual
+- [x] Desafio 10: hasOwnProperty vs in
+- [x] Desafio 11: Object.keys vs for...in
+- [x] Desafio 12: Prototype pollution (entender o problema)
+- [x] Desafio 13: Desafio combinado - sistema de herança de plantas
 
-**Generators e Iterators - Flor Infinita**
-- [ ] Criar planta "Flor Infinita" (tier 5, 10 regas)
-- [ ] Desafio 1: function* syntax básica
-- [ ] Desafio 2: yield simples
-- [ ] Desafio 3: next() e value
-- [ ] Desafio 4: Generator que retorna valores finitos
-- [ ] Desafio 5: Generator infinito
-- [ ] Desafio 6: yield* para delegar
-- [ ] Desafio 7: Passar valores para next()
-- [ ] Desafio 8: return() em generator
-- [ ] Desafio 9: throw() em generator
-- [ ] Desafio 10: Iterator protocol - Symbol.iterator
-- [ ] Desafio 11: Criar iterador customizado
-- [ ] Desafio 12: Generator para Fibonacci
-- [ ] Desafio 13: Desafio combinado - sequência de crescimento
+**Generators e Iterators - Flor Infinita** ✅ IMPLEMENTADO
+- [x] Criar planta "Flor Infinita" (tier 5, 10 regas)
+- [x] Desafio 1: function* syntax básica
+- [x] Desafio 2: yield simples
+- [x] Desafio 3: next() e value
+- [x] Desafio 4: Generator que retorna valores finitos
+- [x] Desafio 5: Generator infinito
+- [x] Desafio 6: yield* para delegar
+- [x] Desafio 7: Passar valores para next()
+- [x] Desafio 8: return() em generator
+- [x] Desafio 9: throw() em generator
+- [x] Desafio 10: Iterator protocol - Symbol.iterator
+- [x] Desafio 11: Criar iterador customizado
+- [x] Desafio 12: Generator para Fibonacci
+- [x] Desafio 13: Desafio combinado - sequência de crescimento
 
-**Proxies e Reflect - Espelho Mágico**
-- [ ] Criar planta "Espelho Mágico" (tier 5, 10 regas)
-- [ ] Desafio 1: new Proxy() básico
-- [ ] Desafio 2: get trap - interceptar leitura
-- [ ] Desafio 3: set trap - interceptar escrita
-- [ ] Desafio 4: has trap - interceptar 'in' operator
-- [ ] Desafio 5: deleteProperty trap
-- [ ] Desafio 6: apply trap - interceptar chamadas de função
-- [ ] Desafio 7: construct trap - interceptar 'new'
-- [ ] Desafio 8: Reflect API básico
-- [ ] Desafio 9: Reflect.get/set
-- [ ] Desafio 10: Reflect.has e Reflect.deleteProperty
-- [ ] Desafio 11: Reflect.apply
-- [ ] Desafio 12: Proxy para validação
-- [ ] Desafio 13: Proxy para logging
-- [ ] Desafio 14: Desafio combinado - sistema observável de plantas
+**Proxies e Reflect - Espelho Mágico** ✅ IMPLEMENTADO
+- [x] Criar planta "Espelho Mágico" (tier 5, 10 regas)
+- [x] Desafio 1: new Proxy() básico
+- [x] Desafio 2: get trap - interceptar leitura
+- [x] Desafio 3: set trap - interceptar escrita
+- [x] Desafio 4: has trap - interceptar 'in' operator
+- [x] Desafio 5: deleteProperty trap
+- [x] Desafio 6: apply trap - interceptar chamadas de função
+- [x] Desafio 7: construct trap - interceptar 'new'
+- [x] Desafio 8: Reflect API básico
+- [x] Desafio 9: Reflect.get/set
+- [x] Desafio 10: Reflect.has e Reflect.deleteProperty
+- [x] Desafio 11: Reflect.apply
+- [x] Desafio 12: Proxy para validação
+- [x] Desafio 13: Proxy para logging
+- [x] Desafio 14: Desafio combinado - sistema observável de plantas
 
-**WeakMap/WeakSet - Memória Efêmera**
-- [ ] Criar planta "Memória Efêmera" (tier 4, 8 regas)
-- [ ] Desafio 1: Map vs WeakMap - diferenças básicas
-- [ ] Desafio 2: Criar WeakMap
-- [ ] Desafio 3: set/get/has/delete no WeakMap
-- [ ] Desafio 4: Entender garbage collection com WeakMap
-- [ ] Desafio 5: WeakMap para dados privados
-- [ ] Desafio 6: WeakMap para cache
-- [ ] Desafio 7: Set vs WeakSet
-- [ ] Desafio 8: Criar WeakSet
-- [ ] Desafio 9: add/has/delete no WeakSet
-- [ ] Desafio 10: WeakSet para rastrear objetos
-- [ ] Desafio 11: Desafio combinado - sistema de referências fracas
+**WeakMap/WeakSet - Memória Efêmera** ✅ IMPLEMENTADO
+- [x] Criar planta "Memória Efêmera" (tier 4, 8 regas)
+- [x] Desafio 1: Map vs WeakMap - diferenças básicas
+- [x] Desafio 2: Criar WeakMap
+- [x] Desafio 3: set/get/has/delete no WeakMap
+- [x] Desafio 4: Entender garbage collection com WeakMap
+- [x] Desafio 5: WeakMap para dados privados
+- [x] Desafio 6: WeakMap para cache
+- [x] Desafio 7: Set vs WeakSet
+- [x] Desafio 8: Criar WeakSet
+- [x] Desafio 9: add/has/delete no WeakSet
+- [x] Desafio 10: WeakSet para rastrear objetos
+- [x] Desafio 11: Desafio combinado - sistema de referências fracas
 
 #### 2.5 Sistema de Progressão Educacional
 
