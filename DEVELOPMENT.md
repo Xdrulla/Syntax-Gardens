@@ -73,9 +73,13 @@ syntax-gardens/
 │           │       ├── loops.ts
 │           │       ├── objects.ts
 │           │       ├── arrays.ts
-│           │       ├── conditionals.ts  # Desafios de condicionais
-│           │       ├── strings.ts       # Desafios de strings
-│           │       ├── math.ts          # Desafios de matemática
+│           │       ├── conditionals.ts    # Desafios de condicionais
+│           │       ├── strings.ts         # Desafios de strings
+│           │       ├── math.ts            # Desafios de matemática
+│           │       ├── arrayMethods.ts    # Métodos avançados de array
+│           │       ├── destructuring.ts   # Destructuring
+│           │       ├── spreadRest.ts      # Spread/Rest operators
+│           │       ├── arrowFunctions.ts  # Arrow functions avançadas
 │           │       └── index.ts
 │           ├── lib/
 │           │   └── validators/       # Validação de código
@@ -262,6 +266,10 @@ syntax-gardens/
 | cond-cactus | Cacto Condicional | conditional | 1 | 4 | 15 | 8 |
 | string-vine | Cipó de String | string | 1 | 4 | 15 | 8 |
 | math-crystal | Cristal Numérico | math | 2 | 5 | 25 | 15 |
+| data-garden | Jardim de Dados | array-methods | 3 | 6 | 45 | 30 |
+| fragment-flower | Flor Fragmentada | destructuring | 2 | 5 | 30 | 20 |
+| spread-seed | Semente Expansiva | spread-rest | 2 | 5 | 30 | 20 |
+| arrow-rose | Rosa Aérea | arrow-functions | 2 | 5 | 30 | 20 |
 
 ### Desafios Implementados
 
@@ -360,6 +368,86 @@ syntax-gardens/
 14. **isNaN/isFinite** - Validar números
 15. **Math.PI e Math.E** - Constantes matemáticas
 16. **Calculadora de Crescimento** - Desafio combinado
+
+**Array Methods Avançados (arr-adv-1 a arr-adv-23):**
+
+1. **reduce() Básico** - Somar valores
+2. **reduce() com Objeto** - Agrupar dados
+3. **reduce() para Flatten** - Achatar array
+4. **find()** - Encontrar primeiro elemento
+5. **findIndex()** - Encontrar índice
+6. **findLast/findLastIndex** - Buscar do fim
+7. **some()** - Verificar se algum satisfaz
+8. **every()** - Verificar se todos satisfazem
+9. **sort() com Números** - Ordenar crescente/decrescente
+10. **sort() com Strings** - Ordenar alfabeticamente
+11. **sort() com Comparador** - Ordenar objetos
+12. **reverse()** - Inverter array
+13. **flat()** - Achatar array aninhado
+14. **flatMap()** - map + flat
+15. **includes()** - Verificar se contém
+16. **indexOf/lastIndexOf** - Encontrar índice
+17. **slice() vs splice()** - Extrair vs modificar
+18. **concat()** - Juntar arrays
+19. **Array.from()** - Criar de iterável
+20. **Array.isArray()** - Verificar se é array
+21. **Encadeamento filter+map+reduce**
+22. **Encadeamento sort+slice** - Top N
+23. **Análise Completa do Jardim** - Desafio combinado
+
+**Destructuring (destr-1 a destr-15):**
+
+1. **Destructuring de Array Básico** - [a, b] = arr
+2. **Pular Elementos** - [a, , c] = arr
+3. **Rest em Array** - [first, ...rest]
+4. **Valores Padrão em Array** - [a = 1]
+5. **Swap de Variáveis** - [a, b] = [b, a]
+6. **Destructuring de Objeto** - {name, water}
+7. **Renomear Propriedades** - {name: plantName}
+8. **Valores Padrão em Objeto** - {a = 0}
+9. **Destructuring Aninhado**
+10. **Em Parâmetros de Função**
+11. **Rest em Objeto** - {...rest}
+12. **Em Loops** - for (const {name} of arr)
+13. **De Arrays Retornados**
+14. **De Objetos Retornados**
+15. **Processamento Completo** - Desafio combinado
+
+**Spread/Rest (spread-1 a spread-15):**
+
+1. **Spread em Arrays** - [...arr1, ...arr2]
+2. **Copiar Array** - [...original]
+3. **Adicionar Elementos** - [...arr, item]
+4. **Spread em Objetos** - {...obj1, ...obj2}
+5. **Copiar Objeto** - {...original}
+6. **Merge com Override**
+7. **Adicionar Propriedades** - {...obj, prop}
+8. **Rest Parameters** - (...args)
+9. **Rest com Parâmetros Fixos**
+10. **Spread em Chamada** - fn(...args)
+11. **Spread com Math.max/min**
+12. **Cópia Superficial de Array**
+13. **Cópia Profunda com Spread**
+14. **Remover Propriedade** - {remove, ...keep}
+15. **Sistema de Merge** - Desafio combinado
+
+**Arrow Functions Avançadas (arrow-1 a arrow-15):**
+
+1. **Implicit Return** - x => x * 2
+2. **Retornar Objeto** - x => ({})
+3. **Sem Parâmetros** - () => value
+4. **Um Parâmetro** - x => x + 1
+5. **Múltiplos Parâmetros** - (a, b) => a + b
+6. **Em map()** - arr.map(x => x * 2)
+7. **Em filter()** - arr.filter(x => x > 0)
+8. **Em reduce()**
+9. **Em sort()**
+10. **Como Callback**
+11. **This em Arrow Functions**
+12. **Quando NÃO Usar Arrow**
+13. **Currying** - x => y => x + y
+14. **Higher-Order Function**
+15. **Pipeline de Transformações** - Desafio combinado
 
 ---
 
@@ -476,85 +564,85 @@ pnpm exec tsc --noEmit
 
 #### 2.2 Conceitos Intermediários - Tier 6-12 (Nível 6-12)
 
-**Array Methods Avançados - Jardim de Dados**
-- [ ] Criar planta "Jardim de Dados" (tier 3, 6 regas)
-- [ ] Desafio 1: reduce() básico - somar valores
-- [ ] Desafio 2: reduce() com objeto - agrupar dados
-- [ ] Desafio 3: reduce() para flatten - achatar array
-- [ ] Desafio 4: find() - encontrar primeiro elemento
-- [ ] Desafio 5: findIndex() - encontrar índice do primeiro elemento
-- [ ] Desafio 6: findLast() e findLastIndex() - buscar do fim
-- [ ] Desafio 7: some() - verificar se algum satisfaz condição
-- [ ] Desafio 8: every() - verificar se todos satisfazem condição
-- [ ] Desafio 9: sort() com números - ordenar crescente/decrescente
-- [ ] Desafio 10: sort() com strings - ordenar alfabeticamente
-- [ ] Desafio 11: sort() com comparador customizado - ordenar objetos
-- [ ] Desafio 12: reverse() - inverter array
-- [ ] Desafio 13: flat() - achatar array aninhado
-- [ ] Desafio 14: flatMap() - map + flat em um passo
-- [ ] Desafio 15: includes() - verificar se contém elemento
-- [ ] Desafio 16: indexOf() e lastIndexOf() - encontrar índice
-- [ ] Desafio 17: slice() vs splice() - extrair vs modificar
-- [ ] Desafio 18: concat() - juntar arrays
-- [ ] Desafio 19: Array.from() - criar array de iterável
-- [ ] Desafio 20: Array.isArray() - verificar se é array
-- [ ] Desafio 21: Encadeamento: filter + map + reduce
-- [ ] Desafio 22: Encadeamento: sort + slice - top N elementos
-- [ ] Desafio 23: Desafio combinado - análise de jardim completo
+**Array Methods Avançados - Jardim de Dados** ✅ IMPLEMENTADO
+- [x] Criar planta "Jardim de Dados" (tier 3, 6 regas)
+- [x] Desafio 1: reduce() básico - somar valores
+- [x] Desafio 2: reduce() com objeto - agrupar dados
+- [x] Desafio 3: reduce() para flatten - achatar array
+- [x] Desafio 4: find() - encontrar primeiro elemento
+- [x] Desafio 5: findIndex() - encontrar índice do primeiro elemento
+- [x] Desafio 6: findLast() e findLastIndex() - buscar do fim
+- [x] Desafio 7: some() - verificar se algum satisfaz condição
+- [x] Desafio 8: every() - verificar se todos satisfazem condição
+- [x] Desafio 9: sort() com números - ordenar crescente/decrescente
+- [x] Desafio 10: sort() com strings - ordenar alfabeticamente
+- [x] Desafio 11: sort() com comparador customizado - ordenar objetos
+- [x] Desafio 12: reverse() - inverter array
+- [x] Desafio 13: flat() - achatar array aninhado
+- [x] Desafio 14: flatMap() - map + flat em um passo
+- [x] Desafio 15: includes() - verificar se contém elemento
+- [x] Desafio 16: indexOf() e lastIndexOf() - encontrar índice
+- [x] Desafio 17: slice() vs splice() - extrair vs modificar
+- [x] Desafio 18: concat() - juntar arrays
+- [x] Desafio 19: Array.from() - criar array de iterável
+- [x] Desafio 20: Array.isArray() - verificar se é array
+- [x] Desafio 21: Encadeamento: filter + map + reduce
+- [x] Desafio 22: Encadeamento: sort + slice - top N elementos
+- [x] Desafio 23: Desafio combinado - análise de jardim completo
 
-**Destructuring - Flor Fragmentada**
-- [ ] Criar planta "Flor Fragmentada" (tier 2, 5 regas)
-- [ ] Desafio 1: Destructuring básico de array - [a, b] = arr
-- [ ] Desafio 2: Pular elementos em array - [a, , c] = arr
-- [ ] Desafio 3: Rest em array - [first, ...rest] = arr
-- [ ] Desafio 4: Default values em array - [a = 1, b = 2] = arr
-- [ ] Desafio 5: Swap de variáveis - [a, b] = [b, a]
-- [ ] Desafio 6: Destructuring básico de objeto - {name, age} = obj
-- [ ] Desafio 7: Renomear propriedades - {name: plantName} = obj
-- [ ] Desafio 8: Default values em objeto - {name = 'Unknown'} = obj
-- [ ] Desafio 9: Destructuring aninhado - objeto dentro de objeto
-- [ ] Desafio 10: Destructuring em parâmetros de função
-- [ ] Desafio 11: Destructuring com rest - {a, b, ...rest} = obj
-- [ ] Desafio 12: Destructuring em loops - for (const {name} of plants)
-- [ ] Desafio 13: Destructuring de arrays retornados
-- [ ] Desafio 14: Destructuring de objetos retornados
-- [ ] Desafio 15: Desafio combinado - processar dados de plantas
+**Destructuring - Flor Fragmentada** ✅ IMPLEMENTADO
+- [x] Criar planta "Flor Fragmentada" (tier 2, 5 regas)
+- [x] Desafio 1: Destructuring básico de array - [a, b] = arr
+- [x] Desafio 2: Pular elementos em array - [a, , c] = arr
+- [x] Desafio 3: Rest em array - [first, ...rest] = arr
+- [x] Desafio 4: Default values em array - [a = 1, b = 2] = arr
+- [x] Desafio 5: Swap de variáveis - [a, b] = [b, a]
+- [x] Desafio 6: Destructuring básico de objeto - {name, age} = obj
+- [x] Desafio 7: Renomear propriedades - {name: plantName} = obj
+- [x] Desafio 8: Default values em objeto - {name = 'Unknown'} = obj
+- [x] Desafio 9: Destructuring aninhado - objeto dentro de objeto
+- [x] Desafio 10: Destructuring em parâmetros de função
+- [x] Desafio 11: Destructuring com rest - {a, b, ...rest} = obj
+- [x] Desafio 12: Destructuring em loops - for (const {name} of plants)
+- [x] Desafio 13: Destructuring de arrays retornados
+- [x] Desafio 14: Destructuring de objetos retornados
+- [x] Desafio 15: Desafio combinado - processar dados de plantas
 
-**Spread/Rest - Semente Expansiva**
-- [ ] Criar planta "Semente Expansiva" (tier 2, 5 regas)
-- [ ] Desafio 1: Spread em arrays - [...arr1, ...arr2]
-- [ ] Desafio 2: Copiar array - [...original]
-- [ ] Desafio 3: Adicionar elementos - [...arr, newItem]
-- [ ] Desafio 4: Spread em objetos - {...obj1, ...obj2}
-- [ ] Desafio 5: Copiar objeto - {...original}
-- [ ] Desafio 6: Merge de objetos com override
-- [ ] Desafio 7: Adicionar propriedades - {...obj, newProp: value}
-- [ ] Desafio 8: Rest parameters em função - (...args)
-- [ ] Desafio 9: Rest com outros parâmetros - (first, ...rest)
-- [ ] Desafio 10: Spread em chamada de função - fn(...args)
-- [ ] Desafio 11: Spread com Math.max/min
-- [ ] Desafio 12: Clonar array aninhado (shallow vs deep)
-- [ ] Desafio 13: Clonar objeto aninhado (shallow vs deep)
-- [ ] Desafio 14: Spread para remover propriedade - const {remove, ...keep} = obj
-- [ ] Desafio 15: Desafio combinado - sistema de merge de plantas
+**Spread/Rest - Semente Expansiva** ✅ IMPLEMENTADO
+- [x] Criar planta "Semente Expansiva" (tier 2, 5 regas)
+- [x] Desafio 1: Spread em arrays - [...arr1, ...arr2]
+- [x] Desafio 2: Copiar array - [...original]
+- [x] Desafio 3: Adicionar elementos - [...arr, newItem]
+- [x] Desafio 4: Spread em objetos - {...obj1, ...obj2}
+- [x] Desafio 5: Copiar objeto - {...original}
+- [x] Desafio 6: Merge de objetos com override
+- [x] Desafio 7: Adicionar propriedades - {...obj, newProp: value}
+- [x] Desafio 8: Rest parameters em função - (...args)
+- [x] Desafio 9: Rest com outros parâmetros - (first, ...rest)
+- [x] Desafio 10: Spread em chamada de função - fn(...args)
+- [x] Desafio 11: Spread com Math.max/min
+- [x] Desafio 12: Clonar array aninhado (shallow vs deep)
+- [x] Desafio 13: Clonar objeto aninhado (shallow vs deep)
+- [x] Desafio 14: Spread para remover propriedade - const {remove, ...keep} = obj
+- [x] Desafio 15: Desafio combinado - sistema de merge de plantas
 
-**Arrow Functions Avançadas - Rosa Aérea**
-- [ ] Criar planta "Rosa Aérea" (tier 2, 5 regas)
-- [ ] Desafio 1: Implicit return simples - x => x * 2
-- [ ] Desafio 2: Implicit return de objeto - x => ({value: x})
-- [ ] Desafio 3: Arrow function sem parâmetros - () => value
-- [ ] Desafio 4: Arrow function com um parâmetro - x => x + 1
-- [ ] Desafio 5: Arrow function com múltiplos parâmetros - (a, b) => a + b
-- [ ] Desafio 6: Arrow function em map - arr.map(x => x * 2)
-- [ ] Desafio 7: Arrow function em filter - arr.filter(x => x > 0)
-- [ ] Desafio 8: Arrow function em reduce
-- [ ] Desafio 9: Arrow function em sort
-- [ ] Desafio 10: Arrow function como callback - setTimeout(() => {})
-- [ ] Desafio 11: This binding - comparar arrow vs function
-- [ ] Desafio 12: Arrow em métodos de objeto - quando NÃO usar
-- [ ] Desafio 13: Currying com arrows - x => y => x + y
-- [ ] Desafio 14: Higher-order function retornando arrow
-- [ ] Desafio 15: Desafio combinado - pipeline de transformações
+**Arrow Functions Avançadas - Rosa Aérea** ✅ IMPLEMENTADO
+- [x] Criar planta "Rosa Aérea" (tier 2, 5 regas)
+- [x] Desafio 1: Implicit return simples - x => x * 2
+- [x] Desafio 2: Implicit return de objeto - x => ({value: x})
+- [x] Desafio 3: Arrow function sem parâmetros - () => value
+- [x] Desafio 4: Arrow function com um parâmetro - x => x + 1
+- [x] Desafio 5: Arrow function com múltiplos parâmetros - (a, b) => a + b
+- [x] Desafio 6: Arrow function em map - arr.map(x => x * 2)
+- [x] Desafio 7: Arrow function em filter - arr.filter(x => x > 0)
+- [x] Desafio 8: Arrow function em reduce
+- [x] Desafio 9: Arrow function em sort
+- [x] Desafio 10: Arrow function como callback - setTimeout(() => {})
+- [x] Desafio 11: This binding - comparar arrow vs function
+- [x] Desafio 12: Arrow em métodos de objeto - quando NÃO usar
+- [x] Desafio 13: Currying com arrows - x => y => x + y
+- [x] Desafio 14: Higher-order function retornando arrow
+- [x] Desafio 15: Desafio combinado - pipeline de transformações
 
 #### 2.3 Conceitos Avançados - Tier 13-20 (Nível 13-20)
 

@@ -1,4 +1,4 @@
-export type PlantType = 'variable' | 'function' | 'loop' | 'object' | 'array' | 'async' | 'conditional' | 'string' | 'math';
+export type PlantType = 'variable' | 'function' | 'loop' | 'object' | 'array' | 'async' | 'conditional' | 'string' | 'math' | 'array-methods' | 'destructuring' | 'spread-rest' | 'arrow-functions';
 
 export type PlantTier = 1 | 2 | 3 | 4 | 5;
 

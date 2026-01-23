@@ -6,6 +6,10 @@ import { arrayChallenges } from './arrays';
 import { conditionalChallenges } from './conditionals';
 import { stringChallenges } from './strings';
 import { mathChallenges } from './math';
+import { arrayMethodsChallenges } from './arrayMethods';
+import { destructuringChallenges } from './destructuring';
+import { spreadRestChallenges } from './spreadRest';
+import { arrowFunctionsChallenges } from './arrowFunctions';
 import type { ChallengeDefinition } from '../../types';
 
 export const allChallenges: ChallengeDefinition[] = [
@@ -17,6 +21,10 @@ export const allChallenges: ChallengeDefinition[] = [
   ...conditionalChallenges,
   ...stringChallenges,
   ...mathChallenges,
+  ...arrayMethodsChallenges,
+  ...destructuringChallenges,
+  ...spreadRestChallenges,
+  ...arrowFunctionsChallenges,
 ];
 
 export const getChallengeById = (id: string): ChallengeDefinition | undefined => {
@@ -36,5 +44,9 @@ export {
   conditionalChallenges,
   stringChallenges,
   mathChallenges,
+  arrayMethodsChallenges,
+  destructuringChallenges,
+  spreadRestChallenges,
+  arrowFunctionsChallenges,
   getVarChallenge,
 };

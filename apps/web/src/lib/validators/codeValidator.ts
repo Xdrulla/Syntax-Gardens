@@ -201,6 +201,82 @@ const EXTRACTABLE_VARIABLES = [
   'euler',
   'roundedHeight',
   'growthPercent',
+  // Array Methods Avançados
+  'plantCount',
+  'allSeeds',
+  'thirstyPlant',
+  'matureIndex',
+  'lastDry',
+  'lastDryIndex',
+  'needsWater',
+  'allHealthy',
+  'sortedAsc',
+  'sortedDesc',
+  'sortedNames',
+  'reverseSorted',
+  'sortedByWater',
+  'reversedSeasons',
+  'flatGarden',
+  'deepFlat',
+  'duplicated',
+  'firstRosa',
+  'lastRosa',
+  'sliced',
+  'spliced',
+  'allPlants',
+  'numbers',
+  'doubled',
+  'isArr1',
+  'isArr2',
+  'isArr3',
+  'totalDoubledWater',
+  'top3',
+  'analysis',
+  // Destructuring
+  'x',
+  'y',
+  'third',
+  'leader',
+  'followers',
+  'plant1',
+  'plant2',
+  'plant3',
+  'a',
+  'b',
+  'fertilizer',
+  'city',
+  'output',
+  'plantData',
+  'names',
+  'lat',
+  'lng',
+  'report',
+  // Spread/Rest
+  'original',
+  'copy',
+  'withStart',
+  'withEnd',
+  'totalStats',
+  'plantCopy',
+  'finalSettings',
+  'plantWithId',
+  'maxNumber',
+  'maxWater',
+  'minWater',
+  'originalWater',
+  'copyWater',
+  'safeUser',
+  'mergedPlant',
+  // Arrow Functions
+  'hydrated',
+  'sorted',
+  'receivedMessage',
+  'messages',
+  'result1',
+  'result2',
+  'filtered',
+  'pipeline',
+  'rose',
 ];
 
 // Lista de funcoes que o sistema pode tentar chamar
@@ -286,6 +362,185 @@ function extractResult(results: Record<string, unknown>): unknown {
   }
   if ('randomInt' in results && 'randomRange' in results) {
     return true; // Para random, simplificado
+  }
+
+  // ========== ARRAY METHODS AVANÇADOS ==========
+  if ('plantCount' in results && typeof results.plantCount === 'object') {
+    return results.plantCount;
+  }
+  if ('allSeeds' in results && Array.isArray(results.allSeeds)) {
+    return results.allSeeds;
+  }
+  if ('thirstyPlant' in results && typeof results.thirstyPlant === 'object') {
+    return results.thirstyPlant;
+  }
+  if ('matureIndex' in results && typeof results.matureIndex === 'number') {
+    return results.matureIndex;
+  }
+  if ('lastDry' in results && 'lastDryIndex' in results) {
+    return { lastDry: results.lastDry, lastDryIndex: results.lastDryIndex };
+  }
+  if ('needsWater' in results && typeof results.needsWater === 'boolean') {
+    return results.needsWater;
+  }
+  if ('allHealthy' in results && typeof results.allHealthy === 'boolean') {
+    return results.allHealthy;
+  }
+  if ('sortedAsc' in results && 'sortedDesc' in results) {
+    return { sortedAsc: results.sortedAsc, sortedDesc: results.sortedDesc };
+  }
+  if ('sortedNames' in results && 'reverseSorted' in results) {
+    return { sortedNames: results.sortedNames, reverseSorted: results.reverseSorted };
+  }
+  if ('sortedByWater' in results && Array.isArray(results.sortedByWater)) {
+    return results.sortedByWater;
+  }
+  if ('reversedSeasons' in results && Array.isArray(results.reversedSeasons)) {
+    return results.reversedSeasons;
+  }
+  if ('flatGarden' in results && 'deepFlat' in results) {
+    return { flatGarden: results.flatGarden, deepFlat: results.deepFlat };
+  }
+  if ('duplicated' in results && Array.isArray(results.duplicated)) {
+    return results.duplicated;
+  }
+  if ('hasRosa' in results && 'hasOrquidea' in results && !('hasCacto' in results)) {
+    return { hasRosa: results.hasRosa, hasOrquidea: results.hasOrquidea };
+  }
+  if ('firstRosa' in results && 'lastRosa' in results) {
+    return { firstRosa: results.firstRosa, lastRosa: results.lastRosa };
+  }
+  if ('sliced' in results && 'spliced' in results) {
+    return { sliced: results.sliced, spliced: results.spliced };
+  }
+  if ('allPlants' in results && 'garden' in results && Array.isArray(results.allPlants)) {
+    return { allPlants: results.allPlants, garden: results.garden };
+  }
+  if ('numbers' in results && 'doubled' in results && Array.isArray(results.numbers)) {
+    return { numbers: results.numbers, doubled: results.doubled };
+  }
+  if ('isArr1' in results && 'isArr2' in results && 'isArr3' in results) {
+    return { isArr1: results.isArr1, isArr2: results.isArr2, isArr3: results.isArr3 };
+  }
+  if ('totalDoubledWater' in results) {
+    return results.totalDoubledWater;
+  }
+  if ('top3' in results && Array.isArray(results.top3)) {
+    return results.top3;
+  }
+  if ('analysis' in results && typeof results.analysis === 'object') {
+    return results.analysis;
+  }
+
+  // ========== DESTRUCTURING ==========
+  if ('x' in results && 'y' in results && typeof results.x === 'number') {
+    return { x: results.x, y: results.y };
+  }
+  if ('first' in results && 'third' in results && !('last' in results)) {
+    return { first: results.first, third: results.third };
+  }
+  if ('leader' in results && 'followers' in results) {
+    return { leader: results.leader, followers: results.followers };
+  }
+  if ('plant1' in results && 'plant2' in results && 'plant3' in results) {
+    return { plant1: results.plant1, plant2: results.plant2, plant3: results.plant3 };
+  }
+  if ('a' in results && 'b' in results && typeof results.a === 'string') {
+    return { a: results.a, b: results.b };
+  }
+  if ('name' in results && 'water' in results && typeof results.name === 'string' && typeof results.water === 'number' && Object.keys(results).filter(k => !k.startsWith('__')).length <= 3) {
+    return { name: results.name, water: results.water };
+  }
+  if ('plantName' in results && 'waterLevel' in results && !('isWatered' in results)) {
+    return { plantName: results.plantName, waterLevel: results.waterLevel };
+  }
+  if ('name' in results && 'water' in results && 'fertilizer' in results) {
+    return { name: results.name, water: results.water, fertilizer: results.fertilizer };
+  }
+  if ('name' in results && 'city' in results) {
+    return { name: results.name, city: results.city };
+  }
+  if ('output' in results && typeof results.output === 'string') {
+    return results.output;
+  }
+  if ('id' in results && 'plantData' in results) {
+    return { id: results.id, plantData: results.plantData };
+  }
+  if ('names' in results && Array.isArray(results.names)) {
+    return results.names;
+  }
+  if ('lat' in results && 'lng' in results) {
+    return { lat: results.lat, lng: results.lng };
+  }
+  if ('name' in results && 'status' in results && typeof results.status === 'string' && results.status !== '' && !('water' in results)) {
+    return { name: results.name, status: results.status };
+  }
+  if ('report' in results && typeof results.report === 'object') {
+    return results.report;
+  }
+
+  // ========== SPREAD/REST ==========
+  if ('garden' in results && Array.isArray(results.garden) && results.garden.length === 4) {
+    return results.garden;
+  }
+  if ('original' in results && 'copy' in results && Array.isArray(results.original)) {
+    return { original: results.original, copy: results.copy };
+  }
+  if ('withStart' in results && 'withEnd' in results) {
+    return { withStart: results.withStart, withEnd: results.withEnd };
+  }
+  if ('totalStats' in results && typeof results.totalStats === 'object') {
+    return results.totalStats;
+  }
+  if ('plant' in results && 'plantCopy' in results) {
+    return { plant: results.plant, plantCopy: results.plantCopy };
+  }
+  if ('finalSettings' in results && typeof results.finalSettings === 'object') {
+    return results.finalSettings;
+  }
+  if ('plantWithId' in results && typeof results.plantWithId === 'object') {
+    return results.plantWithId;
+  }
+  if ('maxNumber' in results && typeof results.maxNumber === 'number') {
+    return results.maxNumber;
+  }
+  if ('maxWater' in results && 'minWater' in results) {
+    return { maxWater: results.maxWater, minWater: results.minWater };
+  }
+  if ('originalWater' in results && 'copyWater' in results) {
+    return { originalWater: results.originalWater, copyWater: results.copyWater };
+  }
+  if ('safeUser' in results && typeof results.safeUser === 'object') {
+    return results.safeUser;
+  }
+  if ('mergedPlant' in results && typeof results.mergedPlant === 'object') {
+    return results.mergedPlant;
+  }
+
+  // ========== ARROW FUNCTIONS ==========
+  if ('doubled' in results && Array.isArray(results.doubled) && !('numbers' in results)) {
+    return results.doubled;
+  }
+  if ('hydrated' in results && Array.isArray(results.hydrated)) {
+    return results.hydrated;
+  }
+  if ('sorted' in results && Array.isArray(results.sorted)) {
+    return results.sorted;
+  }
+  if ('receivedMessage' in results && typeof results.receivedMessage === 'string') {
+    return results.receivedMessage;
+  }
+  if ('messages' in results && Array.isArray(results.messages)) {
+    return results.messages;
+  }
+  if ('result1' in results && 'result2' in results) {
+    return { result1: results.result1, result2: results.result2 };
+  }
+  if ('filtered' in results && Array.isArray(results.filtered)) {
+    return results.filtered;
+  }
+  if ('pipeline' in results && typeof results.pipeline === 'string') {
+    return results.pipeline;
   }
 
   // Strings - objetos compostos
