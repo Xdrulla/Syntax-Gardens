@@ -20,6 +20,8 @@ import { prototypeChallenges } from './prototypes';
 import { generatorChallenges } from './generators';
 import { proxyChallenges } from './proxies';
 import { weakCollectionChallenges } from './weakCollections';
+// Fase 2.5 - Desafios Combinados
+import { crossConceptChallenges, getCrossConceptRequirements, CROSS_CONCEPT_REQUIREMENTS } from './crossConcept';
 import type { ChallengeDefinition } from '../../types';
 
 export const allChallenges: ChallengeDefinition[] = [
@@ -45,6 +47,8 @@ export const allChallenges: ChallengeDefinition[] = [
   ...generatorChallenges,
   ...proxyChallenges,
   ...weakCollectionChallenges,
+  // Fase 2.5 - Desafios Combinados
+  ...crossConceptChallenges,
 ];
 
 export const getChallengeById = (id: string): ChallengeDefinition | undefined => {
@@ -78,5 +82,9 @@ export {
   generatorChallenges,
   proxyChallenges,
   weakCollectionChallenges,
+  // Fase 2.5 - Desafios Combinados
+  crossConceptChallenges,
+  getCrossConceptRequirements,
+  CROSS_CONCEPT_REQUIREMENTS,
   getVarChallenge,
 };

@@ -4,10 +4,14 @@ export interface TestCase {
   description: string;
 }
 
+// Níveis de dificuldade por conceito: Iniciante (30%), Praticante (50%), Mestre (20%)
+export type DifficultyTier = 'beginner' | 'practitioner' | 'master';
+
 export interface ChallengeDefinition {
   id: string;
   plantType: string;
   difficulty: 1 | 2 | 3 | 4 | 5;
+  difficultyTier?: DifficultyTier; // Novo campo para classificar desafios
   title: string;
   description: string;
   instructions: string;
@@ -16,6 +20,19 @@ export interface ChallengeDefinition {
   hints: string[];
   solution: string;
   experienceReward: number;
+}
+
+// Progresso do jogador em um conceito específico
+export interface ConceptProgress {
+  conceptId: string;
+  completedChallenges: string[];
+  beginnerCompleted: number;
+  beginnerTotal: number;
+  practitionerCompleted: number;
+  practitionerTotal: number;
+  masterCompleted: number;
+  masterTotal: number;
+  badge: 'none' | 'bronze' | 'silver' | 'gold';
 }
 
 export interface ChallengeCompletion {

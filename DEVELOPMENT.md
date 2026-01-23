@@ -928,34 +928,39 @@ pnpm exec tsc --noEmit
 
 #### 2.5 Sistema de Progressão Educacional
 
-- [ ] **Níveis de dificuldade por conceito**
+- [x] **Níveis de dificuldade por conceito** ✅ IMPLEMENTADO
   - Cada conceito terá 3 níveis: Iniciante (30%), Praticante (50%), Mestre (20%)
   - Desafios escalam em complexidade dentro do mesmo conceito
   - Visual badges: Bronze/Prata/Ouro para cada conceito
+  - Arquivos: `conceptProgressStore.ts`, `ConceptBadge.tsx`, tipos em `challenge.ts`
 
-- [ ] **Sistema de pré-requisitos inteligente**
+- [x] **Sistema de pré-requisitos inteligente** ✅ IMPLEMENTADO
   - Criar grafo de dependências entre conceitos
   - Ex: Async/Await requer Functions + Promises + Error Handling
   - Mostrar path de aprendizado sugerido
   - Bloquear conceitos avançados até completar básicos
+  - Arquivo: `conceptProgressStore.ts` - CONCEPT_PREREQUISITES, isConceptUnlocked(), getSuggestedLearningPath()
 
-- [ ] **Desafios combinados (Cross-Concept)**
+- [x] **Desafios combinados (Cross-Concept)** ✅ IMPLEMENTADO
   - Criar 20+ desafios que misturam múltiplos conceitos
   - Recompensas 2x maiores (XP e moedas)
   - Desbloqueiam após dominar conceitos individuais
   - Ex: "Sistema de Jardim Assíncrono" = Async + Classes + Arrays
+  - Arquivo: `crossConcept.ts` com 8 desafios combinados e mapeamento de requisitos
 
-- [ ] **Modo Revisão**
+- [x] **Modo Revisão** ✅ IMPLEMENTADO
   - Gerar desafio aleatório de conceitos já aprendidos
-  - Recompensa menor mas mantém conhecimento fresco
-  - Sistema de spaced repetition
+  - Recompensa menor mas mantém conhecimento fresco (50%)
+  - Sistema de spaced repetition (algoritmo SM-2)
   - Notificação se não praticar por 3+ dias
+  - Arquivo: `reviewStore.ts` com getNextReviewChallenge, getDueReviews, shouldShowReviewReminder
 
-- [ ] **Curva de aprendizado inteligente**
+- [x] **Curva de aprendizado inteligente** ✅ IMPLEMENTADO
   - Rastrear tempo médio por desafio
   - Se jogador travar 3+ tentativas, oferecer dica automática
   - Se completar muito rápido, sugerir nível acima
   - Adaptive difficulty baseado em performance
+  - Arquivo: `learningCurveStore.ts` com shouldShowAutoHint, shouldSuggestHigherDifficulty, getPerformanceLevel
 
 ---
 
