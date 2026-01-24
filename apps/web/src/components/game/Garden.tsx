@@ -2,9 +2,13 @@ import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Plot } from './Plot';
 import { HarvestReward } from './HarvestReward';
+import { TutorialModal } from '../tutorials';
 import type { HarvestQuality, HarvestRewardData } from './HarvestReward';
 import { useGardenStore, useInventoryStore, usePlayerStore, useChallengeProgressionStore } from '../../stores';
+import { useTutorialStore } from '../../stores/tutorialStore';
 import { getAnyPlantById } from '../../data/plants';
+import { getTutorialByConceptId } from '../../data/tutorials';
+import type { ConceptTutorial } from '../../data/tutorials';
 import { useSound } from '../../hooks';
 
 function calculateHarvestQuality(): HarvestQuality {
@@ -44,6 +48,12 @@ export function Garden() {
   const [harvestingPlotId, setHarvestingPlotId] = useState<string | null>(null);
   const [harvestQuality, setHarvestQuality] = useState<HarvestQuality>('normal');
 
+  // Estado para o tutorial
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [currentTutorial, setCurrentTutorial] = useState<ConceptTutorial | null>(null);
+  const [pendingChallengeInfo, setPendingChallengeInfo] = useState<{ challengeId: string; plotId: string } | null>(null);
+  const { hasSeenTutorial } = useTutorialStore();
+
   const gridSize = Math.sqrt(garden.size);
 
   const handleSelectPlot = (plotId: string) => {
@@ -67,13 +77,44 @@ export function Garden() {
     const plantDef = getAnyPlantById(plot.plant.plantDefinitionId);
     if (!plantDef) return;
 
-    // NOVO: Seleciona o próximo desafio na sequência progressiva
-    // Antes era aleatório, agora segue ordem: Beginner → Practitioner → Master
+    // Seleciona o próximo desafio na sequência progressiva
     const nextChallengeInfo = getNextChallenge(plantDef.type);
-    if (nextChallengeInfo) {
-      setActiveChallenge(nextChallengeInfo.challengeId, plotId);
+    if (!nextChallengeInfo) return;
+
+    // Verifica se é o primeiro desafio do conceito e se o tutorial ainda não foi visto
+    if (nextChallengeInfo.isFirstOfConcept && !hasSeenTutorial(plantDef.type)) {
+      // Busca o tutorial para este conceito
+      const tutorial = getTutorialByConceptId(plantDef.type);
+      if (tutorial) {
+        // Guarda as informações do desafio para abrir após o tutorial
+        setPendingChallengeInfo({ challengeId: nextChallengeInfo.challengeId, plotId });
+        setCurrentTutorial(tutorial);
+        setShowTutorial(true);
+        return;
+      }
     }
+
+    // Se não precisa de tutorial, vai direto para o desafio
+    setActiveChallenge(nextChallengeInfo.challengeId, plotId);
   };
+
+  // Callback quando o tutorial é completado
+  const handleTutorialComplete = useCallback(() => {
+    setShowTutorial(false);
+    // Abre o desafio que estava pendente
+    if (pendingChallengeInfo) {
+      setActiveChallenge(pendingChallengeInfo.challengeId, pendingChallengeInfo.plotId);
+      setPendingChallengeInfo(null);
+    }
+    setCurrentTutorial(null);
+  }, [pendingChallengeInfo, setActiveChallenge]);
+
+  // Callback quando o tutorial é fechado/pulado
+  const handleTutorialClose = useCallback(() => {
+    setShowTutorial(false);
+    setPendingChallengeInfo(null);
+    setCurrentTutorial(null);
+  }, []);
 
   const handleHarvestPlant = useCallback((plotId: string) => {
     const plot = garden.plots.find((p) => p.id === plotId);
@@ -157,6 +198,13 @@ export function Garden() {
         isVisible={showReward}
         data={harvestReward}
         onClose={handleCloseReward}
+      />
+
+      <TutorialModal
+        isOpen={showTutorial}
+        tutorial={currentTutorial}
+        onClose={handleTutorialClose}
+        onComplete={handleTutorialComplete}
       />
     </>
   );

@@ -681,14 +681,14 @@ const challengeId = challenges[randomIndex];
   - [x] Badge de tier atual (Iniciante/Praticante/Mestre) no modal
   - [x] Indicador de "Revisão" quando desafio já foi completado
 
-#### 1.5.3 Sistema de Introdução de Conceitos (Concept Tutorials)
+#### 1.5.3 Sistema de Introdução de Conceitos (Concept Tutorials) ✅ IMPLEMENTADO
 
-- [ ] **Criar estrutura de tutoriais por conceito**
+- [x] **Criar estrutura de tutoriais por conceito** ✅ IMPLEMENTADO
   - Arquivo: `src/data/tutorials/index.ts`
-  - Cada conceito terá um mini-tutorial antes do primeiro desafio
-  - Conteúdo: explicação + exemplo + analogia com jardim
+  - Cada conceito tem um mini-tutorial antes do primeiro desafio
+  - Conteúdo: explicação + exemplo + analogia com jardim + pontos-chave
 
-- [ ] **Estrutura do tutorial**
+- [x] **Estrutura do tutorial** ✅ IMPLEMENTADO
   ```typescript
   interface ConceptTutorial {
     conceptId: string;
@@ -696,12 +696,13 @@ const challengeId = challenges[randomIndex];
     introduction: string;        // Explicação simples (2-3 parágrafos)
     analogy: string;             // Analogia com jardinagem
     codeExample: string;         // Código demonstrativo
+    codeExplanation: string;     // Explicação do código
     keyPoints: string[];         // Pontos-chave para memorizar
-    visualAid?: string;          // Imagem/animação opcional
+    icon: string;                // Emoji para representar visualmente
   }
   ```
 
-- [ ] **Tutoriais obrigatórios por conceito**
+- [x] **Tutoriais implementados para todos os conceitos** ✅ IMPLEMENTADO
   - `variable`: O que são variáveis (caixas que guardam valores)
   - `conditional`: Tomando decisões no código (se/senão)
   - `string`: Trabalhando com textos
@@ -709,20 +710,36 @@ const challengeId = challenges[randomIndex];
   - `loop`: Repetindo ações automaticamente
   - `array`: Listas de valores
   - `object`: Agrupando dados relacionados
-  - E assim por diante para cada conceito...
+  - `math`: Cálculos e números
+  - `array-methods`: Métodos avançados de array
+  - `destructuring`: Extraindo valores
+  - `spread-rest`: Expandindo e coletando
+  - `arrow-functions`: Sintaxe moderna
+  - `class`: Programação orientada a objetos
+  - `async`: Código assíncrono
+  - `closure`: Funções que lembram
+  - `error-handling`: Tratamento de erros
+  - `prototype`: A base do JavaScript
+  - `generator`: Produção sob demanda
+  - `proxy`: Metaprogramação
+  - `weak-collection`: Referências fracas
 
-- [ ] **Componente TutorialModal**
-  - Aparecer automaticamente antes do primeiro desafio de um conceito
-  - Navegação: Próximo/Anterior/Pular
-  - Opção "Não mostrar novamente" para usuários avançados
-  - Botão "Estou pronto para o desafio!"
-  - Persistir que tutorial foi visto no localStorage
+- [x] **Componente TutorialModal** ✅ IMPLEMENTADO
+  - Arquivo: `src/components/tutorials/TutorialModal.tsx`
+  - Aparece automaticamente antes do primeiro desafio de um conceito
+  - Navegação em 4 etapas: Introdução → Analogia → Código → Pontos-chave
+  - Barra de progresso visual com navegação por clique
+  - Opção "Não mostrar tutoriais" para usuários avançados
+  - Botão "Iniciar Desafio" ao final
+  - Animações suaves com Framer Motion
 
-- [ ] **Integração com fluxo de jogo**
-  - Antes de `setActiveChallenge()`, verificar se tutorial foi visto
-  - Se não: mostrar TutorialModal primeiro
-  - Se sim: ir direto para o desafio
-  - Store: `tutorialStore.ts` com `hasSeenTutorial(conceptId)`
+- [x] **Integração com fluxo de jogo** ✅ IMPLEMENTADO
+  - Arquivo modificado: `src/components/game/Garden.tsx`
+  - Antes de `setActiveChallenge()`, verifica se tutorial foi visto
+  - Se não visto: mostra TutorialModal primeiro
+  - Se já visto: vai direto para o desafio
+  - Store: `src/stores/tutorialStore.ts` com `hasSeenTutorial(conceptId)`
+  - Persistência no localStorage: `syntax-gardens-tutorials`
 
 #### 1.5.4 Melhorias no Sistema de Dificuldade
 
@@ -770,36 +787,42 @@ const challengeId = challenges[randomIndex];
   - Arquivo modificado: `src/components/game/Garden.tsx`
   - Usa `useChallengeProgressionStore().getNextChallenge()` para seleção progressiva
 
-- [ ] **Adicionar verificação de tutorial** (pendente para Fase 1.5.3)
-  ```typescript
-  const handleWaterPlant = (plotId: string) => {
-    const plantDef = getAnyPlantById(plot.plant.plantDefinitionId);
-
-    // Verificar se precisa mostrar tutorial primeiro
-    if (!hasSeenTutorial(plantDef.type)) {
-      setShowTutorial(plantDef.type);
-      return;
-    }
-
-    // Selecionar próximo desafio na sequência
-    const challengeId = getNextChallengeForConcept(plantDef.type);
-    setActiveChallenge(challengeId, plotId);
-  };
-  ```
+- [x] **Adicionar verificação de tutorial** ✅ IMPLEMENTADO
+  - Verifica `isFirstOfConcept` do próximo desafio
+  - Se primeiro e tutorial não visto: mostra TutorialModal
+  - Após tutorial: abre o desafio automaticamente
+  - Integrado com `useTutorialStore`
 
 #### 1.5.7 Arquivos a Criar/Modificar
 
 **Novos arquivos:**
 - [x] `src/stores/challengeProgressionStore.ts` - Lógica de progressão ✅ CRIADO
-- [ ] `src/stores/tutorialStore.ts` - Controle de tutoriais vistos
-- [ ] `src/data/tutorials/index.ts` - Definições de tutoriais
-- [ ] `src/data/tutorials/variables.ts` - Tutorial de variáveis
-- [ ] `src/data/tutorials/conditionals.ts` - Tutorial de condicionais
-- ... (um arquivo por conceito)
-- [ ] `src/components/tutorials/TutorialModal.tsx` - Modal de tutorial
-- [ ] `src/components/tutorials/ConceptIntro.tsx` - Componente de introdução
-- [ ] `src/components/onboarding/WelcomeScreen.tsx` - Tela inicial
-- [ ] `src/components/onboarding/FirstPlantGuide.tsx` - Guia do primeiro plantio
+- [x] `src/stores/tutorialStore.ts` - Controle de tutoriais vistos ✅ CRIADO
+- [x] `src/data/tutorials/index.ts` - Definições de tutoriais ✅ CRIADO
+- [x] `src/data/tutorials/variable.ts` - Tutorial de variáveis ✅ CRIADO
+- [x] `src/data/tutorials/conditional.ts` - Tutorial de condicionais ✅ CRIADO
+- [x] `src/data/tutorials/string.ts` - Tutorial de strings ✅ CRIADO
+- [x] `src/data/tutorials/function.ts` - Tutorial de funções ✅ CRIADO
+- [x] `src/data/tutorials/loop.ts` - Tutorial de loops ✅ CRIADO
+- [x] `src/data/tutorials/array.ts` - Tutorial de arrays ✅ CRIADO
+- [x] `src/data/tutorials/object.ts` - Tutorial de objetos ✅ CRIADO
+- [x] `src/data/tutorials/math.ts` - Tutorial de math ✅ CRIADO
+- [x] `src/data/tutorials/arrayMethods.ts` - Tutorial de métodos avançados ✅ CRIADO
+- [x] `src/data/tutorials/destructuring.ts` - Tutorial de destructuring ✅ CRIADO
+- [x] `src/data/tutorials/spreadRest.ts` - Tutorial de spread/rest ✅ CRIADO
+- [x] `src/data/tutorials/arrowFunctions.ts` - Tutorial de arrow functions ✅ CRIADO
+- [x] `src/data/tutorials/class.ts` - Tutorial de classes ✅ CRIADO
+- [x] `src/data/tutorials/async.ts` - Tutorial de async/await ✅ CRIADO
+- [x] `src/data/tutorials/closure.ts` - Tutorial de closures ✅ CRIADO
+- [x] `src/data/tutorials/errorHandling.ts` - Tutorial de error handling ✅ CRIADO
+- [x] `src/data/tutorials/prototype.ts` - Tutorial de prototypes ✅ CRIADO
+- [x] `src/data/tutorials/generator.ts` - Tutorial de generators ✅ CRIADO
+- [x] `src/data/tutorials/proxy.ts` - Tutorial de proxy ✅ CRIADO
+- [x] `src/data/tutorials/weakCollection.ts` - Tutorial de WeakMap/WeakSet ✅ CRIADO
+- [x] `src/components/tutorials/TutorialModal.tsx` - Modal de tutorial ✅ CRIADO
+- [x] `src/components/tutorials/index.ts` - Export do componente ✅ CRIADO
+- [ ] `src/components/onboarding/WelcomeScreen.tsx` - Tela inicial (pendente 1.5.5)
+- [ ] `src/components/onboarding/FirstPlantGuide.tsx` - Guia do primeiro plantio (pendente 1.5.5)
 
 **Arquivos modificados:**
 - [x] `src/components/game/Garden.tsx` - Refatorar handleWaterPlant ✅ MODIFICADO
@@ -811,7 +834,7 @@ const challengeId = challenges[randomIndex];
 #### 1.5.8 Critérios de Conclusão
 
 - [x] Desafios seguem ordem progressiva (não mais aleatório) ✅ IMPLEMENTADO
-- [ ] Tutorial aparece antes do primeiro desafio de cada conceito (pendente 1.5.3)
+- [x] Tutorial aparece antes do primeiro desafio de cada conceito ✅ IMPLEMENTADO
 - [x] Usuário pode ver visualmente seu progresso em cada conceito ✅ IMPLEMENTADO
 - [ ] Onboarding guia novos jogadores nos primeiros passos (pendente 1.5.5)
 - [ ] Sistema testado com usuário que "não sabe nada de programação"
