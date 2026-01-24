@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Plot } from './Plot';
 import { HarvestReward } from './HarvestReward';
 import type { HarvestQuality, HarvestRewardData } from './HarvestReward';
-import { useGardenStore, useInventoryStore, usePlayerStore } from '../../stores';
+import { useGardenStore, useInventoryStore, usePlayerStore, useChallengeProgressionStore } from '../../stores';
 import { getAnyPlantById } from '../../data/plants';
 import { useSound } from '../../hooks';
 
@@ -57,6 +57,9 @@ export function Garden() {
     }
   };
 
+  // Usa o store de progressão para seleção sequencial de desafios
+  const { getNextChallenge } = useChallengeProgressionStore();
+
   const handleWaterPlant = (plotId: string) => {
     const plot = garden.plots.find((p) => p.id === plotId);
     if (!plot?.plant) return;
@@ -64,13 +67,11 @@ export function Garden() {
     const plantDef = getAnyPlantById(plot.plant.plantDefinitionId);
     if (!plantDef) return;
 
-    const challenges = plantDef.challenges;
-
-    // Seleciona um desafio aleatório do pool disponível
-    if (challenges.length > 0) {
-      const randomIndex = Math.floor(Math.random() * challenges.length);
-      const challengeId = challenges[randomIndex];
-      setActiveChallenge(challengeId, plotId);
+    // NOVO: Seleciona o próximo desafio na sequência progressiva
+    // Antes era aleatório, agora segue ordem: Beginner → Practitioner → Master
+    const nextChallengeInfo = getNextChallenge(plantDef.type);
+    if (nextChallengeInfo) {
+      setActiveChallenge(nextChallengeInfo.challengeId, plotId);
     }
   };
 

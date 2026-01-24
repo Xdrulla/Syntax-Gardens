@@ -1,6 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Droplets, Sparkles, Lightbulb } from 'lucide-react';
+import { Droplets, Sparkles, Lightbulb, RefreshCw } from 'lucide-react';
 import { Modal, Button } from '../ui';
 import { DifficultyTierBadge } from '../ui/ConceptBadge';
 import { CodeEditor } from './CodeEditor';
@@ -8,7 +8,7 @@ import { TestResults } from './TestResults';
 import { HintSystem } from './HintSystem';
 import { validateCode } from '../../lib/validators/codeValidator';
 import { getChallengeById } from '../../data/challenges';
-import { useGardenStore, usePlayerStore } from '../../stores';
+import { useGardenStore, usePlayerStore, useChallengeProgressionStore, getTierDisplayName, getTierBgColor } from '../../stores';
 import { useConceptProgressStore } from '../../stores/conceptProgressStore';
 import { useLearningCurveStore } from '../../stores/learningCurveStore';
 import type { ValidationResult } from '../../types';
@@ -17,6 +17,7 @@ export function ChallengeModal() {
   const { activeChallengeId, currentPlantId, setActiveChallenge, waterPlant } = useGardenStore();
   const { addExperience, incrementChallengesPassed } = usePlayerStore();
   const { markChallengeComplete, getDifficultyTier } = useConceptProgressStore();
+  const { getChallengePosition, markChallengeCompleted } = useChallengeProgressionStore();
   const {
     startChallenge,
     recordAttempt,
@@ -32,6 +33,12 @@ export function ChallengeModal() {
   const [showAutoHintSuggestion, setShowAutoHintSuggestion] = useState(false);
 
   const challenge = activeChallengeId ? getChallengeById(activeChallengeId) : null;
+
+  // Obtém informações de posição do desafio na progressão
+  const challengePositionInfo = useMemo(() => {
+    if (!activeChallengeId) return null;
+    return getChallengePosition(activeChallengeId);
+  }, [activeChallengeId, getChallengePosition]);
 
   // Inicia tracking quando abre desafio
   useEffect(() => {
@@ -93,9 +100,10 @@ export function ChallengeModal() {
     addExperience(challenge.experienceReward);
     incrementChallengesPassed();
     markChallengeComplete(challenge.id, challenge.plantType);
+    markChallengeCompleted(challenge.id, challenge.plantType); // Marca no store de progressão
     completeLearningChallenge(challenge.id, challenge.plantType);
     handleClose();
-  }, [challenge, currentPlantId, result, waterPlant, addExperience, incrementChallengesPassed, markChallengeComplete, completeLearningChallenge, handleClose]);
+  }, [challenge, currentPlantId, result, waterPlant, addExperience, incrementChallengesPassed, markChallengeComplete, markChallengeCompleted, completeLearningChallenge, handleClose]);
 
   if (!challenge) return null;
 
@@ -109,10 +117,30 @@ export function ChallengeModal() {
       size="xl"
     >
       <div className="space-y-6">
-        {/* Badge de dificuldade e descricao */}
+        {/* Indicador de progressão e dificuldade */}
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <DifficultyTierBadge tier={difficultyTier} />
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <DifficultyTierBadge tier={difficultyTier} />
+              {challengePositionInfo && (
+                <span className={`px-2 py-1 rounded-md text-xs font-medium border ${getTierBgColor(challengePositionInfo.tier)}`}>
+                  {getTierDisplayName(challengePositionInfo.tier)} {challengePositionInfo.tierPosition}/{challengePositionInfo.tierTotal}
+                </span>
+              )}
+            </div>
+            {challengePositionInfo && (
+              <div className="flex items-center gap-2 text-sm text-slate-400">
+                {challengePositionInfo.isReview && (
+                  <span className="flex items-center gap-1 text-amber-400">
+                    <RefreshCw size={14} />
+                    Revisão
+                  </span>
+                )}
+                <span>
+                  Desafio {challengePositionInfo.position} de {challengePositionInfo.total}
+                </span>
+              </div>
+            )}
           </div>
           <p className="text-slate-300">{challenge.description}</p>
           <div className="p-4 bg-slate-900 rounded-lg border border-slate-700">

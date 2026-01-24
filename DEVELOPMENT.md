@@ -639,6 +639,185 @@ pnpm exec tsc --noEmit
 
 ## Próximos Passos de Desenvolvimento
 
+### Fase 1.5: Sistema de Progressão Inteligente (Prioridade URGENTE)
+
+**Objetivo**: Corrigir a seleção aleatória de desafios e implementar sistema de introdução de conceitos para garantir progressão educacional adequada.
+
+> **⚠️ CRÍTICO**: Atualmente o sistema seleciona desafios **aleatoriamente** do pool da planta, fazendo um iniciante pular de um desafio básico para um avançado. Isso quebra completamente a experiência educacional. Esta fase deve ser implementada ANTES de qualquer outra expansão.
+
+#### 1.5.1 Problema Identificado
+
+**Código problemático em `Garden.tsx:70-73`:**
+```typescript
+// PROBLEMA: Seleção completamente aleatória
+const randomIndex = Math.floor(Math.random() * challenges.length);
+const challengeId = challenges[randomIndex];
+```
+
+**Impacto:**
+- Usuário pode receber `cond-15` (Sistema de Irrigação Inteligente - Master) antes de `cond-1` (If Simples - Beginner)
+- Não há garantia de progressão educacional
+- Frustra iniciantes que não aprenderam os conceitos básicos
+
+#### 1.5.2 Sistema de Progressão Sequencial
+
+- [x] **Refatorar seleção de desafios para ser progressiva** ✅ IMPLEMENTADO
+  - [x] Criar novo store `challengeProgressionStore.ts`
+  - [x] Rastrear último desafio completado por planta/conceito
+  - [x] Desafios devem seguir ordem: Beginner → Practitioner → Master
+  - [x] Permitir repetir desafios já completados (revisão)
+  - [x] Só desbloquear próximo nível após completar anterior
+
+- [x] **Lógica de seleção inteligente** ✅ IMPLEMENTADO
+  - Arquivo: `src/stores/challengeProgressionStore.ts`
+  - Função `getNextChallenge(plantType)` retorna o próximo desafio na sequência
+  - Ordena desafios por dificuldade (difficulty: 1-5)
+  - Se todos completados, retorna aleatório para revisão
+  - Integrado com `Garden.tsx` para seleção de desafios
+
+- [x] **Indicador visual de progresso na planta** ✅ IMPLEMENTADO
+  - [x] Mostrar "Desafio 3/15" no modal de desafio (`ChallengeModal.tsx`)
+  - [x] Indicador X/Y no canteiro (`Plot.tsx`)
+  - [x] Badge de tier atual (Iniciante/Praticante/Mestre) no modal
+  - [x] Indicador de "Revisão" quando desafio já foi completado
+
+#### 1.5.3 Sistema de Introdução de Conceitos (Concept Tutorials)
+
+- [ ] **Criar estrutura de tutoriais por conceito**
+  - Arquivo: `src/data/tutorials/index.ts`
+  - Cada conceito terá um mini-tutorial antes do primeiro desafio
+  - Conteúdo: explicação + exemplo + analogia com jardim
+
+- [ ] **Estrutura do tutorial**
+  ```typescript
+  interface ConceptTutorial {
+    conceptId: string;
+    title: string;
+    introduction: string;        // Explicação simples (2-3 parágrafos)
+    analogy: string;             // Analogia com jardinagem
+    codeExample: string;         // Código demonstrativo
+    keyPoints: string[];         // Pontos-chave para memorizar
+    visualAid?: string;          // Imagem/animação opcional
+  }
+  ```
+
+- [ ] **Tutoriais obrigatórios por conceito**
+  - `variable`: O que são variáveis (caixas que guardam valores)
+  - `conditional`: Tomando decisões no código (se/senão)
+  - `string`: Trabalhando com textos
+  - `function`: Criando blocos reutilizáveis
+  - `loop`: Repetindo ações automaticamente
+  - `array`: Listas de valores
+  - `object`: Agrupando dados relacionados
+  - E assim por diante para cada conceito...
+
+- [ ] **Componente TutorialModal**
+  - Aparecer automaticamente antes do primeiro desafio de um conceito
+  - Navegação: Próximo/Anterior/Pular
+  - Opção "Não mostrar novamente" para usuários avançados
+  - Botão "Estou pronto para o desafio!"
+  - Persistir que tutorial foi visto no localStorage
+
+- [ ] **Integração com fluxo de jogo**
+  - Antes de `setActiveChallenge()`, verificar se tutorial foi visto
+  - Se não: mostrar TutorialModal primeiro
+  - Se sim: ir direto para o desafio
+  - Store: `tutorialStore.ts` com `hasSeenTutorial(conceptId)`
+
+#### 1.5.4 Melhorias no Sistema de Dificuldade
+
+- [ ] **Padronizar dificuldade em todos os desafios**
+  - Revisar todos arquivos em `src/data/challenges/`
+  - Garantir que `difficulty: 1-5` corresponde ao tier
+  - Adicionar `difficultyTier: 'beginner' | 'practitioner' | 'master'` explicitamente
+
+- [ ] **Distribuição de dificuldade por conceito**
+  ```
+  Beginner (30%):     difficulty 1-2, desafios introdutórios
+  Practitioner (50%): difficulty 3-4, aplicação prática
+  Master (20%):       difficulty 5, desafios combinados/complexos
+  ```
+
+- [ ] **Indicador visual de dificuldade no modal de desafio**
+  - Mostrar tier atual com ícone (Semente/Broto/Flor)
+  - Mostrar posição no conceito (ex: "Beginner 2/5")
+  - Cor do border do modal baseado na dificuldade
+
+#### 1.5.5 Sistema de "Primeiro Contato" (First-Time Experience)
+
+- [ ] **Onboarding inicial do jogo**
+  - Tela de boas-vindas explicando a metáfora jardim = código
+  - "Cada planta representa um conceito de programação"
+  - "Regar = resolver desafios de código"
+  - "Colher = dominar o conceito"
+  - Duração: ~2 minutos, pode pular
+
+- [ ] **Primeiro plantio guiado**
+  - Forçar primeira planta ser `var-seedling` (variáveis)
+  - Highlight no canteiro central
+  - Tooltip explicando cada passo
+  - Celebração ao completar primeiro desafio
+
+- [ ] **Tooltips de primeira vez**
+  - Primeira vez vendo a loja: explicar moedas/preços
+  - Primeira vez vendo inventário: explicar sementes
+  - Primeira vez vendo HUD: explicar XP/nível
+  - Persistir tooltips vistos no localStorage
+
+#### 1.5.6 Refatoração do Garden.tsx
+
+- [x] **Substituir seleção aleatória** ✅ IMPLEMENTADO
+  - Arquivo modificado: `src/components/game/Garden.tsx`
+  - Usa `useChallengeProgressionStore().getNextChallenge()` para seleção progressiva
+
+- [ ] **Adicionar verificação de tutorial** (pendente para Fase 1.5.3)
+  ```typescript
+  const handleWaterPlant = (plotId: string) => {
+    const plantDef = getAnyPlantById(plot.plant.plantDefinitionId);
+
+    // Verificar se precisa mostrar tutorial primeiro
+    if (!hasSeenTutorial(plantDef.type)) {
+      setShowTutorial(plantDef.type);
+      return;
+    }
+
+    // Selecionar próximo desafio na sequência
+    const challengeId = getNextChallengeForConcept(plantDef.type);
+    setActiveChallenge(challengeId, plotId);
+  };
+  ```
+
+#### 1.5.7 Arquivos a Criar/Modificar
+
+**Novos arquivos:**
+- [x] `src/stores/challengeProgressionStore.ts` - Lógica de progressão ✅ CRIADO
+- [ ] `src/stores/tutorialStore.ts` - Controle de tutoriais vistos
+- [ ] `src/data/tutorials/index.ts` - Definições de tutoriais
+- [ ] `src/data/tutorials/variables.ts` - Tutorial de variáveis
+- [ ] `src/data/tutorials/conditionals.ts` - Tutorial de condicionais
+- ... (um arquivo por conceito)
+- [ ] `src/components/tutorials/TutorialModal.tsx` - Modal de tutorial
+- [ ] `src/components/tutorials/ConceptIntro.tsx` - Componente de introdução
+- [ ] `src/components/onboarding/WelcomeScreen.tsx` - Tela inicial
+- [ ] `src/components/onboarding/FirstPlantGuide.tsx` - Guia do primeiro plantio
+
+**Arquivos modificados:**
+- [x] `src/components/game/Garden.tsx` - Refatorar handleWaterPlant ✅ MODIFICADO
+- [x] `src/components/game/Plot.tsx` - Adicionar indicador de progresso ✅ MODIFICADO
+- [x] `src/components/challenges/ChallengeModal.tsx` - Mostrar tier/posição ✅ MODIFICADO
+- [x] `src/stores/index.ts` - Exportar novo store ✅ MODIFICADO
+- [ ] `src/data/challenges/*.ts` - Padronizar dificuldades (parcialmente feito)
+
+#### 1.5.8 Critérios de Conclusão
+
+- [x] Desafios seguem ordem progressiva (não mais aleatório) ✅ IMPLEMENTADO
+- [ ] Tutorial aparece antes do primeiro desafio de cada conceito (pendente 1.5.3)
+- [x] Usuário pode ver visualmente seu progresso em cada conceito ✅ IMPLEMENTADO
+- [ ] Onboarding guia novos jogadores nos primeiros passos (pendente 1.5.5)
+- [ ] Sistema testado com usuário que "não sabe nada de programação"
+
+---
+
 ### Fase 2: Expansão de Conteúdo Core (Prioridade CRÍTICA)
 
 **Objetivo**: Cobrir todos os conceitos fundamentais de JavaScript de forma progressiva e completa.
@@ -1630,6 +1809,6 @@ MIT License - veja LICENSE para detalhes.
 
 ---
 
-**Última atualização**: Janeiro 2026  
-**Versão do documento**: 2.0  
+**Última atualização**: 23 Janeiro 2026
+**Versão do documento**: 2.5
 **Próxima revisão planejada**: Fevereiro 2026

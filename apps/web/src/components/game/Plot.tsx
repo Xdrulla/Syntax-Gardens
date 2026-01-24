@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Sprout, Flower2, TreeDeciduous, Droplets } from 'lucide-react';
 import { HarvestParticles } from './HarvestParticles';
+import { getAnyPlantById } from '../../data/plants';
+import { useChallengeProgressionStore, getTierColor } from '../../stores';
 import type { Plot as PlotType } from '../../types';
 import type { GrowthStage } from '../../types';
 import type { HarvestQuality } from './HarvestReward';
@@ -56,6 +58,11 @@ export function Plot({
 }: PlotProps) {
   const hasPlant = plot.plant !== null;
   const isHarvestable = plot.plant?.isHarvestable ?? false;
+
+  // Obtém informações de progresso do conceito da planta
+  const { getConceptCompletionInfo } = useChallengeProgressionStore();
+  const plantDef = hasPlant ? getAnyPlantById(plot.plant!.plantDefinitionId) : null;
+  const conceptProgress = plantDef ? getConceptCompletionInfo(plantDef.type) : null;
 
   const handleClick = () => {
     if (!hasPlant) {
@@ -114,6 +121,15 @@ export function Plot({
                 />
               </div>
             </div>
+
+            {/* Indicador de progresso do conceito */}
+            {conceptProgress && !isHarvestable && (
+              <div className="absolute top-1 left-1 right-1">
+                <div className={`text-center text-[10px] font-medium ${getTierColor(conceptProgress.currentTier)}`}>
+                  {conceptProgress.completed}/{conceptProgress.total}
+                </div>
+              </div>
+            )}
 
             {/* Indicador de colheita */}
             {isHarvestable && (
