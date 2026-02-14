@@ -7,8 +7,10 @@ export const asyncAwaitChallenges: ChallengeDefinition[] = [
     title: 'Primeira Promise',
     description:
       'Promise representa um valor que pode estar disponivel agora, depois, ou nunca. Crie uma variavel promise que e uma new Promise que resolve com o valor "Planta regada".',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'async',
+    experienceReward: 10,
     starterCode: `// Crie uma Promise que resolve com "Planta regada"
 // new Promise((resolve, reject) => { ... })
 
@@ -37,8 +39,10 @@ export const asyncAwaitChallenges: ChallengeDefinition[] = [
     title: 'Promise.resolve e reject',
     description:
       'Promise.resolve e Promise.reject criam promises ja resolvidas/rejeitadas. Crie resolved com Promise.resolve(42) e rejected com Promise.reject("erro").',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'async',
+    experienceReward: 10,
     starterCode: `// Crie resolved = Promise.resolve(42)
 // Crie rejected = Promise.reject("erro")
 
@@ -66,8 +70,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Then e Catch',
     description:
       '.then() executa quando a promise resolve, .catch() quando rejeita. Crie funcao handlePromise(p) que retorna p.then(v => v * 2).catch(e => 0).',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'async',
+    experienceReward: 10,
     starterCode: `// Crie handlePromise(p)
 // Retorna p.then(v => v * 2).catch(e => 0)
 
@@ -96,8 +102,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Encadear Then',
     description:
       'Voce pode encadear multiplos .then(). Crie funcao processWater(p) que retorna p.then(v => v + 5).then(v => v * 2).then(v => "Total: " + v).',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie processWater(p)
 // p.then(+5).then(*2).then(formatar)
 
@@ -126,8 +134,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Async Function',
     description:
       'async transforma uma funcao para retornar Promise. Crie async function getPlantName() que retorna "Rosa". O retorno vira Promise automaticamente.',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'async',
+    experienceReward: 10,
     starterCode: `// Crie async function getPlantName()
 // Retorne "Rosa"
 
@@ -156,8 +166,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Await Basico',
     description:
       'await pausa a execucao ate a Promise resolver. Crie async function getWater() que faz await Promise.resolve(10) e retorna o valor + 5.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie async function getWater()
 // let water = await Promise.resolve(10)
 // return water + 5
@@ -188,8 +200,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Try/Catch Async',
     description:
       'Use try/catch para capturar erros em async/await. Crie async function safeFetch(promise) que em try faz await promise, em catch retorna "erro".',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie async function safeFetch(promise)
 // try: return await promise
 // catch: return "erro"
@@ -223,8 +237,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Finally Async',
     description:
       'finally executa sempre, com ou sem erro. Crie async function withCleanup(promise) que tem try/catch/finally. Finally define cleanup = true. Retorne { result, cleanup }.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie async function withCleanup(promise)
 // let cleanup = false
 // try: result = await promise
@@ -266,8 +282,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Promise.all',
     description:
       'Promise.all espera todas as promises resolverem. Crie async function getAllWater() que faz await Promise.all([Promise.resolve(5), Promise.resolve(10), Promise.resolve(15)]) e retorna a soma.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie async function getAllWater()
 // let waters = await Promise.all([...])
 // return soma dos valores
@@ -302,8 +320,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Promise.race',
     description:
       'Promise.race retorna a primeira promise a resolver/rejeitar. Crie funcao race(p1, p2) que retorna Promise.race([p1, p2]).',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie function race(p1, p2)
 // return Promise.race([p1, p2])
 
@@ -332,8 +352,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Promise.allSettled',
     description:
       'allSettled espera todas completarem, sem falhar. Crie async function checkAll(promises) que retorna await Promise.allSettled(promises) e conta quantas foram fulfilled.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'async',
+    experienceReward: 35,
     starterCode: `// Crie async function checkAll(promises)
 // let results = await Promise.allSettled(promises)
 // return quantidade de results com status "fulfilled"
@@ -364,8 +386,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Promise.any',
     description:
       'Promise.any retorna a primeira promise a resolver com sucesso (ignora rejeicoes). Crie funcao firstSuccess(promises) que retorna Promise.any(promises).',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'async',
+    experienceReward: 20,
     starterCode: `// Crie function firstSuccess(promises)
 // return Promise.any(promises)
 
@@ -394,8 +418,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Async em Loop',
     description:
       'Use for...of com await para processar sequencialmente. Crie async function sumWaters(promises) que faz loop for...of, await cada promise e soma os valores.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'async',
+    experienceReward: 35,
     starterCode: `// Crie async function sumWaters(promises)
 // let total = 0
 // for (let p of promises): total += await p
@@ -430,8 +456,10 @@ let rejected = Promise.reject("erro");`,
     title: 'Paralelo vs Sequencial',
     description:
       'Crie duas funcoes: sequential(p1, p2) que await p1, depois await p2 e retorna array; parallel(p1, p2) que usa Promise.all. Ambas retornam [result1, result2].',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'async',
+    experienceReward: 35,
     starterCode: `// Crie async function sequential(p1, p2)
 // r1 = await p1, r2 = await p2, return [r1, r2]
 
@@ -469,8 +497,10 @@ async function parallel(p1, p2) {
     title: 'Sistema de Rega Async',
     description:
       'Crie async function waterGarden(plants) que para cada planta: await fetchWater(plant), adiciona water ao total. Retorna { totalWater, plantsWatered }. fetchWater retorna Promise com plant.water.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'async',
+    experienceReward: 35,
     starterCode: `// Funcao auxiliar
 function fetchWater(plant) {
   return Promise.resolve(plant.water);

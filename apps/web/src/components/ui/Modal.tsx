@@ -8,6 +8,7 @@ interface ModalProps {
   title?: string;
   children: ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  borderColorClass?: string;
 }
 
 const sizes = {
@@ -23,6 +24,7 @@ export function Modal({
   title,
   children,
   size = 'md',
+  borderColorClass,
 }: ModalProps) {
   return (
     <AnimatePresence>
@@ -44,7 +46,7 @@ export function Modal({
             className={`
               relative w-full ${sizes[size]}
               bg-slate-800 rounded-xl shadow-2xl
-              border border-slate-700
+              border ${borderColorClass || 'border-slate-700'}
               max-h-[90vh] overflow-hidden flex flex-col
             `}
           >

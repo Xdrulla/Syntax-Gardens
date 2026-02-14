@@ -5,6 +5,7 @@ export const loopChallenges: ChallengeDefinition[] = [
     id: 'loop-1',
     plantType: 'loop',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Primeiro Loop',
     description: 'Use um loop para regar varias plantas.',
     instructions: `Crie uma variavel 'total' iniciando em 0.
@@ -37,6 +38,7 @@ for (let i = 1; i <= 5; i++) {
     id: 'loop-2',
     plantType: 'loop',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Loop While',
     description: 'Aprenda outro tipo de loop.',
     instructions: `Crie uma variavel 'waterLevel' iniciando em 100.
@@ -69,6 +71,7 @@ while (waterLevel > 30) {
     id: 'loop-3',
     plantType: 'loop',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Contando Plantas',
     description: 'Use um loop para contar elementos.',
     instructions: `Dado um array de plantas, conte quantas estao prontas para colheita.
@@ -106,6 +109,7 @@ for (let i = 0; i < plants.length; i++) {
     id: 'loop-4',
     plantType: 'loop',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'For...of Loop',
     description: 'Aprenda a forma moderna de iterar arrays.',
     instructions: `Use o loop for...of para somar todos os numeros do array.
@@ -140,6 +144,7 @@ for (const amount of waterAmounts) {
     id: 'loop-5',
     plantType: 'loop',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Loop Aninhado',
     description: 'Use loops dentro de loops.',
     instructions: `Voce tem um jardim 3x3 (3 linhas, 3 colunas).

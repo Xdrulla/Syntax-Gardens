@@ -5,6 +5,7 @@ export const variableChallenges: ChallengeDefinition[] = [
     id: 'var-1',
     plantType: 'variable',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'Primeira Variavel',
     description: 'Crie sua primeira variavel para regar a planta.',
     instructions: `Declare uma variavel chamada 'water' e atribua o valor 10 a ela.
@@ -31,6 +32,7 @@ Dica: Use 'let' ou 'const' para declarar variaveis.`,
     id: 'var-2',
     plantType: 'variable',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'Calculando Crescimento',
     description: 'Use operadores para calcular quanto a planta cresceu.',
     instructions: `A planta comeca com altura 5cm.
@@ -64,6 +66,7 @@ let finalHeight = initialHeight + (growthPerWater * timesWatered);`,
     id: 'var-3',
     plantType: 'variable',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Tipos de Dados',
     description: 'Aprenda sobre diferentes tipos de dados.',
     instructions: `Crie tres variaveis:

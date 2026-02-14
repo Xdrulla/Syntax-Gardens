@@ -11,15 +11,16 @@ export interface ChallengeDefinition {
   id: string;
   plantType: string;
   difficulty: 1 | 2 | 3 | 4 | 5;
-  difficultyTier?: DifficultyTier; // Novo campo para classificar desafios
+  difficultyTier: DifficultyTier; // Classificação por nível: beginner, practitioner, master
   title: string;
   description: string;
-  instructions: string;
+  instructions?: string; // Instruções detalhadas (opcional, usa description como fallback)
   starterCode?: string;
   testCases: TestCase[];
   hints: string[];
   solution: string;
   experienceReward: number;
+  conceptsUsed?: string[]; // Tags de conceitos usados (opcional)
 }
 
 // Progresso do jogador em um conceito específico

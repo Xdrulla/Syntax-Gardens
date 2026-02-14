@@ -7,8 +7,10 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Primeira Classe',
     description:
       'Classes sao como moldes para criar objetos. Use a palavra-chave `class` para declarar uma classe. Crie uma classe chamada `Plant` vazia.',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'class',
+    instructions: 'Crie uma classe chamada `Plant` vazia usando a sintaxe class NomeDaClasse { }.',
     starterCode: `// Crie uma classe chamada Plant
 // Classes vazias usam chaves {}
 
@@ -27,6 +29,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'O nome da classe deve ser Plant',
       'Uma classe vazia tem apenas as chaves {}',
     ],
+    experienceReward: 15,
     conceptsUsed: ['class', 'declaracao'],
   },
 
@@ -36,8 +39,10 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Constructor',
     description:
       'O constructor e um metodo especial que e chamado quando criamos uma nova instancia. Crie uma classe `Plant` com um constructor que recebe `name` e `water` e os atribui a `this`.',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'class',
+    instructions: 'Crie uma classe `Plant` com constructor(name, water) e atribua os valores a this.name e this.water.',
     starterCode: `// Crie a classe Plant com constructor
 // O constructor deve receber name e water
 // Use this.name e this.water para armazenar
@@ -61,6 +66,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'Use this.propriedade = valor para definir propriedades',
       'this se refere a instancia atual da classe',
     ],
+    experienceReward: 15,
     conceptsUsed: ['class', 'constructor', 'this'],
   },
 
@@ -70,8 +76,10 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Propriedades da Instancia',
     description:
       'Crie uma classe `Seed` com constructor que recebe `type` e define `this.type` e `this.planted = false` como valor padrao.',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'class',
+    instructions: 'Crie uma classe `Seed` com constructor(type) definindo this.type e this.planted = false.',
     starterCode: `// Crie a classe Seed
 // Constructor recebe type
 // Define this.type e this.planted = false
@@ -95,6 +103,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'this.planted = false define um valor inicial',
       'O parametro type vem do constructor',
     ],
+    experienceReward: 20,
     conceptsUsed: ['class', 'constructor', 'propriedades'],
   },
 
@@ -104,7 +113,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Metodos de Classe',
     description:
       'Metodos sao funcoes dentro da classe. Crie uma classe `Plant` com constructor(name, water) e um metodo `drink(amount)` que adiciona amount ao water.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Crie a classe Plant
 // Constructor: name, water
@@ -133,6 +143,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'Use this.water para acessar a propriedade',
       'drink(amount) { this.water += amount; }',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'methods', 'this'],
   },
 
@@ -142,7 +153,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Getter Methods',
     description:
       'Getters permitem acessar valores calculados como propriedades. Crie uma classe `Plant` com name e water, e um getter `status` que retorna "saudavel" se water >= 5, senao "sedenta".',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Crie a classe Plant com getter status
 // Constructor: name, water
@@ -171,6 +183,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'O getter e acessado como propriedade: planta.status',
       'Use operador ternario para a condicao',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'getter'],
   },
 
@@ -180,7 +193,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Setter Methods',
     description:
       'Setters permitem validar valores ao atribuir. Crie uma classe `Plant` com _water privado, getter water e setter water que nao permite valores negativos (usa 0 se negativo).',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Crie a classe Plant
 // Use _water como propriedade interna
@@ -213,6 +227,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       '_water e uma convencao para propriedades "privadas"',
       'O setter e usado como: planta.water = valor',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'setter', 'getter'],
   },
 
@@ -222,7 +237,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Metodos Estaticos',
     description:
       'Metodos estaticos pertencem a classe, nao a instancia. Crie uma classe `PlantUtils` com um metodo estatico `isHealthy(water)` que retorna true se water >= 5.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Crie a classe PlantUtils
 // static isHealthy(water): retorna water >= 5
@@ -245,6 +261,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'Chamado como: PlantUtils.isHealthy(10)',
       'Nao precisa criar instancia com new',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'static'],
   },
 
@@ -254,7 +271,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Propriedades Estaticas',
     description:
       'Propriedades estaticas sao compartilhadas por todas instancias. Crie uma classe `Plant` com static count = 0, e no constructor incremente Plant.count.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Crie a classe Plant
 // static count = 0
@@ -281,6 +299,7 @@ export const classesChallenges: ChallengeDefinition[] = [
       'Acesse com Plant.count, nao this.count',
       'Cada new Plant() incrementa o contador',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'static', 'propriedades'],
   },
 
@@ -290,7 +309,8 @@ export const classesChallenges: ChallengeDefinition[] = [
     title: 'Heranca com Extends',
     description:
       'Heranca permite criar classes baseadas em outras. Crie uma classe `Flower` que extends `Plant`. Plant tem constructor(name) e metodo grow(). Flower apenas herda.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `// Classe base Plant
 class Plant {
@@ -328,6 +348,7 @@ class Flower extends Plant {
       'A classe filha herda metodos e propriedades',
       'Flower extends Plant herda tudo de Plant',
     ],
+    experienceReward: 25,
     conceptsUsed: ['class', 'extends', 'heranca'],
   },
 
@@ -337,7 +358,8 @@ class Flower extends Plant {
     title: 'Super no Constructor',
     description:
       'super() chama o constructor da classe pai. Crie `Flower` que extends `Plant`, com constructor(name, color) que chama super(name) e define this.color.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `class Plant {
   constructor(name) {
@@ -373,6 +395,7 @@ class Flower extends Plant {
       'super(name) passa name para Plant',
       'Depois de super(), defina this.color',
     ],
+    experienceReward: 30,
     conceptsUsed: ['class', 'extends', 'super'],
   },
 
@@ -382,7 +405,8 @@ class Flower extends Plant {
     title: 'Override de Metodos',
     description:
       'Classes filhas podem sobrescrever metodos. Crie `Cactus` extends `Plant`. Override o metodo `needsWater()` para retornar false (cactos precisam de pouca agua).',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'class',
     starterCode: `class Plant {
   constructor(name) {
@@ -422,6 +446,7 @@ class Cactus extends Plant {
       'O metodo da filha substitui o do pai',
       'needsWater() { return false; }',
     ],
+    experienceReward: 30,
     conceptsUsed: ['class', 'extends', 'override'],
   },
 
@@ -431,7 +456,8 @@ class Cactus extends Plant {
     title: 'Chamar Metodo do Pai',
     description:
       'Use super.metodo() para chamar o metodo da classe pai. Crie `Flower` que extends `Plant` e override `describe()` para retornar super.describe() + " e tem flores".',
-    difficulty: 'hard',
+    difficulty: 4,
+    difficultyTier: 'master',
     plantType: 'class',
     starterCode: `class Plant {
   constructor(name) {
@@ -471,6 +497,7 @@ class Flower extends Plant {
       'Concatene o resultado com a string adicional',
       'return super.describe() + " e tem flores"',
     ],
+    experienceReward: 30,
     conceptsUsed: ['class', 'extends', 'super'],
   },
 
@@ -480,7 +507,8 @@ class Flower extends Plant {
     title: 'Campos Privados',
     description:
       'Campos privados usam # e so podem ser acessados dentro da classe. Crie uma classe `SecretPlant` com #secretName privado, constructor(name) e metodo revealName() que retorna #secretName.',
-    difficulty: 'hard',
+    difficulty: 4,
+    difficultyTier: 'master',
     plantType: 'class',
     starterCode: `// Crie SecretPlant com campo privado #secretName
 // Constructor recebe name e atribui a #secretName
@@ -510,6 +538,7 @@ class Flower extends Plant {
       'Acesse com this.#secretName',
       'Campos # sao inacessiveis fora da classe',
     ],
+    experienceReward: 30,
     conceptsUsed: ['class', 'private fields'],
   },
 
@@ -519,7 +548,8 @@ class Flower extends Plant {
     title: 'Padrao Protected',
     description:
       'A convencao _propriedade indica "protegido" (use apenas na classe e filhas). Crie `Plant` com _water, e `Flower` extends `Plant` com metodo `doubleWater()` que dobra _water.',
-    difficulty: 'hard',
+    difficulty: 4,
+    difficultyTier: 'master',
     plantType: 'class',
     starterCode: `// Crie Plant com _water
 // Crie Flower extends Plant
@@ -549,6 +579,7 @@ class Flower extends Plant {
       'A classe filha pode acessar this._water',
       'doubleWater multiplica _water por 2',
     ],
+    experienceReward: 30,
     conceptsUsed: ['class', 'protected pattern', 'heranca'],
   },
 
@@ -558,7 +589,8 @@ class Flower extends Plant {
     title: 'Hierarquia de Plantas',
     description:
       'Crie um sistema completo: classe `Plant` com name, water e metodo getInfo(). Classe `Flower` extends Plant com color e override getInfo() adicionando a cor. Classe `Rose` extends Flower com thorns e override getInfo() adicionando se tem espinhos.',
-    difficulty: 'hard',
+    difficulty: 4,
+    difficultyTier: 'master',
     plantType: 'class',
     starterCode: `// Crie a hierarquia completa:
 // Plant -> Flower -> Rose
@@ -609,6 +641,7 @@ class Rose extends Flower {
       'getInfo() usa super.getInfo() e adiciona sua parte',
       'Rose recebe 4 parametros: name, water, color, thorns',
     ],
+    experienceReward: 40,
     conceptsUsed: ['class', 'extends', 'super', 'override', 'heranca'],
   },
 ];

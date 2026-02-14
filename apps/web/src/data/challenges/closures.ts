@@ -7,8 +7,10 @@ export const closuresChallenges: ChallengeDefinition[] = [
     title: 'Escopo de Bloco',
     description:
       'let e const tem escopo de bloco - existem apenas dentro das chaves {}. Crie um bloco que declara let water = 10 dentro, e fora declare let water = 5. Retorne o water externo em result.',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'closure',
+    experienceReward: 10,
     starterCode: `// Declare let water = 5 fora do bloco
 // Crie um bloco { } com let water = 10 dentro
 // result deve ser o water externo (5)
@@ -40,8 +42,10 @@ let result = water;`,
     title: 'Escopo de Funcao',
     description:
       'var tem escopo de funcao, nao de bloco. Crie uma funcao getWater() que tem um if(true) com var water = 10 dentro, e retorna water fora do if.',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'closure',
+    experienceReward: 10,
     starterCode: `// Crie funcao getWater
 // Dentro: if(true) { var water = 10; }
 // Retorne water (fora do if)
@@ -75,8 +79,10 @@ let result = getWater();`,
     title: 'Escopo Lexico',
     description:
       'Funcoes internas acessam variaveis externas. Crie let plantName = "Rosa" e uma funcao inner() que retorna plantName. Chame inner() e armazene em result.',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'closure',
+    experienceReward: 10,
     starterCode: `// Declare let plantName = "Rosa"
 // Crie funcao inner() que retorna plantName
 // result = inner()
@@ -110,8 +116,10 @@ let result = inner();`,
     title: 'Closure Simples',
     description:
       'Closure e quando uma funcao "lembra" variaveis do escopo onde foi criada. Crie uma funcao createGreeter(name) que retorna uma funcao que retorna "Ola, " + name.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createGreeter(name)
 // Retorna uma funcao que retorna "Ola, " + name
 
@@ -142,8 +150,10 @@ let result = inner();`,
     title: 'Variavel Privada',
     description:
       'Closures podem criar variaveis "privadas". Crie createCounter() que retorna um objeto com metodo increment() que incrementa e retorna um contador interno.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createCounter()
 // let count = 0 interno
 // Retorna { increment: funcao que incrementa e retorna count }
@@ -179,8 +189,10 @@ let result = inner();`,
     title: 'Counter com Closure',
     description:
       'Crie createWaterTank(initial) que retorna um objeto com: add(amount), remove(amount), e getLevel(). O nivel nao pode ficar negativo.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createWaterTank(initial)
 // let level = initial
 // Retorna { add, remove, getLevel }
@@ -224,8 +236,10 @@ let result = inner();`,
     title: 'Factory Function',
     description:
       'Factory functions criam objetos com closures. Crie createPlant(name) que retorna objeto com getName(), water(amount), e getWater(). Comeca com waterLevel = 0.',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createPlant(name)
 // waterLevel = 0 interno
 // Retorna { getName, water, getWater }
@@ -266,8 +280,10 @@ let result = inner();`,
     title: 'Module Pattern',
     description:
       'O module pattern usa IIFE + closure. Crie gardenModule como IIFE que tem plants = [] interno, e retorna { addPlant, getPlants, getCount }.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'closure',
+    experienceReward: 35,
     starterCode: `// Crie gardenModule como IIFE
 // (function() { ... })()
 // plants = [] interno
@@ -309,8 +325,10 @@ let result = inner();`,
     title: 'IIFE',
     description:
       'IIFE (Immediately Invoked Function Expression) executa imediatamente. Crie result usando IIFE que declara let secret = 42 e retorna secret * 2.',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie result usando IIFE
 // let result = (function() { ... })()
 // Dentro: let secret = 42, return secret * 2
@@ -341,8 +359,10 @@ let result = inner();`,
     title: 'Closure em Loops',
     description:
       'O problema classico de closure em loops. Crie createFunctions() que retorna array de 3 funcoes. Cada funcao deve retornar seu indice (0, 1, 2). Use let no for.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'closure',
+    experienceReward: 35,
     starterCode: `// Crie createFunctions()
 // Retorna array de 3 funcoes
 // Cada funcao retorna seu indice
@@ -379,8 +399,10 @@ let result = inner();`,
     title: 'Closure em Callbacks',
     description:
       'Callbacks usam closure para acessar dados externos. Crie createLogger(prefix) que retorna uma funcao log(message) que retorna prefix + ": " + message.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createLogger(prefix)
 // Retorna funcao log(message)
 // log retorna: prefix + ": " + message
@@ -412,8 +434,10 @@ let result = inner();`,
     title: 'Memoization',
     description:
       'Memoization cacheia resultados para evitar recalculos. Crie memoizedDouble(n) que cacheia resultados. Use um objeto cache interno.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'closure',
+    experienceReward: 35,
     starterCode: `// Crie createMemoizedDouble()
 // cache = {} interno
 // Retorna funcao que dobra n, usando cache
@@ -450,8 +474,10 @@ let result = inner();`,
     title: 'Contador com Delay',
     description:
       'Crie createDelayedCounter() com count = 0 interno. Retorna objeto com increment() que incrementa count, e getCount(). Usado para entender closure em async.',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'closure',
+    experienceReward: 20,
     starterCode: `// Crie createDelayedCounter()
 // count = 0 interno
 // Retorna { increment, getCount }
@@ -490,8 +516,10 @@ let result = inner();`,
     title: 'Closure vs This',
     description:
       'Closures capturam variaveis, nao this. Crie createPlantWithClosure(name) que usa closure (let _name = name) e retorna { getName } usando _name, nao this.',
-    difficulty: 'hard',
+    difficulty: 4,
+    difficultyTier: 'master',
     plantType: 'closure',
+    experienceReward: 35,
     starterCode: `// Crie createPlantWithClosure(name)
 // let _name = name (closure)
 // Retorna { getName() } que retorna _name
@@ -526,8 +554,10 @@ let result = inner();`,
     title: 'Sistema de Cache',
     description:
       'Crie createGrowthCache() que retorna objeto com: calculate(days, water) que retorna days * water, getFromCache(key), e getCacheSize(). Cache usa string "days-water" como chave.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'closure',
+    experienceReward: 35,
     starterCode: `// Crie createGrowthCache()
 // cache = {} interno
 // calculate(days, water): cacheia e retorna days * water

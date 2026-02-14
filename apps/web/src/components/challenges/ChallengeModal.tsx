@@ -109,12 +109,19 @@ export function ChallengeModal() {
 
   const difficultyTier = getDifficultyTier(challenge.id);
 
+  const tierBorderColor = {
+    beginner: 'border-green-600/60',
+    practitioner: 'border-blue-600/60',
+    master: 'border-purple-600/60',
+  }[difficultyTier] || 'border-slate-700';
+
   return (
     <Modal
       isOpen={!!activeChallengeId}
       onClose={handleClose}
       title={challenge.title}
       size="xl"
+      borderColorClass={tierBorderColor}
     >
       <div className="space-y-6">
         {/* Indicador de progressão e dificuldade */}

@@ -7,8 +7,10 @@ export const errorHandlingChallenges: ChallengeDefinition[] = [
     title: 'Try/Catch Basico',
     description:
       'try/catch permite capturar erros sem quebrar o programa. Crie um try que executa JSON.parse("invalid") e um catch que define result = "erro".',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'error-handling',
+    experienceReward: 10,
     starterCode: `// Use try/catch para capturar erro
 // try: JSON.parse("invalid")
 // catch: result = "erro"
@@ -42,8 +44,10 @@ try {
     title: 'Finally Block',
     description:
       'finally sempre executa, com ou sem erro. Crie try/catch/finally onde try faz JSON.parse("{}"), catch define error = true, e finally define done = true.',
-    difficulty: 'easy',
+    difficulty: 1,
+    difficultyTier: 'beginner',
     plantType: 'error-handling',
+    experienceReward: 10,
     starterCode: `// Use try/catch/finally
 // try: JSON.parse("{}")
 // catch: error = true
@@ -82,8 +86,10 @@ try {
     title: 'Throw Error',
     description:
       'throw lanca erros manualmente. Crie funcao validateWater(amount) que lanca Error("Agua negativa") se amount < 0, senao retorna amount.',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'error-handling',
+    experienceReward: 10,
     starterCode: `// Crie validateWater(amount)
 // Se amount < 0: throw new Error("Agua negativa")
 // Senao: return amount
@@ -116,8 +122,10 @@ try {
     title: 'Mensagens de Erro',
     description:
       'Capture a mensagem do erro. Crie try que lanca Error("Planta seca") e catch que armazena e.message em result.',
-    difficulty: 'easy',
+    difficulty: 2,
+    difficultyTier: 'beginner',
     plantType: 'error-handling',
+    experienceReward: 10,
     starterCode: `// try: throw new Error("Planta seca")
 // catch: result = e.message
 let result = "";
@@ -150,8 +158,10 @@ try {
     title: 'Propriedades do Error',
     description:
       'Erros tem name e message. Crie try que lanca new TypeError("Tipo invalido") e catch que armazena { name: e.name, message: e.message } em result.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// try: throw new TypeError("Tipo invalido")
 // catch: result = { name: e.name, message: e.message }
 let result = {};
@@ -184,8 +194,10 @@ try {
     title: 'Verificar Tipo de Erro',
     description:
       'Use instanceof para verificar o tipo do erro. Crie funcao checkError(e) que retorna "tipo" se e instanceof TypeError, "referencia" se ReferenceError, senao "outro".',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie checkError(e)
 // e instanceof TypeError -> "tipo"
 // e instanceof ReferenceError -> "referencia"
@@ -222,8 +234,10 @@ try {
     title: 'Re-lançar Erros',
     description:
       'As vezes queremos capturar, processar e relancar. Crie funcao process(value) que em try faz JSON.parse(value), se der erro adiciona " - processado" na mensagem e relanca.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie process(value)
 // try: JSON.parse(value)
 // catch: adicione " - processado" a e.message e throw e
@@ -258,8 +272,10 @@ try {
     title: 'Funcao Segura',
     description:
       'Crie safeParseInt(str) que usa try/catch. Tenta parseInt(str), se str nao for string lanca TypeError. Se parseInt retornar NaN, lanca Error("Numero invalido"). Senao retorna o numero.',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie safeParseInt(str)
 // Se typeof str !== "string": throw TypeError
 // Se parseInt retorna NaN: throw Error("Numero invalido")
@@ -297,8 +313,10 @@ try {
     title: 'Classe de Erro Customizada',
     description:
       'Crie classe WaterError que extends Error. O constructor recebe amount e define this.name = "WaterError" e this.amount = amount. Chame super com mensagem apropriada.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'error-handling',
+    experienceReward: 35,
     starterCode: `// Crie class WaterError extends Error
 // constructor(amount):
 //   super("Agua insuficiente: " + amount)
@@ -334,8 +352,10 @@ try {
     title: 'Tipos de Erro Padrao',
     description:
       'Crie funcao getErrorType(code) que: code 1 lanca TypeError, code 2 lanca RangeError, code 3 lanca SyntaxError. Capture e retorne o nome do erro.',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie throwByCode(code)
 // 1: throw new TypeError("tipo")
 // 2: throw new RangeError("fora do range")
@@ -372,8 +392,10 @@ try {
     title: 'Validacao de Input',
     description:
       'Crie validatePlant(plant) que verifica: se !plant lanca "Planta nula", se !plant.name lanca "Nome obrigatorio", se plant.water < 0 lanca "Agua invalida". Senao retorna true.',
-    difficulty: 'medium',
+    difficulty: 3,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie validatePlant(plant)
 // !plant -> throw "Planta nula"
 // !plant.name -> throw "Nome obrigatorio"
@@ -414,8 +436,10 @@ try {
     title: 'Funcao Wrapper Segura',
     description:
       'Crie safeFn(fn) que retorna uma nova funcao. Quando chamada, executa fn em try/catch e retorna { success: true, value } ou { success: false, error: message }.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'error-handling',
+    experienceReward: 35,
     starterCode: `// Crie safeFn(fn)
 // Retorna funcao que executa fn(...args)
 // Sucesso: { success: true, value: resultado }
@@ -453,8 +477,10 @@ try {
     title: 'Handler de Erros',
     description:
       'Crie createErrorHandler() que retorna objeto com: errors = [], handle(e) que adiciona { time: Date.now(), message: e.message } a errors, e getErrors() que retorna errors.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'error-handling',
+    experienceReward: 35,
     starterCode: `// Crie createErrorHandler()
 // let errors = []
 // handle(e): adiciona { time: Date.now(), message: e.message }
@@ -496,8 +522,10 @@ try {
     title: 'Log de Erros',
     description:
       'Crie formatError(e) que retorna string formatada: "[NOME] mensagem". Ex: "[TypeError] valor invalido". Se e nao for Error, retorne "[Unknown] " + String(e).',
-    difficulty: 'medium',
+    difficulty: 4,
+    difficultyTier: 'practitioner',
     plantType: 'error-handling',
+    experienceReward: 20,
     starterCode: `// Crie formatError(e)
 // Se e instanceof Error: "[" + e.name + "] " + e.message
 // Senao: "[Unknown] " + String(e)
@@ -530,8 +558,10 @@ try {
     title: 'Sistema Robusto de Rega',
     description:
       'Crie waterPlantSafely(plant, amount) que: valida plant (nao null, tem name), valida amount (numero, >= 0), adiciona amount a plant.water (ou inicia em 0), retorna { success, plant } ou { success: false, error }.',
-    difficulty: 'hard',
+    difficulty: 5,
+    difficultyTier: 'master',
     plantType: 'error-handling',
+    experienceReward: 35,
     starterCode: `// Crie waterPlantSafely(plant, amount)
 // Validacoes: plant existe, plant.name existe, amount e numero >= 0
 // Sucesso: { success: true, plant: plantAtualizada }

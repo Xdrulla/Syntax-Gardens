@@ -243,6 +243,7 @@ const EXTRACTABLE_VARIABLES = [
   'plant3',
   'a',
   'b',
+  'name',
   'fertilizer',
   'city',
   'output',

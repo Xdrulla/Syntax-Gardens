@@ -5,6 +5,7 @@ export const conditionalChallenges: ChallengeDefinition[] = [
     id: 'cond-1',
     plantType: 'conditional',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'If Simples',
     description: 'Aprenda a usar if para tomar decisoes no codigo.',
     instructions: `Verifique se a variavel 'water' e maior que 0.
@@ -40,6 +41,7 @@ if (water > 0) {
     id: 'cond-2',
     plantType: 'conditional',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'If/Else',
     description: 'Use else para lidar com o caso contrario.',
     instructions: `Verifique se a planta precisa de agua (waterLevel < 5).
@@ -76,6 +78,7 @@ if (waterLevel < 5) {
     id: 'cond-3',
     plantType: 'conditional',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'If/Else If/Else',
     description: 'Classifique o nivel de agua em tres categorias.',
     instructions: `Classifique o nivel de agua:
@@ -118,6 +121,7 @@ if (waterLevel < 3) {
     id: 'cond-4',
     plantType: 'conditional',
     difficulty: 1,
+    difficultyTier: 'beginner',
     title: 'Operadores de Comparacao',
     description: 'Aprenda os diferentes operadores de comparacao.',
     instructions: `Use operadores de comparacao para verificar:
@@ -163,6 +167,7 @@ let isLessOrEqual = c <= b;`,
     id: 'cond-5',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Operador AND (&&)',
     description: 'Combine condicoes com o operador AND.',
     instructions: `Uma planta so pode ser regada se:
@@ -202,6 +207,7 @@ if (hasWater && isPlanted) {
     id: 'cond-6',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Operador OR (||)',
     description: 'Use OR para verificar alternativas.',
     instructions: `Uma planta precisa de atencao se:
@@ -241,6 +247,7 @@ if (waterLevel < 3 || sunlight < 2) {
     id: 'cond-7',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Operador NOT (!)',
     description: 'Inverta condicoes com o operador NOT.',
     instructions: `Use o operador ! para inverter valores booleanos.
@@ -283,6 +290,7 @@ isFilled = !isEmpty;`,
     id: 'cond-8',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Condicoes Aninhadas',
     description: 'Use if dentro de if para logica mais complexa.',
     instructions: `Verifique primeiro se a estacao e "verao".
@@ -327,6 +335,7 @@ if (season === "verao") {
     id: 'cond-9',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Operador Ternario',
     description: 'Aprenda a forma curta de if/else.',
     instructions: `Use o operador ternario para definir:
@@ -363,6 +372,7 @@ let plantSize = height > 10 ? "Grande" : "Pequena";`,
     id: 'cond-10',
     plantType: 'conditional',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Ternario Aninhado',
     description: 'Use ternarios para multiplas condicoes.',
     instructions: `Classifique a planta por tamanho usando ternarios aninhados:
@@ -396,6 +406,7 @@ let plantStage = height < 5 ? "Muda" : height < 15 ? "Jovem" : "Adulta";`,
     id: 'cond-11',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Switch/Case Basico',
     description: 'Use switch para multiplas opcoes.',
     instructions: `Use switch para definir a cor baseada na estacao:
@@ -443,6 +454,7 @@ switch (season) {
     id: 'cond-12',
     plantType: 'conditional',
     difficulty: 2,
+    difficultyTier: 'beginner',
     title: 'Switch com Default',
     description: 'Adicione um caso padrao ao switch.',
     instructions: `Classifique o tipo de planta usando switch:
@@ -491,6 +503,7 @@ switch (plantName) {
     id: 'cond-13',
     plantType: 'conditional',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Truthy e Falsy',
     description: 'Entenda valores que viram true ou false.',
     instructions: `Em JavaScript, alguns valores sao "falsy" (viram false):
@@ -533,6 +546,7 @@ let hasData = !!data;`,
     id: 'cond-14',
     plantType: 'conditional',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Comparacao com Null e Undefined',
     description: 'Aprenda a verificar valores nulos corretamente.',
     instructions: `Verifique os valores:
@@ -574,6 +588,7 @@ let hasValue = value3 !== null && value3 !== undefined;`,
     id: 'cond-15',
     plantType: 'conditional',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Sistema de Irrigacao Inteligente',
     description: 'Combine tudo em um sistema completo de decisao.',
     instructions: `Crie um sistema de irrigacao que decide a acao:

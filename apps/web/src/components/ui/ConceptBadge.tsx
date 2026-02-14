@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Award, Star, Crown, Circle } from 'lucide-react';
+import { Award, Star, Crown, Circle, Sprout, Flower2, Flower } from 'lucide-react';
 import type { ConceptProgress } from '../../types';
 
 interface ConceptBadgeProps {
@@ -161,15 +161,17 @@ interface DifficultyTierBadgeProps {
 
 export function DifficultyTierBadge({ tier }: DifficultyTierBadgeProps) {
   const tierConfig = {
-    beginner: { label: 'Iniciante', color: 'bg-green-100 text-green-700 border-green-300' },
-    practitioner: { label: 'Praticante', color: 'bg-blue-100 text-blue-700 border-blue-300' },
-    master: { label: 'Mestre', color: 'bg-purple-100 text-purple-700 border-purple-300' },
+    beginner: { label: 'Semente', icon: Sprout, color: 'bg-green-900/40 text-green-400 border-green-600/50' },
+    practitioner: { label: 'Broto', icon: Flower2, color: 'bg-blue-900/40 text-blue-400 border-blue-600/50' },
+    master: { label: 'Flor', icon: Flower, color: 'bg-purple-900/40 text-purple-400 border-purple-600/50' },
   };
 
   const config = tierConfig[tier];
+  const Icon = config.icon;
 
   return (
-    <span className={`text-xs px-2 py-0.5 rounded-full border ${config.color}`}>
+    <span className={`text-xs px-2.5 py-1 rounded-full border inline-flex items-center gap-1.5 font-medium ${config.color}`}>
+      <Icon size={14} />
       {config.label}
     </span>
   );

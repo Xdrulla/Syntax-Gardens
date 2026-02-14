@@ -6,6 +6,7 @@ export const proxyChallenges: ChallengeDefinition[] = [
     id: 'proxy-1',
     plantType: 'proxy',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Primeiro Proxy',
     description: 'Crie seu primeiro Proxy em JavaScript.',
     instructions: `Proxy permite interceptar operacoes em objetos.
@@ -41,6 +42,7 @@ const plantProxy = new Proxy(plant, {});`,
     id: 'proxy-2',
     plantType: 'proxy',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Get Trap',
     description: 'Intercepte leituras de propriedades.',
     instructions: `A trap 'get' intercepta leituras de propriedades.
@@ -84,6 +86,7 @@ const safePlant = new Proxy(plant, {
     id: 'proxy-3',
     plantType: 'proxy',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Set Trap',
     description: 'Intercepte escritas de propriedades.',
     instructions: `A trap 'set' intercepta atribuicoes de propriedades.
@@ -134,6 +137,7 @@ const validatedPlant = new Proxy(plant, {
     id: 'proxy-4',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Has Trap',
     description: 'Intercepte o operador "in".',
     instructions: `A trap 'has' intercepta o operador 'in' e Reflect.has().
@@ -178,6 +182,7 @@ const secretGarden = new Proxy(garden, {
     id: 'proxy-5',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'DeleteProperty Trap',
     description: 'Intercepte delecoes de propriedades.',
     instructions: `A trap 'deleteProperty' intercepta o operador 'delete'.
@@ -224,6 +229,7 @@ const protectedPlant = new Proxy(plant, {
     id: 'proxy-6',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Apply Trap',
     description: 'Intercepte chamadas de funcao.',
     instructions: `A trap 'apply' intercepta chamadas de funcao.
@@ -275,6 +281,7 @@ const loggedWater = new Proxy(waterPlant, {
     id: 'proxy-7',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Construct Trap',
     description: 'Intercepte a criacao de instancias com new.',
     instructions: `A trap 'construct' intercepta o operador 'new'.
@@ -336,6 +343,7 @@ Object.defineProperty(TrackedPlant, 'count', {
     id: 'proxy-8',
     plantType: 'proxy',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Reflect API Basico',
     description: 'Use Reflect para operacoes em objetos.',
     instructions: `Reflect fornece metodos para operacoes de objetos.
@@ -378,6 +386,7 @@ const keys = Reflect.ownKeys(plant);`,
     id: 'proxy-9',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Reflect.get e Reflect.set',
     description: 'Use Reflect em traps de Proxy.',
     instructions: `Reflect e ideal para delegar operacoes dentro de traps.
@@ -430,6 +439,7 @@ const uppercasePlant = new Proxy(plant, {
     id: 'proxy-10',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Reflect.has e deleteProperty',
     description: 'Use Reflect para verificacao e delecao.',
     instructions: `Reflect.has(obj, prop) e equivalente a 'prop in obj'.
@@ -474,6 +484,7 @@ Crie uma funcao 'cleanupPlant(plant, propsToRemove)' que:
     id: 'proxy-11',
     plantType: 'proxy',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Reflect.apply',
     description: 'Use Reflect.apply para chamar funcoes.',
     instructions: `Reflect.apply(func, thisArg, args) chama func com thisArg e args.
@@ -527,6 +538,7 @@ function callWithGarden(fn) {
     id: 'proxy-12',
     plantType: 'proxy',
     difficulty: 5,
+    difficultyTier: 'master',
     title: 'Proxy para Validacao',
     description: 'Crie um sistema de validacao com Proxy.',
     instructions: `Crie uma funcao 'createValidatedObject(schema)' que retorna um Proxy.
@@ -592,6 +604,7 @@ O Proxy deve:
     id: 'proxy-13',
     plantType: 'proxy',
     difficulty: 5,
+    difficultyTier: 'master',
     title: 'Proxy para Logging',
     description: 'Crie um sistema de logging automatico com Proxy.',
     instructions: `Crie uma funcao 'createLoggedObject(target, logFn)' que:
@@ -663,6 +676,7 @@ logFn recebe objeto com:
     id: 'proxy-14',
     plantType: 'proxy',
     difficulty: 5,
+    difficultyTier: 'master',
     title: 'Sistema Observavel de Plantas',
     description: 'Crie um sistema reativo completo com Proxy.',
     instructions: `Crie um sistema observavel para plantas:

@@ -6,6 +6,7 @@ export const weakCollectionChallenges: ChallengeDefinition[] = [
     id: 'weak-1',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Map vs WeakMap',
     description: 'Entenda as diferencas entre Map e WeakMap.',
     instructions: `WeakMap e similar a Map, mas com diferencas importantes:
@@ -50,6 +51,7 @@ weakMap.set(plant, "saudavel");`,
     id: 'weak-2',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Criando WeakMap',
     description: 'Crie e inicialize um WeakMap.',
     instructions: `WeakMap pode ser inicializado com um array de pares [chave, valor].
@@ -94,6 +96,7 @@ const plantHealth = new WeakMap([
     id: 'weak-3',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Metodos do WeakMap',
     description: 'Use os metodos basicos do WeakMap.',
     instructions: `WeakMap tem apenas 4 metodos:
@@ -143,6 +146,7 @@ const hasAfterDelete = gardenData.has(plot1);`,
     id: 'weak-4',
     plantType: 'weak-collection',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Garbage Collection',
     description: 'Entenda como WeakMap interage com garbage collection.',
     instructions: `A grande vantagem do WeakMap: quando um objeto chave nao tem mais referencias, ele pode ser coletado pelo garbage collector, e sua entrada no WeakMap e automaticamente removida.
@@ -195,6 +199,7 @@ Nota: Nao podemos verificar diretamente se foi coletado (sem .size), mas entende
     id: 'weak-5',
     plantType: 'weak-collection',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Dados Privados com WeakMap',
     description: 'Use WeakMap para armazenar dados privados de classes.',
     instructions: `WeakMap e excelente para armazenar dados privados associados a instancias de classes, sem poluir o objeto.
@@ -254,6 +259,7 @@ class SecurePlant {
     id: 'weak-6',
     plantType: 'weak-collection',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Cache com WeakMap',
     description: 'Use WeakMap para criar um cache que nao causa memory leaks.',
     instructions: `WeakMap e ideal para caches associados a objetos, pois o cache e automaticamente limpo quando o objeto e coletado.
@@ -304,6 +310,7 @@ Crie uma funcao 'createCachedCalculator()' que retorna um objeto com:
     id: 'weak-7',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Set vs WeakSet',
     description: 'Entenda as diferencas entre Set e WeakSet.',
     instructions: `WeakSet e similar a Set, mas:
@@ -351,6 +358,7 @@ weakSet.add(rose);`,
     id: 'weak-8',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Criando WeakSet',
     description: 'Crie e inicialize um WeakSet.',
     instructions: `WeakSet pode ser inicializado com um iteravel de objetos.
@@ -396,6 +404,7 @@ const orchid = { name: "Orquidea", water: 5 };`,
     id: 'weak-9',
     plantType: 'weak-collection',
     difficulty: 3,
+    difficultyTier: 'practitioner',
     title: 'Metodos do WeakSet',
     description: 'Use os metodos basicos do WeakSet.',
     instructions: `WeakSet tem apenas 3 metodos:
@@ -453,6 +462,7 @@ const hasPlant1After = processedPlants.has(plant1);`,
     id: 'weak-10',
     plantType: 'weak-collection',
     difficulty: 4,
+    difficultyTier: 'practitioner',
     title: 'Rastreamento com WeakSet',
     description: 'Use WeakSet para rastrear objetos processados.',
     instructions: `WeakSet e perfeito para marcar objetos como "ja processados" sem modificar o objeto original.
@@ -506,6 +516,7 @@ Crie uma funcao 'createPlantProcessor()' que retorna um objeto com:
     id: 'weak-11',
     plantType: 'weak-collection',
     difficulty: 5,
+    difficultyTier: 'master',
     title: 'Sistema de Referencias Fracas',
     description: 'Crie um sistema completo usando WeakMap e WeakSet.',
     instructions: `Crie um sistema de gerenciamento de jardim que usa colecoes fracas:
