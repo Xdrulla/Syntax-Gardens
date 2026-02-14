@@ -542,7 +542,7 @@ function extractResult(results: Record<string, unknown>): unknown {
   if ('a' in results && 'b' in results && typeof results.a === 'string') {
     return { a: results.a, b: results.b };
   }
-  if ('name' in results && 'water' in results && typeof results.name === 'string' && typeof results.water === 'number' && Object.keys(results).filter(k => !k.startsWith('__')).length <= 3) {
+  if ('name' in results && 'water' in results && typeof results.name === 'string' && typeof results.water === 'number' && !('fertilizer' in results) && !('city' in results)) {
     return { name: results.name, water: results.water };
   }
   if ('plantName' in results && 'waterLevel' in results && !('isWatered' in results)) {
@@ -826,7 +826,8 @@ function extractResult(results: Record<string, unknown>): unknown {
   if ('type' in results && results.type !== '') return results.type;
 
   // ========== VARIAVEIS GENERICAS (desafios antigos) ==========
-  if ('water' in results) return results.water;
+  // IMPORTANTE: Não retornar 'water' sozinho se 'name' também existir (destructuring)
+  if ('water' in results && !('name' in results)) return results.water;
   if ('finalHeight' in results) return results.finalHeight;
   if ('total' in results) return results.total;
   if ('sum' in results) return results.sum;
@@ -860,7 +861,8 @@ function extractResult(results: Record<string, unknown>): unknown {
   if ('info' in results && typeof results.info === 'string') return results.info;
 
   // Objetos simples
-  if ('plant' in results && typeof results.plant === 'object') return results.plant;
+  // IMPORTANTE: Não retornar 'plant' se 'name' e 'water' existirem (destructuring)
+  if ('plant' in results && typeof results.plant === 'object' && !('name' in results && 'water' in results)) return results.plant;
   if ('plot' in results && typeof results.plot === 'object') return results.plot;
   if ('seedBag' in results && typeof results.seedBag === 'object') return results.seedBag;
   if ('info' in results && typeof results.info === 'object') return results.info;
