@@ -42,7 +42,6 @@ export function Garden() {
   const { selectedSeedId, removeItem } = useInventoryStore();
   const { addCoins, addExperience, incrementHarvested } = usePlayerStore();
   const { playSound } = useSound();
-  console.log("Teste de PR")
 
   const [harvestReward, setHarvestReward] = useState<HarvestRewardData | null>(null);
   const [showReward, setShowReward] = useState(false);
